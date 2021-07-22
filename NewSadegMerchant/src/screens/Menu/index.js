@@ -1,18 +1,23 @@
 import React from 'react'
-import { ScrollView, StyleSheet } from 'react-native'
+import { ScrollView, StyleSheet, View } from 'react-native'
 
 import { BaseHeader } from '@/components'
 
 import CategoriesSection from './sections/CategoriesSection'
 import ListSection from './sections/ListSection'
+import ActionSection from './sections/ActionSection'
 
 const Menu = () => {
 	return (
-		<ScrollView style={styles.container}>
-			<BaseHeader title="MENU" />
-			<CategoriesSection />
-			<ListSection />
-		</ScrollView>
+		<View style={{ flex: 1 }}>
+			<ScrollView style={styles.container}>
+				<BaseHeader title="MENU" />
+				<CategoriesSection />
+				<ListSection />
+			</ScrollView>
+
+			<ActionSection />
+		</View>
 	)
 }
 
