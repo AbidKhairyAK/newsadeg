@@ -1,18 +1,17 @@
 import React from 'react'
 import { View, ScrollView, Image, StyleSheet } from 'react-native'
-import { ShadowFlex } from 'react-native-neomorph-shadows'
 
-import { BaseText } from '@/components'
-import { sizes, colors, shadows } from '@/constants'
+import { BaseText, ShadowView } from '@/components'
+import { sizes, colors } from '@/constants'
 
 const MenuItem = () => (
 	<View style={styles.container}>
-		<ShadowFlex style={styles.imageWrapper}>
+		<ShadowView type="item" style={styles.imageWrapper}>
 			<Image 
 				source={{ uri: 'https://source.unsplash.com/240x240/?burger' }} 
 				style={styles.image}
 			/>
-		</ShadowFlex>
+		</ShadowView>
 		<View style={styles.contentWrapper}>
 			<View style={styles.contentMain}>
 				<View>
@@ -34,7 +33,7 @@ export default MenuItem
 
 const styles = StyleSheet.create({
 	container: { flexDirection: 'row', marginTop: sizes.sm, borderBottomWidth: 1, borderColor: colors.gray + '33', paddingBottom: sizes.sm },
-	imageWrapper: { ...shadows.item, backgroundColor: colors.white, borderRadius: sizes.xs, marginRight: sizes.xs, alignSelf: 'flex-start' },
+	imageWrapper: { backgroundColor: colors.white, borderRadius: sizes.xs, marginRight: sizes.xs, alignSelf: 'flex-start' },
 	image: { width: sizes.xxxl, height: sizes.xxxl, borderRadius: sizes.xxs },
 	contentWrapper: { flexShrink: 1, flex: 1 },
 	contentMain: { flexDirection: 'row', justifyContent: 'space-between', flex: 1 },

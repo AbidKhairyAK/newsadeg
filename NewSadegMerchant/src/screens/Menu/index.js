@@ -1,16 +1,23 @@
 import React from 'react'
-import { View } from 'react-native'
+import { ScrollView, StyleSheet } from 'react-native'
 
-import { BaseText } from '@/components'
+import { BaseHeader } from '@/components'
+
+import CategoriesSection from './sections/CategoriesSection'
+import ListSection from './sections/ListSection'
 
 const Menu = () => {
 	return (
-		<View>
-			<BaseText>
-				menu
-			</BaseText>
-		</View>
+		<ScrollView style={styles.container}>
+			<BaseHeader title="MENU" />
+			<CategoriesSection />
+			<ListSection />
+		</ScrollView>
 	)
 }
 
 export default Menu
+
+const styles = StyleSheet.create({
+	container: { flex: 1 },
+})

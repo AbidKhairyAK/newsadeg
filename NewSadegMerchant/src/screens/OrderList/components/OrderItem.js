@@ -1,14 +1,13 @@
 import React from 'react'
 import { View, StyleSheet } from 'react-native'
-import { ShadowFlex } from 'react-native-neomorph-shadows'
 
-import { BaseText } from '@/components'
-import { sizes, colors, shadows } from '@/constants'
+import { BaseText, ShadowView, MoneyText } from '@/components'
+import { sizes, colors } from '@/constants'
 
 import MenuItem from './MenuItem'
 
 const OrderItem = () => (
-	<ShadowFlex style={styles.container}>
+	<ShadowView type="card" style={styles.container}>
 		<View style={styles.headerSection}>
 			<View>
 				<BaseText>
@@ -19,11 +18,11 @@ const OrderItem = () => (
 				</BaseText>
 			</View>
 
-			<ShadowFlex style={styles.statusWrapper}>
+			<ShadowView type="item" style={styles.statusWrapper}>
 				<BaseText type="bold" size="xxs" color="white">
 					Pending
 				</BaseText>
-			</ShadowFlex>
+			</ShadowView>
 		</View>
 
 		<MenuItem />
@@ -34,19 +33,16 @@ const OrderItem = () => (
 			<BaseText size="sm" type="semi-bold">
 				Total
 			</BaseText>
-			<BaseText type="bold" color="green" size="lg">
-				SR 60.00
-			</BaseText>
+			<MoneyText value={20} size="lg" />
 		</View>
 
-	</ShadowFlex>
+	</ShadowView>
 )
 
 export default OrderItem
 
 const styles = StyleSheet.create({
 	container: { 
-		...shadows.card,
 		backgroundColor: colors.white, 
 		padding: sizes.xs, 
 		borderRadius: sizes.base, 
@@ -56,7 +52,6 @@ const styles = StyleSheet.create({
 	},
 	headerSection: { flexDirection: 'row', justifyContent: 'space-between' },
 	statusWrapper: { 
-		...shadows.item,
 		padding: sizes.xxxs, 
 		backgroundColor: colors.red, 
 		borderRadius: sizes.xxs, 

@@ -3,21 +3,15 @@ import { ScrollView, StyleSheet } from 'react-native'
 
 import { BaseHeader } from '@/components'
 
-import OrderItem from './OrderItem'
-import OrderType from './OrderType'
+import TypesSection from './sections/TypesSection'
+import ListSection from './sections/ListSection'
 
 const OrderList = () => {
 	return (
 		<ScrollView style={styles.container}>
 			<BaseHeader title="ORDER LIST" />
-
-			<OrderType />
-
-			<OrderItem />
-			<OrderItem />
-			<OrderItem />
-			<OrderItem />
-
+			<TypesSection />
+			<ListSection />
 		</ScrollView>
 	)
 }
