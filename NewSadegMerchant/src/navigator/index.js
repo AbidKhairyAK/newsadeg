@@ -32,7 +32,7 @@ const Tab = createBottomTabNavigator()
 const renderTabBar = props => <CustomTabBar icons={tabIcons} {...props} />
 
 const AppTabs = () => 
-	<Tab.Navigator tabBar={renderTabBar} initialRouteName="Menu">
+	<Tab.Navigator tabBar={renderTabBar} initialRouteName="Account">
 		<Tab.Screen name="OrderList" component={OrderList} />
 		<Tab.Screen name="Menu" component={Menu} />
 		<Tab.Screen name="Account" component={Account} />

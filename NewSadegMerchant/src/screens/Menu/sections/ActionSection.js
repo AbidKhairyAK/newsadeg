@@ -15,14 +15,14 @@ const ActionSection = () => {
 			<ActionButton.Item 
 				onPress={() => alert('test')}
 				buttonColor={colors.white} 
-				title="Category" 
+				title="+ New Category" 
 			>
 				<BaseIcon name="ice-cream-outline" color="green"/>
 			</ActionButton.Item>
 			<ActionButton.Item 
 				onPress={() => alert('test')}
 				buttonColor={colors.white} 
-				title="Menu" 
+				title="+ New Menu" 
 			>
 				<BaseIcon name="fast-food-outline" color="green"/>
 			</ActionButton.Item>

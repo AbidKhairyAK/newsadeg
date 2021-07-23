@@ -42,5 +42,5 @@ const CategoriesSection = () => {
 export default CategoriesSection
 
 const styles = StyleSheet.create({
-	container: { flex: 1, marginTop: sizes.xs * -1 / 2 },
+	container: { flex: 1, marginTop: sizes.xs * -1 },
 })

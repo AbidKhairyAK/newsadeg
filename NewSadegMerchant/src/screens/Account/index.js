@@ -1,15 +1,20 @@
 import React from 'react'
-import { View } from 'react-native'
+import { ScrollView } from 'react-native'
 
-import { BaseText } from '@/components'
+import HeaderSection from './sections/HeaderSection'
+import AdditionalSettings from './sections/AdditionalSettings'
+import DataSettings from './sections/DataSettings'
+
+import LogoutButton from './components/LogoutButton'
 
 const Account = () => {
 	return (
-		<View>
-			<BaseText>
-				Account
-			</BaseText>
-		</View>
+		<ScrollView>
+			<HeaderSection />
+			<AdditionalSettings />
+			<DataSettings />
+			<LogoutButton />
+		</ScrollView>
 	)
 }
 
