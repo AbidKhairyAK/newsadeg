@@ -11,6 +11,12 @@ const shadows = {
 		shadowColor: '#8D8E8F',
 		shadowRadius: 6,
 	},
+	sectionHard: {
+		shadowOffset: { width: 0, height: 0 },
+		shadowOpacity: 0.5,
+		shadowColor: '#000000',
+		shadowRadius: 12,
+	},
 	item: {
 		shadowOffset: { width: 0, height: 1 },
 		shadowOpacity: 0.3,
@@ -27,6 +33,12 @@ const shadows = {
 		shadowOffset: { width: 0, height: 0 },
 		shadowOpacity: 0.2,
 		shadowColor: '#8D8E8F',
+		shadowRadius: 6,
+	},
+	modal: {
+		shadowOffset: { width: 0, height: 3 },
+		shadowOpacity: 0.1,
+		shadowColor: '#000000',
 		shadowRadius: 6,
 	},
 }

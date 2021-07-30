@@ -4,8 +4,8 @@ import { View, ScrollView, Image, StyleSheet } from 'react-native'
 import { BaseText, ShadowView } from '@/components'
 import { sizes, colors } from '@/constants'
 
-const MenuItem = () => (
-	<View style={styles.container}>
+const MenuItem = ({ noBorder }) => (
+	<View style={styles.container(noBorder)}>
 		<ShadowView type="item" style={styles.imageWrapper}>
 			<Image 
 				source={{ uri: 'https://source.unsplash.com/240x240/?burger' }} 
@@ -32,7 +32,7 @@ const MenuItem = () => (
 export default MenuItem
 
 const styles = StyleSheet.create({
-	container: { flexDirection: 'row', marginTop: sizes.sm, borderBottomWidth: 1, borderColor: colors.gray + '33', paddingBottom: sizes.sm },
+	container: (noBorder) => ({ paddingBottom: noBorder ? 0 : sizes.sm, borderBottomWidth: noBorder ? 0 : 1, flexDirection: 'row', paddingTop: sizes.sm, borderColor: colors.gray + '33' }),
 	imageWrapper: { backgroundColor: colors.white, borderRadius: sizes.xs, marginRight: sizes.xs, alignSelf: 'flex-start' },
 	image: { width: sizes.xxxl, height: sizes.xxxl, borderRadius: sizes.xxs },
 	contentWrapper: { flexShrink: 1, flex: 1 },

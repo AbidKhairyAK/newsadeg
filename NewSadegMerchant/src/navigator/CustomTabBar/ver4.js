@@ -1,26 +1,21 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native'
 import { ShadowFlex } from 'react-native-neomorph-shadows'
 
-import { BaseText, BaseIcon } from '@/components'
+import { BaseText, BaseIcon, BaseSwitch } from '@/components'
 import { sizes, colors, shadows } from '@/constants'
 
 const ITEM_TOP_PADDING = sizes.lg
 const ITEM_BOTTOM_PADDING = sizes.lg
 const ICON_SIZE = sizes.xl
 const CONTAINER_RADIUS = sizes.base
-const SWITCH_HEIGHT = sizes.xl
 
 const CustomTabBar = ({ state, descriptors, navigation, icons }) => {
-	const [isOpen, setIsOpen] = useState(true)
-
 	const focusedOptions = descriptors[state.routes[state.index].key].options;
 
 	if (focusedOptions.tabBarVisible === false) {
 		return null;
 	}
-
-	const toggleIsOpen = () => setIsOpen(prev => !prev)
 
 	return <>
 		<ShadowFlex style={styles.container}>
@@ -82,23 +77,7 @@ const CustomTabBar = ({ state, descriptors, navigation, icons }) => {
 				</View>
 
 				<View style={styles.containerRight}>
-					<View style={{
-						...styles.switchWrapper,
-						...styles[isOpen ? 'switchWrapperOpen' : 'switchWrapperClosed']
-					}}>
-						<TouchableOpacity onPress={toggleIsOpen}>
-							<ShadowFlex style={styles.switchItem}>
-								<View style={{
-									...styles.switchItemInner,
-									...styles[isOpen ? 'switchItemOpen' : 'switchItemClosed']
-								}}>
-									<BaseText size="xs" type="semi-bold" color="white" style={styles.switchText}>
-										{isOpen ? 'OPEN' : 'CLOSED' }
-									</BaseText>
-								</View>
-							</ShadowFlex>
-						</TouchableOpacity>
-					</View>
+					<BaseSwitch trueTitle="OPEN" falseTitle="CLOSED" />
 				</View>
 			</View>
 		</ShadowFlex>
@@ -114,12 +93,4 @@ const styles = StyleSheet.create({
 	containerRight: { flex: 1, justifyContent: 'center', alignItems: 'center' },
 	itemWrapper: { flex: 1, alignItems: 'center', position: 'relative', paddingTop: ITEM_TOP_PADDING, paddingBottom: ITEM_BOTTOM_PADDING },
 	activeIndicator: { width: sizes.xs, height: sizes.xs / 4, backgroundColor: colors.green, borderRadius: sizes.xs, position: 'absolute', bottom: sizes.sm },
-	switchWrapper: { height: SWITCH_HEIGHT / 1.5, borderRadius: SWITCH_HEIGHT / 5, justifyContent: 'center', backgroundColor: colors.gray + '55' },
-	switchWrapperOpen: { paddingLeft: sizes.xxs, alignItems: 'flex-end' },
-	switchWrapperClosed: { paddingRight: sizes.xxs, alignItems: 'flex-start' },
-	switchItem: { ...shadows.item, borderRadius: SWITCH_HEIGHT / 5 },
-	switchItemInner: { height: SWITCH_HEIGHT, justifyContent: 'center', paddingHorizontal: sizes.xxs, borderRadius: SWITCH_HEIGHT / 5 },
-	switchItemOpen: { backgroundColor: colors.green },
-	switchItemClosed: { backgroundColor: colors.red },
-	switchText: { lineHeight: sizes.xs * 1.35 }
 })

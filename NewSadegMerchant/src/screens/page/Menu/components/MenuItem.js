@@ -1,13 +1,18 @@
 import React from 'react'
 import { StyleSheet, TouchableOpacity, View, Image } from 'react-native'
+import { useNavigation } from '@react-navigation/native'
 
 import { ShadowView, BaseText, MoneyText } from '@/components'
 import { sizes, colors } from '@/constants'
 
 const MenuItem = ({ isTopItem }) => {
+	const navigation = useNavigation()
+
+	const toDetailScreen = () => navigation.navigate('MenuDetail')
+
 	return (
 		<ShadowView type="card" style={styles.itemWrapper(isTopItem)}>
-			<TouchableOpacity>
+			<TouchableOpacity onPress={toDetailScreen}>
 				<View style={styles.itemInner}>
 					<ShadowView type="item" style={styles.imageWrapper}>
 						<Image

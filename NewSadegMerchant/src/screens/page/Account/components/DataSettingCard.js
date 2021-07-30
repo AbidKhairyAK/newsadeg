@@ -17,7 +17,7 @@ const DataSettingCard = ({ title, items }) => {
 				<View key={index}>
 					{index !== 0 && <HorizontalRule />}
 
-					<DataSettingItem title={item.title} icon={item.icon} />
+					<DataSettingItem title={item.title} icon={item.icon} onPress={item.onPress} />
 				</View>
 			)}
 		</ShadowView>
