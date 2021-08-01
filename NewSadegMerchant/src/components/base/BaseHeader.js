@@ -5,7 +5,7 @@ import { useNavigation } from '@react-navigation/native'
 import { BaseIcon, BaseText } from '@/components'
 import { sizes, colors } from '@/constants'
 
-const BaseHeader = ({ title, withBack }) => {
+const BaseHeader = ({ title, withBack, noMargin }) => {
 	const navigation = useNavigation()
 
 	return (
@@ -15,7 +15,7 @@ const BaseHeader = ({ title, withBack }) => {
 					<BaseIcon name="chevron-back-outline" />
 				</TouchableOpacity>
 			}
-			<BaseText align="center" type="bold" style={styles.title}>
+			<BaseText align="center" type="bold" color="gray" style={styles.title(noMargin)}>
 				{title}
 			</BaseText>
 		</View>
@@ -27,5 +27,5 @@ export default BaseHeader
 const styles = StyleSheet.create({
 	container: { flexDirection: 'row', position: 'relative' },
 	backButton: { padding: sizes.base, alignItems: 'center', justifyContent: 'center', position: 'absolute', top: 0, bottom: 0, left: 0, zIndex: 1 },
-	title: { marginVertical: sizes.xl, flex: 1 }
+	title: (noMargin) => ({ marginVertical: noMargin ? 0 : sizes.xl, flex: 1 })
 })

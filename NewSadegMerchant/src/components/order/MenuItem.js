@@ -32,7 +32,7 @@ const MenuItem = ({ noBorder }) => (
 export default MenuItem
 
 const styles = StyleSheet.create({
-	container: (noBorder) => ({ paddingBottom: noBorder ? 0 : sizes.sm, borderBottomWidth: noBorder ? 0 : 1, flexDirection: 'row', paddingTop: sizes.sm, borderColor: colors.gray + '33' }),
+	container: (noBorder) => ({ paddingBottom: noBorder ? 0 : sizes.sm, borderBottomWidth: noBorder ? 0 : 1, flexDirection: 'row', paddingTop: sizes.sm, borderColor: colors.border }),
 	imageWrapper: { backgroundColor: colors.white, borderRadius: sizes.xs, marginRight: sizes.xs, alignSelf: 'flex-start' },
 	image: { width: sizes.xxxl, height: sizes.xxxl, borderRadius: sizes.xxs },
 	contentWrapper: { flexShrink: 1, flex: 1 },

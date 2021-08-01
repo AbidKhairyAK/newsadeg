@@ -10,7 +10,7 @@ export default HorizontalRule
 const styles = StyleSheet.create({
 	rule: (margin, style) => ({ 
 		borderBottomWidth: 1, 
-		borderColor: colors.gray + '33', 
+		borderColor: colors.border, 
 		marginVertical: margin || sizes.base,
 		...style 
 	})

@@ -1,31 +1,15 @@
 import React from 'react'
-import { View, ScrollView } from 'react-native'
+import { View, ScrollView, TextInput } from 'react-native'
 
-import { BaseText, ModalContainer } from '@/components'
-import { colors, sizes } from '@/constants'
+import { ModalForm, FormInput } from '@/components'
 
 const FormExample = () => {
 	return (
-		<ModalContainer>
-			<BaseText>
-				test
-			</BaseText>
-			<BaseText>
-				test
-			</BaseText>
-			<BaseText>
-				test
-			</BaseText>
-			<BaseText>
-				test
-			</BaseText>
-			<BaseText>
-				test
-			</BaseText>
-			<BaseText>
-				test
-			</BaseText>
-		</ModalContainer>
+		<ModalForm title="Owner Data" onPressPositive={() => alert('yes')}>
+			<FormInput label="Nama Lengkap" />
+			<FormInput label="No KTP" />
+			<FormInput label="No KTP" />
+		</ModalForm>
 	)
 }
 

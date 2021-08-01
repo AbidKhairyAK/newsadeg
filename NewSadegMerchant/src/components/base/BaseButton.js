@@ -64,5 +64,5 @@ const styles = StyleSheet.create({
 		justifyContent: 'center', 
 		alignItems: 'center' 
 	}),
-	icon: (noTitle) => noTitle ? {} : ({ marginRight: sizes.base / 4 })
+	icon: (noTitle) => noTitle ? {} : ({ marginRight: sizes.base / 3 }) // base (16) bagi 3 ( = 5.333 ) sebenarnya menyalahi prinsipku T_T tapi ini ukuran yg paling pas T_T
 })

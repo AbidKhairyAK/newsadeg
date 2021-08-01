@@ -26,7 +26,7 @@ const FormSection = () => {
 				/>
 				<BaseButton
 					title="Driver Restaurant"
-					bg="lightGray"
+					bg="darkGray"
 					color="white"
 					size="sm"
 					style={styles.driverOption}
@@ -45,7 +45,7 @@ const FormSection = () => {
 							key={time + (time === selectedTime ? 1 : 0)} 
 							onPress={changeSelectedTIme(time)} 
 							title={time + ' Minutes'} 
-							bg={time === selectedTime ? 'green' : 'lightGray'} 
+							bg={time === selectedTime ? 'green' : 'darkGray'} 
 							color="white" 
 							size="sm" 
 							style={styles.timeOption} 

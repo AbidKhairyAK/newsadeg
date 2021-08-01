@@ -28,5 +28,5 @@ export default BalanceInfo
 const styles = StyleSheet.create({
 	container: { flexDirection: 'row', borderRadius: sizes.base, marginHorizontal: sizes.base, padding: sizes.base, position: 'absolute', bottom: sizes.base * -2, left: 0, right: 0 },
 	infoWrapper: { flex: 4 },
-	actionWrapper: { flex: 5, flexDirection: 'row', justifyContent: 'space-around', borderLeftWidth: 1, borderColor: colors.gray + '33' },
+	actionWrapper: { flex: 5, flexDirection: 'row', justifyContent: 'space-around', borderLeftWidth: 1, borderColor: colors.border },
 })
