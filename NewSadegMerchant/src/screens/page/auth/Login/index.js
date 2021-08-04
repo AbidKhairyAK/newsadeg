@@ -1,50 +1,40 @@
-import React, { useState } from 'react'
-import { ScrollView, View, StyleSheet, TouchableOpacity } from 'react-native'
+import React, { useRef } from 'react'
+import { ScrollView, View, StyleSheet } from 'react-native'
 import LottieView from 'lottie-react-native'
 
-import { BaseText, BaseIcon, FormInputCard, BaseButton, HorizontalRule } from '@/components'
+import { BaseText, BaseButton, HorizontalRule } from '@/components'
 import { sizes } from '@/constants'
 import { getScreenSize } from '@/helpers'
 
-const Register = ({ navigation }) => {
-	const [hidePassword, setHidePassword] = useState(true)
+import commonLogic from './logics/commonLogic'
+import loginLogic from './logics/loginLogic'
+import FormSection from './sections/FormSection'
 
-	const toggleShowPassword = () => setHidePassword(prev => !prev)
-	const toRegisterScreen = () => navigation.navigate('Register')
-	const toMainScreens = () => navigation.navigate('MainScreens')
+const Login = () => {
+	const animRef = useRef()
+	const { toRegisterScreen } = commonLogic({ animRef })
+	const { isLoading, form, setFormInline, handleLogin, validateFormInline, formErrors } = loginLogic()
 
 	return (
 		<ScrollView>
 			<View style={styles.wrapper}>
 				<LottieView
+					ref={animRef}
 					source={require('@/assets/animations/Koki.json')}
 					style={styles.animation}
-					autoPlay
 					loop
 				/>
 
-				<FormInputCard 
-					label="Email" 
-					icon="mail-outline" 
-					placeholder="enter your email ..." 
+				<FormSection
+					form={form}
+					setFormInline={setFormInline}
+					validateFormInline={validateFormInline}
+					formErrors={formErrors}
 				/>
-				<FormInputCard 
-					label="Password" 
-					icon="lock-closed-outline" 
-					placeholder="enter your password ..."
-					secureTextEntry={hidePassword}
-				>
-					<TouchableOpacity onPress={toggleShowPassword} style={styles.hidePassword}>
-						<BaseIcon 
-							name={hidePassword ? 'eye-off-outline' : 'eye-outline'} 
-							size="lg" 
-							color={hidePassword ? 'gray' : 'green'}
-						/>
-					</TouchableOpacity>
-				</FormInputCard>
 
 				<BaseButton 
-					onPress={toMainScreens}
+					isLoading={isLoading}
+					onPress={handleLogin}
 					title="Login" 
 					icon="enter-outline" 
 					bg="green" 
@@ -60,6 +50,7 @@ const Register = ({ navigation }) => {
 
 				<BaseButton 
 					onPress={toRegisterScreen}
+					disabled={isLoading}
 					title="Register" 
 					icon="cloud-upload-outline" 
 					color="green" 
@@ -70,11 +61,10 @@ const Register = ({ navigation }) => {
 	)
 }
 
-export default Register
+export default Login
 
 const styles = StyleSheet.create({
 	wrapper: { paddingHorizontal: sizes.base, paddingTop: sizes.base / 2, paddingBottom: sizes.base * 2 },
 	animation: { width: getScreenSize().width, height: getScreenSize().width - sizes.base * 3, alignSelf: 'center', marginBottom: sizes.base * -1.5 },
 	registerCaption: { marginBottom: sizes.base },
-	hidePassword: { padding: sizes.base, margin: sizes.base * -1 }
 })

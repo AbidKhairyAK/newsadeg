@@ -1,13 +1,19 @@
 import React from 'react'
 import { View, TouchableOpacity, StyleSheet } from 'react-native'
+import { useDispatch } from 'react-redux'
 
 import { BaseText, BaseIcon, ShadowView } from '@/components'
 import { sizes } from '@/constants'
+import { logout } from '@/store/auth'
 
 const LogoutButton = () => {
+	const dispatch = useDispatch()
+
+	const handleLogout = () => dispatch(logout())
+
 	return (
 		<ShadowView type="card" style={styles.container}>
-			<TouchableOpacity>
+			<TouchableOpacity onPress={handleLogout}>
 				<View style={styles.inner}>
 					<BaseIcon name="log-out-outline" color="red" style={styles.icon} />
 					<BaseText type="semi-bold" align="center" color="red">

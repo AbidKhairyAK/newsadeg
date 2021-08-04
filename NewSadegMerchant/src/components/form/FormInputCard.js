@@ -1,26 +1,38 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { View, StyleSheet, TextInput } from 'react-native'
 
 import { ShadowView, BaseText, BaseIcon } from '@/components'
 import { sizes, colors, fontTypes } from '@/constants'
+import { validate } from '@/utils'
 
-const FormInputCard = ({ style, label, icon, noMargin, children, ...props }) => 
-	<ShadowView type="card" style={{
-		...styles.container(noMargin),
-		...style
-	}}>
-		<View style={styles.inner}>
-			<BaseText size="sm" color="gray">
-				{label}
-			</BaseText>
-			<View style={styles.inputWrapper}>
-				<BaseIcon name={icon} size="lg" color="gray" />
-				<TextInput {...props} style={styles.input}/>
-				{children}
+const FormInputCard = ({ style, label, icon, noMargin, error, children, ...props }) => {
+	return (
+		<ShadowView 
+			type="card" 
+			key={label + error}
+			style={{
+				...styles.container(noMargin),
+				...style
+			}}
+		>
+			<View style={styles.inner}>
+				<BaseText size="sm" color={error ? 'red' : 'gray'}>
+					{label}
+				</BaseText>
+
+				<View style={styles.inputWrapper}>
+					<BaseIcon name={icon} size="lg" color={error ? 'red' : 'gray'} />
+					<TextInput {...props} style={styles.input} />
+					{children}
+				</View>
+
+				{error && <BaseText color="red" size="xs">
+					{error}
+				</BaseText>}
 			</View>
-		</View>
-	</ShadowView>
-
+		</ShadowView>
+	)
+}
 export default FormInputCard
 
 const styles = StyleSheet.create({

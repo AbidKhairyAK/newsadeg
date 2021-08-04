@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { createStackNavigator } from '@react-navigation/stack'
 
 import {
@@ -10,7 +10,7 @@ import {
 const Stack = createStackNavigator()
 
 const AuthScreens = () => 
-	<Stack.Navigator headerMode="none" initialRouteName="Login">
+	<Stack.Navigator headerMode="none">
 		<Stack.Screen name="Onboarding" component={Onboarding} />
 		<Stack.Screen name="Register" component={Register} />
 		<Stack.Screen name="Login" component={Login} />

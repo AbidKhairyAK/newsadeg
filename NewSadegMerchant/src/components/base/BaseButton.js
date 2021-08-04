@@ -1,17 +1,17 @@
 import React from 'react'
-import { TouchableOpacity, StyleSheet } from 'react-native'
+import { TouchableOpacity, StyleSheet, ActivityIndicator, View } from 'react-native'
 
 import { ShadowView, BaseIcon, BaseText } from '@/components'
 import { colors, sizes } from '@/constants'
 
 const BaseButton = ({ 
-	onPress,
-	style, innerStyle, iconStyle, textStyle, // style props
+	isLoading, // logic props
+	innerStyle, iconStyle, textStyle, // style props
 	bg, radius, shadowType, // wrapper props
 	title, color, size, type, // text props
-	icon, iconSize, iconColor // icon props
+	icon, iconSize, iconColor, // icon props
+	...props // other props
 }) => {
-
 	bg = bg ? colors[bg] : colors.white,
 	radius = radius ? sizes[radius] : sizes.xs
 	shadowType = shadowType || 'item'
@@ -20,13 +20,12 @@ const BaseButton = ({
 	type = type || 'semi-bold'
 	iconSize = iconSize || 'lg'
 	iconColor = iconColor || color
-	style = style || {}
 	innerStyle = innerStyle || {}
 	iconStyle = iconStyle || {}
 	textStyle = textStyle || {}
 
 	return (
-		<TouchableOpacity style={style} onPress={onPress}>
+		<TouchableOpacity disabled={isLoading || props.disabled} {...props}>
 			<ShadowView 
 				type={shadowType}
 				style={{ 
@@ -48,6 +47,11 @@ const BaseButton = ({
 				>
 					{title}
 				</BaseText>}
+				{isLoading && <View 
+					style={styles.loadingBlock(bg, radius)}
+				>
+					<ActivityIndicator color={colors[color]} />
+				</View>}
 			</ShadowView>
 		</TouchableOpacity>
 	)
@@ -62,7 +66,19 @@ const styles = StyleSheet.create({
 		paddingVertical: sizes.xs, 
 		flexDirection: 'row', 
 		justifyContent: 'center', 
+		alignItems: 'center',
+		position: 'relative'
+	}),
+	loadingBlock: (bg, radius) => ({ 
+		position: 'absolute',
+		top: 0,
+		bottom: 0,
+		left: 0,
+		right: 0,
+		backgroundColor: bg,
+		borderRadius: radius,
+		justifyContent: 'center',
 		alignItems: 'center' 
 	}),
-	icon: (noTitle) => noTitle ? {} : ({ marginRight: sizes.base / 3 }) // base (16) bagi 3 ( = 5.333 ) sebenarnya menyalahi prinsipku T_T tapi ini ukuran yg paling pas T_T
+	icon: (noTitle) => noTitle ? {} : ({ marginRight: sizes.base / 3 }), // base (16) bagi 3 ( = 5.333 ) sebenarnya menyalahi prinsipku T_T tapi ini ukuran yg paling pas T_T
 })

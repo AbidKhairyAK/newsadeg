@@ -7,3 +7,5 @@ export const DEFAULT_FONT_TYPE = 'regular'
 
 export const DEFAULT_ICON_SIZE = 'xl'
 export const DEFAULT_ICON_COLOR = 'black'
+
+export const MAIN_SOURCE_URL = 'https://source.sadegapp.com'

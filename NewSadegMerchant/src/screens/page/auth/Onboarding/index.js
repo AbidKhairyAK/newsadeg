@@ -6,6 +6,7 @@ import Swiper from 'react-native-swiper'
 import { BaseText, BaseButton } from '@/components'
 import { sizes } from '@/constants'
 import { getScreenSize } from '@/helpers'
+import { storage } from '@/utils'
 
 const anims = [
 	{
@@ -49,6 +50,7 @@ const Onboarding = ({ navigation }) => {
 
 		if (isLastAnim) {
 			navigation.replace('Register')
+			storage.setItem('isAppHasBeenOpened', true)
 		} else {
 			setCurrentAnim(prev => prev + 1)
 			swiperRef.current.scrollBy(1)

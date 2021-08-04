@@ -1,56 +1,31 @@
 import React, { useState } from 'react'
-import { ScrollView, View, StyleSheet, TouchableOpacity } from 'react-native'
+import { ScrollView, View, StyleSheet } from 'react-native'
 
-import { BaseText, BaseHeader, BaseIcon, FormInputCard, BaseButton, HorizontalRule } from '@/components'
+import { BaseText, BaseHeader, BaseButton, HorizontalRule } from '@/components'
 import { sizes } from '@/constants'
 
-const Register = ({ navigation }) => {
-	const [hidePassword, setHidePassword] = useState(true)
+import registerLogic from './logics/registerLogic'
+import FormSection from './sections/FormSection'
 
-	const toggleShowPassword = () => setHidePassword(prev => !prev)
+const Register = ({ navigation }) => {
+	const { form, setFormInline, handleRegister, isLoading, validateFormInline, formErrors } = registerLogic()
+
 	const toLoginScreen = () => navigation.navigate('Login')
 
 	return (
 		<ScrollView>
 			<BaseHeader title="REGISTRATION FORM" />
 			<View style={styles.wrapper}>
-				<FormInputCard 
-					label="Email" 
-					icon="mail-outline" 
-					placeholder="enter your email ..." 
-				/>
-				<FormInputCard 
-					label="Password" 
-					icon="lock-closed-outline" 
-					placeholder="enter your password ..."
-					secureTextEntry={hidePassword}
-				>
-					<TouchableOpacity onPress={toggleShowPassword} style={styles.hidePassword}>
-						<BaseIcon 
-							name={hidePassword ? 'eye-off-outline' : 'eye-outline'} 
-							size="lg" 
-							color={hidePassword ? 'gray' : 'green'}
-						/>
-					</TouchableOpacity>
-				</FormInputCard>
-				<FormInputCard 
-					label="Owner Name" 
-					icon="person-outline" 
-					placeholder="enter your full name ..." 
-				/>
-				<FormInputCard 
-					label="Identity Card Number" 
-					icon="card-outline" 
-					placeholder="enter your id card number ..." 
-				/>
-				<FormInputCard 
-					label="Phone Number" 
-					icon="call-outline" 
-					placeholder="enter your phone number (+966) ..." 
+				<FormSection 
+					form={form} 
+					setFormInline={setFormInline} 
+					validateFormInline={validateFormInline}
+					formErrors={formErrors}
 				/>
 
 				<BaseButton 
-					onPress={toLoginScreen}
+					onPress={handleRegister}
+					isLoading={isLoading}
 					title="Register" 
 					icon="cloud-upload-outline" 
 					bg="green" 
@@ -66,6 +41,7 @@ const Register = ({ navigation }) => {
 
 				<BaseButton 
 					onPress={toLoginScreen}
+					disabled={isLoading}
 					title="Login" 
 					icon="enter-outline" 
 					color="green" 
