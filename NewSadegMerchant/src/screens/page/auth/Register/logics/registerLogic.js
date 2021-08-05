@@ -34,12 +34,7 @@ const registerLogic = () => {
 			// munculin success modal atau snackbar
 
 			navigation.navigate('Login')
-		} catch (err) { // jangan lupa buat catch global
-			alert(err.message)
-			if (err.response) console.error(err.response)
-			else if (err.request) console.error(err.request)
-			else console.error(err)
-		} finally {
+		} catch {} finally {
 			setIsLoading(false)
 		}
 	}

@@ -8,12 +8,7 @@ export const authenticate = createAsyncThunk('auth/authenticate', async (credent
 		await storage.setItem('token', res)
 		dispatch({ type: 'auth/login', payload: res })
 	} catch (err) {
-		if (err.response) {
-			console.error(err.response)
-			if ([401, 400].includes(err.response.status)) alert('Email or password is incorrect')
-		}
-		else if (err.request) console.error(err.request)
-		else console.error(err)
+		if ([401, 400].includes(err?.response?.status)) alert('Email or password is incorrect')
 		throw err
 	}
 })

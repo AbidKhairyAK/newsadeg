@@ -16,10 +16,13 @@ const loginLogic = () => {
 		password: { presence: true, length: { minimum: 4, maximum: 20 } }
 	})
 
-	const handleLogin = () => {
+	const handleLogin = async () => {
 		const isFormErr = validateForm()
 		if (isFormErr) return
-		dispatch(authenticate(form))
+
+		const res = await dispatch(authenticate(form))
+		if (res.error) return
+
 		resetForm()
 	}
 
