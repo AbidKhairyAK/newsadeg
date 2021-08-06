@@ -11,30 +11,27 @@ import {
 } from './navigators'
 import Init from '@/screens/page/Init'
 
-import { AppTheme, AppScreenOptions } from './config'
+import { AppTheme } from './config'
 
-const Stack = createStackNavigator()
+const { Navigator, Screen } = createStackNavigator()
 
-const AppScreens = () =>{
+const AppScreens = () => {
 	const { isLogin } = useSelector(state => state.auth)
 
 	return (
-		<Stack.Navigator 
-			headerMode="none" 
-			mode="modal" 
-			screenOptions={AppScreenOptions(false)}
-		>
-			<Stack.Screen name="Init" component={Init} />
+		<Navigator headerMode="none" mode="modal">
+			<Screen name="Init" component={Init} />
 			{
 				isLogin 
-				? <Stack.Screen name="MainScreens" component={MainScreens} />
-				: <Stack.Screen name="AuthScreens" component={AuthScreens} />
+				? MainScreens.map(screen => screen)
+				: AuthScreens.map(screen => screen)
 			}
-			<Stack.Screen name="FormModals" component={FormModals} />
-			<Stack.Screen name="InfoModals" component={InfoModals} />
-		</Stack.Navigator>
+			{FormModals.map(screen => screen)}
+			{InfoModals.map(screen => screen)}
+		</Navigator>
 	)
 }
+
 const AppNavigator = () =>
 	<NavigationContainer theme={AppTheme}>
 		<AppScreens />

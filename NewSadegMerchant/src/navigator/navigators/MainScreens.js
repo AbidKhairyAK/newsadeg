@@ -8,13 +8,12 @@ import {
 
 import AppTabs from './AppTabs'
 
-const Stack = createStackNavigator()
+const { Screen } = createStackNavigator()
 
-const MainScreens = () => 
-	<Stack.Navigator headerMode="none">
-		<Stack.Screen name="AppTabs" component={AppTabs} />
-		<Stack.Screen name="MenuDetail" component={MenuDetail} />
-		<Stack.Screen name="OrderDetail" component={OrderDetail} />
-	</Stack.Navigator>
+const MainScreens = [
+	<Screen key="AppTabs" name="AppTabs" component={AppTabs} />,
+	<Screen key="MenuDetail" name="MenuDetail" component={MenuDetail} />,
+	<Screen key="OrderDetail" name="OrderDetail" component={OrderDetail} />
+]
 
 export default MainScreens

@@ -5,13 +5,10 @@ import {
 	FormExample,
 } from '@/screens/modal/form'
 
-import { AppScreenOptions } from '../config'
+const { Screen } = createStackNavigator()
 
-const Stack = createStackNavigator()
-
-const FormModals = () =>
-	<Stack.Navigator headerMode="none" mode="modal" screenOptions={AppScreenOptions(true)}>
-		<Stack.Screen name="FormExample" component={FormExample} />
-	</Stack.Navigator>
+const FormModals = [
+	<Screen key="FormExample" name="FormExample" component={FormExample} />
+]
 
 export default FormModals

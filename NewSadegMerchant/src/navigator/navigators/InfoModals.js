@@ -5,13 +5,10 @@ import {
 	InfoExample,
 } from '@/screens/modal/info'
 
-import { AppScreenOptions } from '../config'
+const { Screen } = createStackNavigator()
 
-const Stack = createStackNavigator()
-
-const InfoModals = () =>
-	<Stack.Navigator headerMode="none" mode="modal" screenOptions={AppScreenOptions(false)}>
-		<Stack.Screen name="InfoExample" component={InfoExample} />
-	</Stack.Navigator>
+const InfoModals = [
+	<Screen key="InfoExample" name="InfoExample" component={InfoExample} />
+]
 
 export default InfoModals

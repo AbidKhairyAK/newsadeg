@@ -1,9 +1,9 @@
-import ModalContainer from './ModalContainer'
+import ModalInfo from './ModalInfo'
 import ModalForm from './ModalForm'
 import ModalActionSection from './ModalActionSection'
 
 export {
-	ModalContainer,
+	ModalInfo,
 	ModalForm,
 	ModalActionSection
 }

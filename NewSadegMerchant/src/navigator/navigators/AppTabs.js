@@ -10,15 +10,15 @@ import {
 import { tabIcons } from '../config'
 import CustomTabBar from '../CustomTabBar/ver4'
 
-const Tab = createBottomTabNavigator()
+const { Navigator, Screen } = createBottomTabNavigator()
 
 const renderTabBar = props => <CustomTabBar icons={tabIcons} {...props} />
 
 const AppTabs = () => 
-	<Tab.Navigator tabBar={renderTabBar}>
-		<Tab.Screen name="OrderList" component={OrderList} />
-		<Tab.Screen name="Menu" component={Menu} />
-		<Tab.Screen name="Account" component={Account} />
-	</Tab.Navigator>
+	<Navigator tabBar={renderTabBar}>
+		<Screen name="OrderList" component={OrderList} />
+		<Screen name="Menu" component={Menu} />
+		<Screen name="Account" component={Account} />
+	</Navigator>
 
 export default AppTabs

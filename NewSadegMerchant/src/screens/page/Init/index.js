@@ -9,7 +9,7 @@ import { axiosInit, authInit } from '@/services'
 import { storage } from '@/utils'
 
 const Init = ({ navigation }) => {
-	const [targetScreen, setTargetScreen] = useState({})
+	const [targetScreen, setTargetScreen] = useState()
 	const [trigger, setTrigger] = useState(0)
 	const [isLoading, setIsLoading] = useState(false)
 
@@ -19,9 +19,9 @@ const Init = ({ navigation }) => {
 		const isOpened = await storage.getItem('isAppHasBeenOpened')
 
 		setTargetScreen(
-			isLogin ? { name: 'MainScreens' } : 
-			isOpened ? { name: 'AuthScreens', params: { screen: 'Login' }} : 
-			{ name: 'AuthScreens' }
+			isLogin ? 'AppTabs' : 
+			isOpened ? 'Login' : 
+			'Onboard'
 		)
 		setTrigger(prev => prev + 1)
 	}
@@ -42,7 +42,7 @@ const Init = ({ navigation }) => {
 		if (trigger < 2) return
 		setTrigger(0)
 		setIsLoading(false)
-		navigation.navigate(targetScreen.name, targetScreen.params)
+		navigation.navigate(targetScreen)
 	}, [trigger])
 
 	return isLoading && (

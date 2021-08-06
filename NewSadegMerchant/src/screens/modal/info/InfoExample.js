@@ -1,25 +1,18 @@
 import React from 'react'
 import { View, ScrollView } from 'react-native'
 
-import { BaseText, ModalContainer } from '@/components'
+import { BaseText, ModalInfo } from '@/components'
 import { colors, sizes } from '@/constants'
+import CheckSVG from '@/assets/illustrations/check.svg'
 
-const InfoExample = () => {
+const InfoExample = ({ navigation }) => {
 	return (
-		<ModalContainer>
-			<BaseText>
-				test
-			</BaseText>
-			<BaseText>
-				test
-			</BaseText>
-			<BaseText>
-				test
-			</BaseText>
-			<BaseText>
-				test
-			</BaseText>
-		</ModalContainer>
+		<ModalInfo
+			Illustration={CheckSVG}
+			title="Data Submitted"
+			desc="Your account data has been submitted"
+			onPressPositive={navigation.goBack}
+		/>
 	)
 }
 

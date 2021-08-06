@@ -7,13 +7,11 @@ import {
 	Login,
 } from '@/screens/page/auth'
 
-const Stack = createStackNavigator()
+const { Screen } = createStackNavigator()
 
-const AuthScreens = () => 
-	<Stack.Navigator headerMode="none">
-		<Stack.Screen name="Onboarding" component={Onboarding} />
-		<Stack.Screen name="Register" component={Register} />
-		<Stack.Screen name="Login" component={Login} />
-	</Stack.Navigator>
-
+const AuthScreens = [
+		<Screen key="Onboarding" name="Onboarding" component={Onboarding} />,
+		<Screen key="Register" name="Register" component={Register} />,
+		<Screen key="Login" name="Login" component={Login} />,
+]
 export default AuthScreens

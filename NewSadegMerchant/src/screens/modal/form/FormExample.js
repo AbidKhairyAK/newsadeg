@@ -9,6 +9,14 @@ const FormExample = () => {
 			<FormInput label="Nama Lengkap" />
 			<FormInput label="No KTP" />
 			<FormInput label="No KTP" />
+			<FormInput label="No KTP" />
+			<FormInput label="No KTP" />
+			<FormInput label="No KTP" />
+			<FormInput label="No KTP" />
+			<FormInput label="No KTP" />
+			<FormInput label="No KTP" />
+			<FormInput label="No KTP" />
+			<FormInput label="No KTP" />
 		</ModalForm>
 	)
 }

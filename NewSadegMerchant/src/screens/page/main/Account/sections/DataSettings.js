@@ -7,8 +7,8 @@ const DataSettings = () => {
 	const navigation = useNavigation()
 
 	const accountSettings = [
-		{ title: 'Owner Data', icon: 'person-outline', onPress: () => navigation.navigate('FormScreens', {screen: 'FormExample'}) },
-		{ title: 'Email Account', icon: 'mail-outline', onPress: () => navigation.navigate('InfoScreens', {screen: 'InfoExample'}) },
+		{ title: 'Owner Data', icon: 'person-outline', onPress: () => navigation.navigate('FormExample') },
+		{ title: 'Email Account', icon: 'mail-outline', onPress: () => navigation.navigate('InfoExample') },
 		{ title: 'Password', icon: 'lock-closed-outline' },
 		{ title: 'Phone Number', icon: 'call-outline' },
 	]
