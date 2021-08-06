@@ -6,7 +6,12 @@ import { storage } from '@/utils'
 import { MAIN_SOURCE_URL } from '@/config'
 
 export const axiosInit = async () => {
+	// add baseURL
 	axios.defaults.baseURL = MAIN_SOURCE_URL
+
+	// add token to every request
+	const storedToken = await storage.getItem('token')
+	axios.defaults.headers.common['Authorization'] = storedToken ?  'Bearer ' + storedToken.access_token : null
 
 	// shorten res.data to res
 	axios.interceptors.response.use(
@@ -25,10 +30,11 @@ export const axiosInit = async () => {
 
 			if (err.response) {
 				if (!ignoredUrls.includes(err.response?.config?.url)) {
+					console.error('response err', err.response)
+					alert(err.response.data.error || err.response.data.message || err.response.data)
+						
 					// handle unauthorized error
 					if ([400, 401].includes(err.response.status)) store.dispatch(logout())
-					console.error(err.response)
-					alert(err.response.data.error || err.response.data.message)
 				}
 			} else {
 				console.error(err)
@@ -38,22 +44,18 @@ export const axiosInit = async () => {
 			throw err
 		}
 	)
-
-	const storedToken = await storage.getItem('token')
-
-	axios.interceptors.request.use(
-		config => {
-			if (storedToken) config.headers.Authorization = 'Bearer ' + storedToken.access_token
-			else delete config.headers.Authorization
-			
-			return config
-		},
-		err => Promise.reject(err)
-	)
 }
 
 export const authInit = async () => {
 	const storedToken = await storage.getItem('token')
-	if (storedToken) store.dispatch(login(storedToken))
-	return storedToken
+	const storedUser = await storage.getItem('user')
+	const isDataExists = storedToken && storedUser
+	const mergedData = {
+		token: storedToken,
+		user: storedUser
+	}
+
+	if (isDataExists) store.dispatch(login(mergedData))
+
+	return isDataExists && mergedData
 }

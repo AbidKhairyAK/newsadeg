@@ -2,6 +2,7 @@ import React from 'react'
 import { useNavigation } from '@react-navigation/native'
 
 import DataSettingCard from '../components/DataSettingCard'
+import store from '@/store'
 
 const DataSettings = () => {
 	const navigation = useNavigation()

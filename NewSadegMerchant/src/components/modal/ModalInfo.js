@@ -8,7 +8,7 @@ import { colors, sizes } from '@/constants'
 import { getScreenSize } from '@/helpers'
 
 const ModalInfo = ({ 
-	Illustration,
+	illustration,
 	title, 
 	desc, 
 	onPressPositive, 
@@ -17,11 +17,14 @@ const ModalInfo = ({
 	negativeTitle = 'Cancel' 
 }) => {
 	const navigation = useNavigation()
+	const Illustration = illustration // change to TitleCase
 
 	return (
 		<Modal style={styles.container} opacity={0.2}>
 			<View style={styles.wrapper}>
-				{!!Illustration && <Illustration height={sizes.base * 10} />}
+				{!!Illustration && 
+					<Illustration height={sizes.base * 10} />
+				}
 				{title && 
 					<BaseText type="semi-bold" size="lg" align="center" style={{ marginBottom: sizes.xs }}>
 						{title}

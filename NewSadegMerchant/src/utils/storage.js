@@ -3,7 +3,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage'
 import { isJsonParsable } from '@/helpers'
 
 // register storage key here before using it in your code
-const storageKeys = ['token', 'isAppHasBeenOpened']
+const storageKeys = ['token', 'user', 'isAppHasBeenOpened']
 
 const checkKey = key => storageKeys.includes(key)
 const checkKeyErr = "Key doesn't match any data in the storage"

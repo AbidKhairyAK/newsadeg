@@ -6,7 +6,8 @@ import { authenticate, logout } from './actions'
 const initialState = {
 	isLoading: false,
 	isLogin: false,
-	token: {}
+	token: {},
+	user: {}
 }
 
 const authSlice = createSlice({
@@ -16,7 +17,9 @@ const authSlice = createSlice({
 		reset: () => ({ ...initialState }),
 		login: (state, action) => {
 			state.isLogin = true
-			state.token = action.payload
+			console.log(action.payload)
+			state.token = action.payload.token
+			state.user = action.payload.user
 		},
 	},
 	extraReducers: builder => { builder

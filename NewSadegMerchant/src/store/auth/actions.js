@@ -4,11 +4,19 @@ import { storage } from '@/utils'
 
 export const authenticate = createAsyncThunk('auth/authenticate', async (credentials, { dispatch }) => {
 	try {
-		const res = await AuthService.login(credentials)
-		await storage.setItem('token', res)
-		dispatch({ type: 'auth/login', payload: res })
+		const loginRes = await AuthService.login(credentials)
+		const profileRes = await AuthService.getProfile(loginRes.access_token)
+
+		await storage.setItem('token', loginRes)
+		await storage.setItem('user', profileRes)
+
+		dispatch({ type: 'auth/login', payload: {
+			token: loginRes,
+			user: profileRes
+		}})
 	} catch (err) {
 		if ([401, 400].includes(err?.response?.status)) alert('Email or password is incorrect')
+		else if (err.response) alert(err.response.data.message || err.response.data.error || err.response.data)
 		throw err
 	}
 })
