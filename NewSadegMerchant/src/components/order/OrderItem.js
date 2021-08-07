@@ -1,79 +1,87 @@
-import React from 'react'
+import React, { memo } from 'react'
 import { View, StyleSheet, TouchableOpacity } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
 
 import { BaseText, ShadowView, MoneyText, BaseIcon } from '@/components'
 import { sizes, colors } from '@/constants'
+import { toTitleCase, formatDate } from '@/helpers'
 
 import MenuItem from './MenuItem'
 
-const OrderItem = ({ onPress, withTotal, withDate }) => {
+const OrderItem = ({ order, onPress, withTotal, withDate }) => {
 	return (
 		<TouchableOpacity onPress={onPress} disabled={!onPress}>
-			<ShadowView type="card" style={styles.container}>
-				<View style={styles.headerSection}>
-					<View>
-						<BaseText>
-							Fulan Bin Fulan
-						</BaseText>
-						<BaseText size="sm" type="semi-bold">
-							Takeaway
-						</BaseText>
-
-						{withDate &&
-							<View style={{ marginVertical: sizes.xxxs, flexDirection: 'row', alignItems: 'center' }}>
-								<BaseIcon name="time-outline" size="base" color="green" style={{ marginRight: sizes.base / 4 }} />
-								<BaseText size="xs" color="gray" lineHeight={sizes.xs * 1.25}>
-									20 June 2021, 20:30
-								</BaseText>
-							</View>
-						}
-
-					</View>
-
-					<View>
-						<ShadowView type="item" style={styles.statusWrapper}>
-							<BaseText type="bold" size="xxs" color="white">
-								Pending
+			<ShadowView type="card" radius="base" style={styles.containerShadow}>
+				<View style={styles.container}>
+					<View style={styles.headerSection}>
+						<View>
+							<BaseText>
+								{order.name_customer}
 							</BaseText>
-						</ShadowView>
+							<BaseText size="sm" type="semi-bold">
+								{toTitleCase(order.order_method)}
+							</BaseText>
+
+							{withDate &&
+								<View style={styles.dateWrapper}>
+									<BaseIcon name="time-outline" size="base" color="green" style={styles.dateIcon} />
+									<BaseText size="xs" color="gray" lineHeight={sizes.xs * 1.25}>
+										{formatDate(order.created_at, 'date monthName year, hour:minute')}
+									</BaseText>
+								</View>
+							}
+
+						</View>
+
+						<View>
+							<ShadowView type="item" radius="xxs" style={styles.statusWrapper}>
+								<View style={styles.statusInner}>
+									<BaseText type="bold" size="xxs" color="white">
+										{toTitleCase(order.status)}
+									</BaseText>
+								</View>
+							</ShadowView>
+						</View>
 					</View>
+
+					{order.order_detail.map((detail, index, self) =>
+						<MenuItem 
+							key={index}
+							orderDetail={detail}
+							noBorder={!withTotal && index === self.length - 1} 
+						/>
+					)}
+
+					{withTotal && 
+						<View style={styles.footerSection}>
+							<BaseText size="sm" type="semi-bold">
+								Total
+							</BaseText>
+							<MoneyText value={order.price} size="lg" />
+						</View>
+					}
 				</View>
-
-				{[...new Array(3).keys()].map((val, index, self) =>
-					<MenuItem key={index} noBorder={!withTotal && index === self.length - 1} />
-				)}
-
-				{withTotal && 
-					<View style={styles.footerSection}>
-						<BaseText size="sm" type="semi-bold">
-							Total
-						</BaseText>
-						<MoneyText value={20} size="lg" />
-					</View>
-				}
 
 			</ShadowView>
 		</TouchableOpacity>
 )}
 
-export default OrderItem
+export default memo(OrderItem)
 
 const styles = StyleSheet.create({
-	container: { 
-		backgroundColor: colors.white, 
-		padding: sizes.xs, 
-		borderRadius: sizes.base, 
-		backgroundColor: colors.white, 
+	containerShadow: {
 		marginBottom: sizes.lg, 
 		marginHorizontal: sizes.base
 	},
-	headerSection: { flexDirection: 'row', justifyContent: 'space-between' },
-	statusWrapper: { 
-		padding: sizes.xxxs, 
-		backgroundColor: colors.red, 
-		borderRadius: sizes.xxs, 
-		alignSelf: 'flex-end' 
+	container: { 
+		backgroundColor: colors.white, 
+		padding: sizes.xs,
+		borderRadius: sizes.base
 	},
+	headerSection: { flexDirection: 'row', justifyContent: 'space-between' },
+	statusWrapper: { alignSelf: 'flex-end' },
+	statusInner: { padding: sizes.xxxs, backgroundColor: colors.red, borderRadius: sizes.xxs },
+	dateWrapper: { marginVertical: sizes.xxxs, flexDirection: 'row', alignItems: 'center' },
+	dateIcon: { marginRight: sizes.base / 4 },
 	footerSection: { justifyContent: 'space-between', flexDirection: 'row', marginTop: sizes.sm, alignItems: 'center' }
 })

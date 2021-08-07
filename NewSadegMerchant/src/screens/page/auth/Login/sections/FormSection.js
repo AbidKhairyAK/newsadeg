@@ -18,6 +18,8 @@ const FormSection = ({ form, setFormInline, validateFormInline, formErrors }) =>
 			label="Email" 
 			icon="mail-outline" 
 			placeholder="enter your email ..." 
+			keyboardType="email-address"
+			autoCapitalize="none"
 		/>
 		<FormInputCard 
 			value={form.password}

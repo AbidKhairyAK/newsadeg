@@ -1,21 +1,24 @@
 import React from 'react'
-import { Shadow, ShadowFlex } from 'react-native-neomorph-shadows'
+import { Shadow } from 'react-native-shadow-2'
 
-import { colors, shadows } from '@/constants'
+import { shadows, sizes } from '@/constants'
 
-const ShadowView = ({ useManual, type, style, children, ...props }) => {
-	const Comp = useManual ? Shadow : ShadowFlex
+const ShadowView = ({ type, radius, style, children, ...props }) => {
+	const shadowConfig = shadows[type]
+	
+	radius = typeof radius === 'string' ? sizes[radius] :
+		typeof radius === 'object' ? radius :
+		0
 
-	return <Comp 
+	return <Shadow
+		paintInside={true}
+		containerViewStyle={style}
+		radius={radius}
+		{...shadowConfig}
 		{...props} 
-		style={{
-			backgroundColor: colors.white,
-			...shadows[type],
-			...style
-		}}
 	>
 		{children}
-	</Comp>
+	</Shadow>
 }
 
 export default ShadowView

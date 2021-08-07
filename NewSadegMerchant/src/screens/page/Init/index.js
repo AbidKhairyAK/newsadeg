@@ -21,7 +21,7 @@ const Init = ({ navigation }) => {
 		setTargetScreen(
 			isLogin ? 'AppTabs' : 
 			isOpened ? 'Login' : 
-			'Onboard'
+			'Onboarding'
 		)
 		setTrigger(prev => prev + 1)
 	}
@@ -29,7 +29,7 @@ const Init = ({ navigation }) => {
 	const minScreenTime = () => {
 		setTimeout(() => {
 			setTrigger(prev => prev + 1)
-		}, 1500)
+		}, 2500)
 	}
 
 	useFocusEffect(useCallback(() => {

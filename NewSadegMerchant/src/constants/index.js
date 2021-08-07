@@ -7,5 +7,5 @@ export {
 	colors,
 	fontTypes,
 	sizes,
-	shadows
+	shadows,
 }

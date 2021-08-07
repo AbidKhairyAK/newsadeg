@@ -6,7 +6,7 @@ import { sizes } from '@/constants'
 
 import MenuItem from '../components/MenuItem'
 
-const ListSection = () => {
+const ListSection = ({ orders }) => {
 	return (
 		<View style={styles.container}>
 			{[...new Array(6).keys()].map((val, i) =>

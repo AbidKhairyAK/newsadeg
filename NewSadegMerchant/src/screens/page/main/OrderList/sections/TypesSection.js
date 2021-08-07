@@ -5,24 +5,16 @@ import { sizes } from '@/constants'
 
 import TypeItem from '../components/TypeItem'
 
-const types = {
-	process: 'On Process',
-	history: 'History'
-}
 
-const TypesSection = () => {
-	const [selected, setSelected] = useState('process')
-
-	const changeSelected = type => e => setSelected(type)
-
+const TypesSection = ({ types, selectedType, changeType }) => {
 	return (
 		<View style={styles.container}>
 			{Object.keys(types).map(type => 
 				<TypeItem
 					key={type}
 					title={types[type]}
-					isSelected={selected === type}
-					onPress={changeSelected(type)}
+					isSelected={selectedType === type}
+					onPress={changeType(type)}
 				/>
 			)}
 		</View>

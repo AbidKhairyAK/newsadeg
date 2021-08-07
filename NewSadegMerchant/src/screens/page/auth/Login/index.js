@@ -39,7 +39,7 @@ const Login = () => {
 					icon="enter-outline" 
 					bg="green" 
 					color="white" 
-					radius="xl" 
+					radius={sizes.base * 1.4} 
 				/>
 
 				<HorizontalRule />
@@ -54,7 +54,7 @@ const Login = () => {
 					title="Register" 
 					icon="cloud-upload-outline" 
 					color="green" 
-					radius="xl" 
+					radius={sizes.base * 1.4} 
 				/>
 			</View>
 		</ScrollView>

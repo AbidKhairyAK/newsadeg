@@ -7,6 +7,7 @@ import { sizes, colors } from '@/constants'
 const TypeSection = ({ title, isSelected, onPress }) => (
 	<ShadowView 
 		type="card"
+		radius="xs"
 		style={styles.itemWrapper}
 	>
 		<TouchableOpacity onPress={onPress}>
@@ -31,7 +32,7 @@ export default TypeSection
 
 const styles = StyleSheet.create({
 	container: { marginBottom: sizes.base, marginHorizontal: sizes.base, flexDirection: 'row', justifyContent: 'space-between' },
-	itemWrapper: {  borderRadius: sizes.xs, width: '48%' },
+	itemWrapper: { width: '48%' },
 	itemInner: { padding: sizes.xs, borderRadius: sizes.xs },
 	itemInnerActive: { backgroundColor: colors.green },
 	itemInnerNormal: { backgroundColor: colors.white },

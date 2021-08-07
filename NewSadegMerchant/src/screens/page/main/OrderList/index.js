@@ -1,18 +1,39 @@
 import React from 'react'
-import { ScrollView, StyleSheet } from 'react-native'
+import { ScrollView, StyleSheet, LogBox, FlatList, ActivityIndicator } from 'react-native'
 
-import { BaseHeader } from '@/components'
+import { BaseHeader, OrderItem } from '@/components'
+import { colors } from '@/constants'
 
+import fetchLogic from './logics/fetchLogic'
 import TypesSection from './sections/TypesSection'
 import ListSection from './sections/ListSection'
 
+LogBox.ignoreLogs(['This synthetic event is reused']);
+
 const OrderList = () => {
+	const { isLoading, types, selectedType, changeType, orders, getNextPage, getOrderList } = fetchLogic()
+
 	return (
-		<ScrollView style={styles.container}>
-			<BaseHeader title="ORDER LIST" />
-			<TypesSection />
-			<ListSection />
-		</ScrollView>
+		<FlatList
+			refreshing={isLoading}
+			scrollEnabled={!isLoading}
+			onRefresh={getOrderList}
+			onEndReached={getNextPage}
+			onEndReachedThreshold={0.2}
+			data={orders}
+			keyExtractor={item => item.id}
+			ListHeaderComponent={<>
+				<BaseHeader title="ORDER LIST" />
+				<TypesSection
+					types={types}
+					selectedType={selectedType}
+					changeType={changeType}
+				/>
+			</>}
+			renderItem={({ item, index }) =>
+				<OrderItem order={item} withTotal />
+			}
+		/>
 	)
 }
 

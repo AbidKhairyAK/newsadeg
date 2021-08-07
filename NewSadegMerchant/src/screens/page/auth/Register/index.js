@@ -30,7 +30,7 @@ const Register = ({ navigation }) => {
 					icon="cloud-upload-outline" 
 					bg="green" 
 					color="white" 
-					radius="xl" 
+					radius={sizes.base * 1.4} 
 				/>
 
 				<HorizontalRule />
@@ -45,7 +45,7 @@ const Register = ({ navigation }) => {
 					title="Login" 
 					icon="enter-outline" 
 					color="green" 
-					radius="xl" 
+					radius={sizes.base * 1.4} 
 				/>
 			</View>
 		</ScrollView>

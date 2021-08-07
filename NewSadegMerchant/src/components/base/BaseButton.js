@@ -13,7 +13,7 @@ const BaseButton = ({
 	...props // other props
 }) => {
 	bg = bg ? colors[bg] : colors.white,
-	radius = radius ? sizes[radius] : sizes.xs
+	radius = typeof radius === 'number' ? radius : (sizes[radius] || sizes.xs)
 	shadowType = shadowType || 'item'
 	color = color || 'black'
 	size = size || 'base'
@@ -26,32 +26,28 @@ const BaseButton = ({
 
 	return (
 		<TouchableOpacity disabled={isLoading || props.disabled} {...props}>
-			<ShadowView 
-				type={shadowType}
-				style={{ 
-					...styles.inner(bg, radius), 
-					...innerStyle 
-				}}
-			>
-				{icon && <BaseIcon 
-					name={icon}
-					size={iconSize}
-					color={iconColor} 
-					style={{ ...styles.icon(!title), ...iconStyle }}
-				/>}
-				{title && <BaseText 
-					color={color} 
-					type={type}
-					size={size}
-					lineHeight={icon && sizes[size] * 1.35}
-				>
-					{title}
-				</BaseText>}
-				{isLoading && <View 
-					style={styles.loadingBlock(bg, radius)}
-				>
-					<ActivityIndicator color={colors[color]} />
-				</View>}
+			<ShadowView type={shadowType} radius={radius}>
+				<View style={{ ...styles.inner(bg, radius), ...innerStyle }}>
+					{icon && <BaseIcon 
+						name={icon}
+						size={iconSize}
+						color={iconColor} 
+						style={{ ...styles.icon(!title), ...iconStyle }}
+					/>}
+					{title && <BaseText 
+						color={color} 
+						type={type}
+						size={size}
+						lineHeight={icon && sizes[size] * 1.35}
+					>
+						{title}
+					</BaseText>}
+					{isLoading && <View 
+						style={styles.loadingBlock(bg, radius)}
+					>
+						<ActivityIndicator color={colors[color]} />
+					</View>}
+				</View>
 			</ShadowView>
 		</TouchableOpacity>
 	)

@@ -2,8 +2,8 @@ import React from 'react'
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native'
 import { ShadowFlex } from 'react-native-neomorph-shadows'
 
-import { BaseText, BaseIcon, BaseSwitch } from '@/components'
-import { sizes, colors, shadows } from '@/constants'
+import { BaseText, BaseIcon, BaseSwitch, ShadowView } from '@/components'
+import { sizes, colors } from '@/constants'
 
 const ITEM_TOP_PADDING = sizes.lg
 const ITEM_BOTTOM_PADDING = sizes.lg
@@ -18,9 +18,9 @@ const CustomTabBar = ({ state, descriptors, navigation, icons }) => {
 	}
 
 	return <>
-		<ShadowFlex style={styles.container}>
-			<View style={styles.containerInner}>
-				<View style={styles.containerLeft}>
+		<ShadowView type="tabBar" radius={{ topLeft: CONTAINER_RADIUS, topRight: CONTAINER_RADIUS }}>
+			<View style={styles.container}>
+				<View style={styles.leftSection}>
 					{state.routes.map((route, index) => {
 						const { options } = descriptors[route.key];
 						const label =
@@ -76,21 +76,20 @@ const CustomTabBar = ({ state, descriptors, navigation, icons }) => {
 					})}
 				</View>
 
-				<View style={styles.containerRight}>
+				<View style={styles.rightSection}>
 					<BaseSwitch trueTitle="OPEN" falseTitle="CLOSED" />
 				</View>
 			</View>
-		</ShadowFlex>
+		</ShadowView>
 	</>;
 }
 
 export default CustomTabBar
 
 const styles = StyleSheet.create({
-	container: { ...shadows.tabBar, backgroundColor: colors.background, borderRadius: CONTAINER_RADIUS },
-	containerInner: { flexDirection: 'row', backgroundColor: colors.white, borderTopLeftRadius: CONTAINER_RADIUS, borderTopRightRadius: CONTAINER_RADIUS },
-	containerLeft: { flexDirection: 'row', flex: 2 },
-	containerRight: { flex: 1, justifyContent: 'center', alignItems: 'center' },
+	container: { flexDirection: 'row', backgroundColor: colors.white, borderTopLeftRadius: CONTAINER_RADIUS, borderTopRightRadius: CONTAINER_RADIUS },
+	leftSection: { flexDirection: 'row', flex: 2 },
+	rightSection: { flex: 1, justifyContent: 'center', alignItems: 'center' },
 	itemWrapper: { flex: 1, alignItems: 'center', position: 'relative', paddingTop: ITEM_TOP_PADDING, paddingBottom: ITEM_BOTTOM_PADDING },
 	activeIndicator: { width: sizes.xs, height: sizes.xs / 4, backgroundColor: colors.green, borderRadius: sizes.xs, position: 'absolute', bottom: sizes.sm },
 })

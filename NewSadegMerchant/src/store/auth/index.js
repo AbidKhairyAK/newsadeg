@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { isActionIncludes } from '@/helpers'
+import { isActionIncludes } from '@/store/helpers'
 
 import { authenticate, logout } from './actions'
 

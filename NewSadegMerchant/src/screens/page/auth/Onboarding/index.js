@@ -21,37 +21,27 @@ const anims = [
 
 const Onboarding = ({ navigation }) => {
 	const swiperRef = useRef()
+	const animRefs = [
+		useRef(),
+		useRef()
+	]
 
 	const [currentAnim, setCurrentAnim] = useState(0)
-	const [animStates, setAnimStates] = useState([
-		false,
-		false
-	])
-
-	useEffect(() => {
-		setAnimStates(prev => {
-			const copyPrev = [...prev]
-			copyPrev[currentAnim] = true
-			return copyPrev
-		})
-	}, [])
+	const [firstAnimAutoplay, setFirstAnimAutoplay] = useState(true)
 
 	const isLastAnim = currentAnim === anims.length - 1
 
 	const buttonTitle = isLastAnim ? 'Get Started' : 'Next'
 
 	const handleButton = () => {
-		setAnimStates(prev => {
-			const copyPrev = [...prev]
-			copyPrev[currentAnim] = false
-			if (!isLastAnim) copyPrev[currentAnim + 1] = true
-			return copyPrev
-		})
-
+		animRefs[currentAnim].current.pause()
+		
 		if (isLastAnim) {
 			navigation.replace('Register')
 			storage.setItem('isAppHasBeenOpened', true)
 		} else {
+			if (currentAnim === 0) setFirstAnimAutoplay(false)
+			animRefs[currentAnim + 1].current.play()
 			setCurrentAnim(prev => prev + 1)
 			swiperRef.current.scrollBy(1)
 		}
@@ -63,8 +53,9 @@ const Onboarding = ({ navigation }) => {
 				<View key={index} style={styles.swiperItem}>
 					<View style={styles.animWrapper}>
 						<LottieView 
-							key={'anim' + index + animStates[index]} 
-							autoPlay={animStates[index]} 
+							key={'anim' + index + (index === 0 ? firstAnimAutoplay : '')} 
+							ref={animRefs[index]}
+							autoPlay={index === 0 ? firstAnimAutoplay : false} 
 							source={source} 
 							loop 
 							style={styles.anim}
