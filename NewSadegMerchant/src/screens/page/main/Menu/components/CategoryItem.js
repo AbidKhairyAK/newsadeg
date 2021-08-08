@@ -6,7 +6,7 @@ import { sizes, colors } from '@/constants'
 
 const CategoryItem = ({ name, selected, firstItem, asAction, onPress }) => (
 	<ShadowView type="card" style={styles.itemWrapper(firstItem)}>
-		<TouchableOpacity onPress={onPress}>
+		<TouchableOpacity delayPressIn={100} onPress={onPress}>
 			<View style={styles.itemInner(selected)}>
 				<BaseText size="sm" type="semi-bold" color={asAction ? 'green' : selected ? 'white' : 'gray'}>
 					{name}

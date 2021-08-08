@@ -13,7 +13,7 @@ const ListSection = ({ orders }) => {
 				<MenuItem key={i} isTopItem={i === 0} />
 			)}
 
-			<TouchableOpacity>
+			<TouchableOpacity delayPressIn={100}>
 				<ShadowView type="card" style={styles.addButton}>
 					<BaseText type="semi-bold" color="green" align="center">
 						+ New Menu

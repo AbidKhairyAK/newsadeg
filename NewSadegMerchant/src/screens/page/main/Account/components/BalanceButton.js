@@ -6,7 +6,7 @@ import { sizes } from '@/constants'
 
 const BalanceButton = ({ title, icon }) => {
 	return (
-		<TouchableOpacity>
+		<TouchableOpacity delayPressIn={100}>
 			<View type="item" style={styles.container}>
 				<BaseIcon name={icon} color="green" style={styles.icon} />
 				<BaseText color="gray" size="xs" type="semi-bold">

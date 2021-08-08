@@ -7,15 +7,16 @@ import DetailSection from './sections/DetailSection'
 import FormSection from './sections/FormSection'
 import ActionSection from './sections/ActionSection'
 
-const OrderDetail = () => {
+const OrderDetail = ({ route }) => {
 	const scrollViewRef = useRef()
+	const { order } = route.params
 
 	return <>
 		<ScrollView ref={scrollViewRef} style={styles.container}>
-			<BaseHeader title="ORDER A234SD91" withBack/>
-			<OrderItem withDate />
-			<DetailSection />
-			<FormSection />
+			<BaseHeader title={'CODE: ' + order.order_code} withBack/>
+			<OrderItem withDate order={order} />
+			<DetailSection order={order} />
+			<FormSection order={order} />
 		</ScrollView>
 		<ActionSection scrollViewRef={scrollViewRef} />
 	</>

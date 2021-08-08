@@ -10,7 +10,7 @@ const TypeSection = ({ title, isSelected, onPress }) => (
 		radius="xs"
 		style={styles.itemWrapper}
 	>
-		<TouchableOpacity onPress={onPress}>
+		<TouchableOpacity delayPressIn={100} onPress={onPress}>
 			<View style={{
 				...styles.itemInner,
 				...styles[isSelected ? 'itemInnerActive' : 'itemInnerNormal']

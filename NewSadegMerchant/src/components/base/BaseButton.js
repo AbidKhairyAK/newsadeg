@@ -25,7 +25,7 @@ const BaseButton = ({
 	textStyle = textStyle || {}
 
 	return (
-		<TouchableOpacity disabled={isLoading || props.disabled} {...props}>
+		<TouchableOpacity delayPressIn={100} disabled={isLoading || props.disabled} {...props}>
 			<ShadowView type={shadowType} radius={radius}>
 				<View style={{ ...styles.inner(bg, radius), ...innerStyle }}>
 					{icon && <BaseIcon 

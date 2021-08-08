@@ -6,11 +6,12 @@ import { BaseText, ShadowView, MoneyText, BaseIcon } from '@/components'
 import { sizes, colors } from '@/constants'
 import { toTitleCase, formatDate } from '@/helpers'
 
+import StatusBadge from './StatusBadge'
 import MenuItem from './MenuItem'
 
 const OrderItem = ({ order, onPress, withTotal, withDate }) => {
 	return (
-		<TouchableOpacity onPress={onPress} disabled={!onPress}>
+		<TouchableOpacity delayPressIn={100} onPress={onPress} disabled={!onPress}>
 			<ShadowView type="card" radius="base" style={styles.containerShadow}>
 				<View style={styles.container}>
 					<View style={styles.headerSection}>
@@ -34,13 +35,7 @@ const OrderItem = ({ order, onPress, withTotal, withDate }) => {
 						</View>
 
 						<View>
-							<ShadowView type="item" radius="xxs" style={styles.statusWrapper}>
-								<View style={styles.statusInner}>
-									<BaseText type="bold" size="xxs" color="white">
-										{toTitleCase(order.status)}
-									</BaseText>
-								</View>
-							</ShadowView>
+							<StatusBadge status={order.status} />
 						</View>
 					</View>
 
@@ -79,8 +74,6 @@ const styles = StyleSheet.create({
 		borderRadius: sizes.base
 	},
 	headerSection: { flexDirection: 'row', justifyContent: 'space-between' },
-	statusWrapper: { alignSelf: 'flex-end' },
-	statusInner: { padding: sizes.xxxs, backgroundColor: colors.red, borderRadius: sizes.xxs },
 	dateWrapper: { marginVertical: sizes.xxxs, flexDirection: 'row', alignItems: 'center' },
 	dateIcon: { marginRight: sizes.base / 4 },
 	footerSection: { justifyContent: 'space-between', flexDirection: 'row', marginTop: sizes.sm, alignItems: 'center' }

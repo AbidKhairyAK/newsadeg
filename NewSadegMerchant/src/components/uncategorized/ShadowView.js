@@ -7,7 +7,7 @@ const ShadowView = ({ type, radius, style, children, ...props }) => {
 	const shadowConfig = shadows[type]
 	
 	radius = typeof radius === 'string' ? sizes[radius] :
-		typeof radius === 'object' ? radius :
+		typeof radius === 'number' ? radius :
 		0
 
 	return <Shadow

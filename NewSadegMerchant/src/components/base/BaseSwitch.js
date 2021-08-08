@@ -16,7 +16,7 @@ const BaseSwitch = ({ style, trueTitle, falseTitle }) => {
 			...styles[isOpen ? 'switchWrapperOpen' : 'switchWrapperClosed'],
 			...style
 		}}>
-			<TouchableOpacity onPress={toggleIsOpen}>
+			<TouchableOpacity delayPressIn={100} onPress={toggleIsOpen}>
 				<ShadowView type="item" radius={SWITCH_HEIGHT / 5}>
 					<View style={{
 						...styles.switchItemInner,

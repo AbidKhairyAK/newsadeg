@@ -6,7 +6,7 @@ import { sizes } from '@/constants'
 
 const AdditionalSettingItem = ({ title, icon }) => (
 	<ShadowView type="card" style={styles.container}>
-		<TouchableOpacity style={styles.button}>
+		<TouchableOpacity delayPressIn={100} style={styles.button}>
 			<BaseIcon name={icon} color="green" size="xxl" />
 			<BaseText size="sm" color="gray" type="semi-bold" style={styles.text}>
 				{title}

@@ -14,7 +14,7 @@ const ModalForm = ({ children, title, onPressPositive, onPressNegative }) => {
 			<ScrollView style={styles.scrollview}>
 				<View style={styles.wrapper}>
 					<View style={styles.header}>
-						<TouchableOpacity style={styles.closeButton} onPress={navigation.goBack}>
+						<TouchableOpacity delayPressIn={100} style={styles.closeButton} onPress={navigation.goBack}>
 							<BaseIcon name="close" color="gray" size="lg" />
 						</TouchableOpacity>
 						<BaseText type="semi-bold" color="gray" align="center" style={styles.title}>

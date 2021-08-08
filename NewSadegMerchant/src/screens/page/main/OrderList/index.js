@@ -11,7 +11,7 @@ import ListSection from './sections/ListSection'
 LogBox.ignoreLogs(['This synthetic event is reused']);
 
 const OrderList = () => {
-	const { isLoading, types, selectedType, changeType, orders, getNextPage, getOrderList } = fetchLogic()
+	const { isLoading, types, selectedType, changeType, orders, getNextPage, getOrderList, toOrderDetail } = fetchLogic()
 
 	return (
 		<FlatList
@@ -31,7 +31,7 @@ const OrderList = () => {
 				/>
 			</>}
 			renderItem={({ item, index }) =>
-				<OrderItem order={item} withTotal />
+				<OrderItem onPress={toOrderDetail({ order: item })} order={item} withTotal />
 			}
 		/>
 	)

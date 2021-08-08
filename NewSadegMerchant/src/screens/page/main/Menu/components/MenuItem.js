@@ -12,7 +12,7 @@ const MenuItem = ({ isTopItem }) => {
 
 	return (
 		<ShadowView type="card" style={styles.itemWrapper(isTopItem)}>
-			<TouchableOpacity onPress={toDetailScreen}>
+			<TouchableOpacity delayPressIn={100} onPress={toDetailScreen}>
 				<View style={styles.itemInner}>
 					<ShadowView type="item" style={styles.imageWrapper}>
 						<Image

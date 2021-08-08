@@ -11,7 +11,7 @@ const BaseHeader = ({ title, withBack, noMargin }) => {
 	return (
 		<View style={styles.container}>
 			{withBack &&
-				<TouchableOpacity onPress={navigation.goBack} style={styles.backButton}>
+				<TouchableOpacity delayPressIn={100} onPress={navigation.goBack} style={styles.backButton}>
 					<BaseIcon name="chevron-back-outline" />
 				</TouchableOpacity>
 			}

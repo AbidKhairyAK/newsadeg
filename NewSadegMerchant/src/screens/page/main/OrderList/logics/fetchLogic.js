@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { throttle } from 'lodash'
+import { useNavigation } from '@react-navigation/native'
 
 import { OrderService } from '@/services'
 
@@ -9,6 +10,8 @@ const types = {
 }
 
 const fetchLogic = () => {
+	const navigation = useNavigation()
+
 	const [isLoading, setIsLoading] = useState(false)
 	const [selectedType, setSelectedType] = useState('new')
 	const [rawOrders, setRawOrders] = useState({})
@@ -32,8 +35,6 @@ const fetchLogic = () => {
 		}
 	}
 
-	const handleScroll = e => console.log(e)
-
 	const getNextPage = ({ distanceFromEnd: distance }) => {
 		const triggerDistance = distance > 0 && distance < 200
 		const notLastPage = rawOrders.current_page !== rawOrders.last_page
@@ -43,12 +44,14 @@ const fetchLogic = () => {
 		}
 	}
 
+	const toOrderDetail = params => e => navigation.navigate('OrderDetail', params)
+
 	useEffect(() => {
 		setRawOrders({})
 		getOrderList()
 	}, [selectedType])
 
-	return { isLoading, types, selectedType, changeType, orders, getNextPage, getOrderList }
+	return { isLoading, types, selectedType, changeType, orders, getNextPage, getOrderList, toOrderDetail }
 }
 
 export default fetchLogic

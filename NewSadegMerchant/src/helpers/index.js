@@ -17,7 +17,7 @@ export const isJsonParsable = (str) => {
 
 export const getUser = () => store.getState().auth.user
 
-export const toTitleCase = str => str.replace(/_/g, ' ').replace(
+export const toTitleCase = str => str && str.replace(/_/g, ' ').replace(
 	/\w\S*/g,
 	txt => txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase()
 )

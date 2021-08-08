@@ -60,7 +60,8 @@ const CustomTabBar = ({ state, descriptors, navigation, icons }) => {
 						};
 
 						return (
-							<TouchableOpacity
+							<TouchableOpacity 
+								delayPressIn={100}
 								key={label}
 								accessibilityRole="button"
 								accessibilityState={isFocused ? { selected: true } : {}}
@@ -82,7 +83,7 @@ const CustomTabBar = ({ state, descriptors, navigation, icons }) => {
 				</View>
 
 				<View style={styles.containerRight}>
-					<TouchableOpacity onPress={toggleIsOpen}>
+					<TouchableOpacity delayPressIn={100} onPress={toggleIsOpen}>
 						<Image 
 							source={require('@/assets/images/open.png')} 
 							style={styles.switchImage} 

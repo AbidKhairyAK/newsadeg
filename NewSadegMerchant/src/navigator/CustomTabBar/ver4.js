@@ -55,7 +55,8 @@ const CustomTabBar = ({ state, descriptors, navigation, icons }) => {
 						};
 
 						return (
-							<TouchableOpacity
+							<TouchableOpacity 
+								delayPressIn={100}
 								key={label}
 								accessibilityRole="button"
 								accessibilityState={isFocused ? { selected: true } : {}}

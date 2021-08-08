@@ -13,7 +13,7 @@ const LogoutButton = () => {
 
 	return (
 		<ShadowView type="card" style={styles.container}>
-			<TouchableOpacity onPress={handleLogout}>
+			<TouchableOpacity delayPressIn={100} onPress={handleLogout}>
 				<View style={styles.inner}>
 					<BaseIcon name="log-out-outline" color="red" style={styles.icon} />
 					<BaseText type="semi-bold" align="center" color="red">
