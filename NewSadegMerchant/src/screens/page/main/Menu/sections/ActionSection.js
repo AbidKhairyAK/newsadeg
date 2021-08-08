@@ -1,8 +1,8 @@
 import React from 'react'
-import { StyleSheet, LogBox } from 'react-native'
+import { StyleSheet, LogBox, View } from 'react-native'
 import ActionButton from 'react-native-action-button'
 
-import { BaseIcon, ShadowView } from '@/components'
+import { BaseIcon, BaseText, ShadowView } from '@/components'
 import { colors } from '@/constants'
 
 LogBox.ignoreLogs(['Animated: `useNativeDriver` was not specified']);
@@ -10,7 +10,10 @@ LogBox.ignoreLogs(['Warning: componentWillReceiveProps has been renamed']);
 
 const ActionSection = () => {
 	return <>
-		<ShadowView useManual type="item" style={styles.backupShadow}/>
+		<View style={styles.backupWrapper}>
+			<ShadowView type="item" size={[56, 56]} radius={28} />
+		</View>
+		
 		<ActionButton buttonColor={colors.green}>
 			<ActionButton.Item 
 				onPress={() => alert('test')}
@@ -33,5 +36,5 @@ const ActionSection = () => {
 export default ActionSection
 
 const styles = StyleSheet.create({
-	backupShadow: { width: 56, height: 56, borderRadius: 56, position: 'absolute', right: 30, bottom: 30 },
+	backupWrapper: { height: 56, width: 56, position: 'absolute', right: 30, bottom: 30 },
 })

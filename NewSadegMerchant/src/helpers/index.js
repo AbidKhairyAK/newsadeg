@@ -22,7 +22,13 @@ export const toTitleCase = str => str && str.replace(/_/g, ' ').replace(
 	txt => txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase()
 )
 
-export const formatNumber = val => val && val.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")
+// export const formatNumber = val => val && val.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")
+export const formatNumber = val => {
+	if (!val) return
+	let parts = val.toString().split(".");
+	parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+	return parts.join(".");
+}
 
 export const stringifyNumber = val => parseInt(val) < 10 ? '0' + val : '' + val
 

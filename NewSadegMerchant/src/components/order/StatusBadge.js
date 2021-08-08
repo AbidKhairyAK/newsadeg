@@ -7,7 +7,7 @@ import { toTitleCase } from '@/helpers'
 
 const statusColors = {
 	// on process
-	pending: colors.red,
+	waiting: colors.red,
 	on_delivery: colors.blue,
 	process: colors.yellow,
 	ready: colors.green,
@@ -16,14 +16,13 @@ const statusColors = {
 	canceled: colors.red,
 	success: colors.green,
 	disapproved: colors.gray,
-
 }
 
 const StatusBadge = ({ status }) =>
 	<ShadowView type="item" radius="xxs" style={styles.statusWrapper}>
 		<View style={styles.statusInner(statusColors[status])}>
 			<BaseText type="bold" size="xxs" color="white">
-				{toTitleCase(status)}
+				{status === 'waiting' ? 'New Order' : toTitleCase(status)}
 			</BaseText>
 		</View>
 	</ShadowView>

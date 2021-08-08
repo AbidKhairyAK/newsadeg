@@ -4,36 +4,38 @@ import { useNavigation } from '@react-navigation/native'
 
 import { ShadowView, BaseText, MoneyText } from '@/components'
 import { sizes, colors } from '@/constants'
+import { toTitleCase } from '@/helpers'
 
-const MenuItem = ({ isTopItem }) => {
+import StatusBadge from './StatusBadge'
+
+const MenuItem = ({ isTopItem, menu }) => {
 	const navigation = useNavigation()
 
-	const toDetailScreen = () => navigation.navigate('MenuDetail')
+	const toDetailScreen = () => navigation.navigate('MenuDetail', { menu })
 
 	return (
-		<ShadowView type="card" style={styles.itemWrapper(isTopItem)}>
+		<ShadowView type="card" radius="base" style={styles.itemWrapper(isTopItem)}>
 			<TouchableOpacity delayPressIn={100} onPress={toDetailScreen}>
 				<View style={styles.itemInner}>
-					<ShadowView type="item" style={styles.imageWrapper}>
-						<Image
-							source={{ uri: 'https://source.unsplash.com/320x240/?dinner' }}
-							style={styles.image}
-						/>
+					<ShadowView type="item" radius="xxs" style={styles.imageShadow}>
+						<View style={styles.imageWrapper}>
+							<Image
+								source={{ uri: menu.image_thumbnail }}
+								style={styles.image}
+							/>
+						</View>
 					</ShadowView>
 					<View style={styles.contentWrapper}>
 						<BaseText size="sm">
-							Hininy
+							{toTitleCase(menu.name)}
 						</BaseText>
 						<BaseText size="xs" color="gray" style={styles.menuDesc}>
-							traditional Saudi Arabian dish consisting of dates, butter, and brown bread
+							{menu.description?.substring(0, 75)}
+							{menu.description?.length > 75 && '...'}
 						</BaseText>
 						<View style={styles.footerSection}>
-							<MoneyText value={20.00} />
-							<ShadowView type="item" style={styles.statusWrapper}>
-								<BaseText size="xxs" color="white" type="semi-bold" lineHeight={sizes.xxs * 1.5}>
-									IN
-								</BaseText>
-							</ShadowView>
+							<MoneyText value={menu.price} />
+							<StatusBadge status={menu.status} />
 						</View>
 					</View>
 				</View>
@@ -49,13 +51,12 @@ const styles = StyleSheet.create({
 		marginHorizontal: sizes.base,
 		marginTop: isTopItem ? sizes.xs : 0,
 		marginBottom: sizes.base,
-		borderRadius: sizes.base 
 	}),
 	itemInner: { flexDirection: 'row', backgroundColor: colors.white, borderRadius: sizes.base, padding: sizes.xxxs },
-	imageWrapper: { marginRight: sizes.xs, borderRadius: sizes.xxs, width: '30%', paddingTop: '20%', position: 'relative' },
+	imageShadow: { marginRight: sizes.xs, width: '30%' },
+	imageWrapper: { paddingTop: '100%', position: 'relative', borderRadius: sizes.xss },
 	image: { borderRadius: sizes.xxs, position: 'absolute', top: 0, bottom: 0, left: 0, right: 0 },
 	contentWrapper: { flexShrink: 1 },
 	menuDesc: { marginTop: sizes.base / 4 },
 	footerSection: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginTop: sizes.xxs },
-	statusWrapper: { paddingHorizontal: sizes.base / 2, paddingVertical: sizes.base / 8, backgroundColor: colors.green, borderRadius: sizes.base / 2  }
 })

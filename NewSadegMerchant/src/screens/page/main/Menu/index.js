@@ -3,17 +3,28 @@ import { ScrollView, StyleSheet, View } from 'react-native'
 
 import { BaseHeader } from '@/components'
 
+import fetchLogic from './logics/fetchLogic'
 import CategoriesSection from './sections/CategoriesSection'
 import ListSection from './sections/ListSection'
 import ActionSection from './sections/ActionSection'
 
 const Menu = () => {
+	const { isLoading, menus, categories, selectedCategory, changeCategory } = fetchLogic()
+
 	return (
-		<View style={{ flex: 1 }}>
+		<View style={styles.container}>
 			<ScrollView style={styles.container}>
 				<BaseHeader title="MENU" />
-				<CategoriesSection />
-				<ListSection />
+				<CategoriesSection
+					isLoading={isLoading.category}
+					categories={categories}
+					selectedCategory={selectedCategory}
+					changeCategory={changeCategory} 
+				/>
+				<ListSection
+					isLoading={isLoading.menu}
+					menus={menus}
+				/>
 			</ScrollView>
 
 			<ActionSection />

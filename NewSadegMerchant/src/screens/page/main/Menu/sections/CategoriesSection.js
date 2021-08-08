@@ -1,33 +1,24 @@
 import React, { useState } from 'react'
-import { View, ScrollView, TouchableOpacity, StyleSheet } from 'react-native'
+import { View, ScrollView, TouchableOpacity, StyleSheet, ActivityIndicator } from 'react-native'
 
 import { BaseText, ShadowView } from '@/components'
-import { sizes } from '@/constants'
+import { sizes, colors } from '@/constants'
 
 import CategoryItem from '../components/CategoryItem'
 
-const categories = {
-	food: 'Food',
-	beverage: 'Beverage',
-	dessert: 'Dessert',
-	snack: 'Snack',
-	misc: 'Misc'
-}
+const CategoriesSection = ({ isLoading, categories, selectedCategory, changeCategory }) => {
 
-const CategoriesSection = () => {
-	const [selected, setSelected] = useState(Object.keys(categories)[0])
-
-	const changeSelected = val => e => setSelected(val)
-
-	return (
+	return isLoading
+	? <ActivityIndicator color={colors.green} />
+	: (
 		<ScrollView horizontal style={styles.container} showsHorizontalScrollIndicator={false}>
-			{Object.keys(categories).map((category, index) =>
+			{categories.map((category, index) =>
 				<CategoryItem 
-					key={category}
-					name={categories[category]} 
+					key={category.id}
+					name={category.name} 
 					firstItem={index === 0} 
-					onPress={changeSelected(category)}
-					selected={selected === category}
+					onPress={changeCategory(category)}
+					selected={selectedCategory.id === category.id}
 				/>
 			)}
 
