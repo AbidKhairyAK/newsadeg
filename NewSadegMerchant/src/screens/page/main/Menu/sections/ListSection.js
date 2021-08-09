@@ -1,8 +1,10 @@
 import React from 'react'
 import { StyleSheet, View, TouchableOpacity, ActivityIndicator } from 'react-native'
 
-import { BaseText, ShadowView } from '@/components'
+import { BaseText, ShadowView, NoData } from '@/components'
 import { sizes, colors } from '@/constants'
+import { getScreenSize } from '@/helpers'
+import DonutIllustration from '@/assets/illustrations/donut.svg'
 
 import MenuItem from '../components/MenuItem'
 
@@ -12,8 +14,15 @@ const ListSection = ({ menus, isLoading }) => {
 	? <ActivityIndicator color={colors.green} />
 	: (
 		<View style={styles.container}>
-			{menus.map((menu, i) =>
+			{menus.length
+			? menus.map((menu, i) =>
 				<MenuItem key={menu.id} menu={menu} isTopItem={i === 0} />
+			) : (
+				<NoData
+					illustration={DonutIllustration}
+					title="Menu is empty"
+					description="Try to select another category or create a new menu"
+				/>
 			)}
 
 			<TouchableOpacity delayPressIn={100} style={styles.addButtonWrapper}>

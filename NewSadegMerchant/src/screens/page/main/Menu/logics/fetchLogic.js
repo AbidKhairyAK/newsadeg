@@ -6,7 +6,7 @@ const CATEGORY_ALL = { id: 'all', name: 'all' }
 
 const fetchLogic = () => {
 	const [selectedCategory, setSelectedCategory] = useState(CATEGORY_ALL)
-	const [categories, setCategories] = useState([])
+	const [categories, setCategories] = useState([CATEGORY_ALL])
 	const [rawMenus, setRawMenus] = useState([])
 	const [menus, setMenus] = useState([])
 	const [isLoading, setIsLoading] = useState({
@@ -22,8 +22,8 @@ const fetchLogic = () => {
 		try {
 			changeLoading('menu', true)
 			const res = await MenuService.getList()
-			setRawMenus(res)
-			filterMenu(res)
+			setRawMenus([])
+			filterMenu([])
 		} catch {} finally {
 			changeLoading('menu', false)
 		}
@@ -33,7 +33,8 @@ const fetchLogic = () => {
 		try {
 			changeLoading('category', true)
 			const res = await MenuCategoryService.getList()
-			setCategories([CATEGORY_ALL, ...res])
+			// setCategories([CATEGORY_ALL, ...res])
+			setCategories([CATEGORY_ALL])
 		} catch {} finally {
 			changeLoading('category', false)
 		}

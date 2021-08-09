@@ -1,8 +1,9 @@
 import React from 'react'
 import { ScrollView, StyleSheet, LogBox, FlatList, ActivityIndicator } from 'react-native'
 
-import { BaseHeader, OrderItem } from '@/components'
+import { BaseHeader, OrderItem, NoData } from '@/components'
 import { colors } from '@/constants'
+import CartIllustration from '@/assets/illustrations/cart.svg'
 
 import fetchLogic from './logics/fetchLogic'
 import TypesSection from './sections/TypesSection'
@@ -15,6 +16,7 @@ const OrderList = () => {
 
 	return (
 		<FlatList
+			style={styles.container}
 			refreshing={isLoading}
 			scrollEnabled={!isLoading}
 			onRefresh={getOrderList}
@@ -32,6 +34,13 @@ const OrderList = () => {
 			</>}
 			renderItem={({ item, index }) =>
 				<OrderItem onPress={toOrderDetail({ order: item })} order={item} withTotal />
+			}
+			ListEmptyComponent={!isLoading &&
+				<NoData
+					illustration={CartIllustration}
+					title="No order found"
+					description="Wait for a new order or create a menu if you haven't"
+				/>
 			}
 		/>
 	)
