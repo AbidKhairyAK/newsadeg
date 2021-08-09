@@ -6,24 +6,21 @@ import { shadows, colors, sizes } from '@/constants'
 
 const SWITCH_HEIGHT = sizes.xl
 
-const BaseSwitch = ({ style, trueTitle, falseTitle }) => {
-	const [isOpen, setIsOpen] = useState(true)
-	const toggleIsOpen = () => setIsOpen(prev => !prev)
-
+const BaseSwitch = ({ style, trueTitle, falseTitle, status, onPress }) => {
 	return (
 		<View style={{
 			...styles.switchWrapper,
-			...styles[isOpen ? 'switchWrapperOpen' : 'switchWrapperClosed'],
+			...styles[status ? 'switchWrapperTrue' : 'switchWrapperFalse'],
 			...style
 		}}>
-			<TouchableOpacity delayPressIn={100} onPress={toggleIsOpen}>
+			<TouchableOpacity delayPressIn={100} onPress={onPress}>
 				<ShadowView type="item" radius={SWITCH_HEIGHT / 5}>
 					<View style={{
 						...styles.switchItemInner,
-						...styles[isOpen ? 'switchItemOpen' : 'switchItemClosed']
+						...styles[status ? 'switchItemTrue' : 'switchItemFalse']
 					}}>
 						<BaseText size="xs" type="semi-bold" color="white" style={styles.switchText}>
-							{isOpen ? trueTitle : falseTitle }
+							{status ? trueTitle : falseTitle }
 						</BaseText>
 					</View>
 				</ShadowView>
@@ -36,10 +33,10 @@ export default BaseSwitch
 
 const styles = StyleSheet.create({
 	switchWrapper: { height: SWITCH_HEIGHT / 1.5, borderRadius: SWITCH_HEIGHT / 5, justifyContent: 'center', backgroundColor: colors.gray + '55' },
-	switchWrapperOpen: { paddingLeft: sizes.xxs, alignItems: 'flex-end' },
-	switchWrapperClosed: { paddingRight: sizes.xxs, alignItems: 'flex-start' },
+	switchWrapperTrue: { paddingLeft: sizes.xxs, alignItems: 'flex-end' },
+	switchWrapperFalse: { paddingRight: sizes.xxs, alignItems: 'flex-start' },
 	switchItemInner: { height: SWITCH_HEIGHT, justifyContent: 'center', paddingHorizontal: sizes.xxs, borderRadius: SWITCH_HEIGHT / 5 },
-	switchItemOpen: { backgroundColor: colors.green },
-	switchItemClosed: { backgroundColor: colors.red },
+	switchItemTrue: { backgroundColor: colors.green },
+	switchItemFalse: { backgroundColor: colors.red },
 	switchText: { lineHeight: sizes.xs * 1.35 }
 })

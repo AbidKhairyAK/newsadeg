@@ -3,15 +3,15 @@ import { ScrollView, View, Image, TouchableOpacity } from 'react-native'
 
 import { ShadowView, BaseText, BaseIcon, MoneyText, BaseSwitch, BaseButton } from '@/components'
 import { sizes, colors } from '@/constants'
-import { getScreenSize } from '@/helpers'
+import { getScreenSize, toTitleCase } from '@/helpers'
 
-const MenuDetail = ({ navigation }) => {
-	const { goBack } = navigation
+const MenuDetail = ({ navigation, route }) => {
+	const { menu } = route.params
 
 	return (
 		<ScrollView style={{ position: 'relative' }}>
 			<BaseButton 
-				onPress={goBack}
+				onPress={navigation.goBack}
 				icon="chevron-back-outline" 
 				radius="xxs"
 				style={{ position: 'absolute', top: sizes.base, left: sizes.base, zIndex: 1 }} 
@@ -19,25 +19,28 @@ const MenuDetail = ({ navigation }) => {
 			/>
 
 			<Image
-				source={{ uri: 'https://source.unsplash.com/720x720/?food' }}
+				source={{ uri: menu.image }}
 				style={{ width: '100%', height: getScreenSize().width }}
 			/>
 
 			<ShadowView type="sectionHard" style={{ width: '100%', borderRadius: sizes.base, marginTop: sizes.base * -2 }}>
 				<View style={{ minHeight: getScreenSize().height / 2 + sizes.base * 2, width: '100%', backgroundColor: colors.white, padding: sizes.xl, borderTopLeftRadius: sizes.base, borderTopRightRadius: sizes.base, position: 'relative' }}>
 					<BaseText type="semi-bold" size="xl" style={{ marginBottom: sizes.xxxs }}>
-						Quwarmah Al Dajaj
+						{toTitleCase(menu.name)}
 					</BaseText>
 
 					<View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: sizes.xl }}>
-						<MoneyText value={17} size="xxl"/>
-						<BaseSwitch trueTitle="IN" falseTitle="OUT" style={{ marginTop: sizes.base / 4 }} />
+						<MoneyText value={menu.price} size="xxl"/>
+						<BaseSwitch
+							status={menu.status === 'ready'}
+							trueTitle="IN" 
+							falseTitle="OUT" 
+							style={{ marginTop: sizes.base / 4 }} 
+						/>
 					</View>
 
 					<BaseText style={{ marginBottom: (sizes.xl * 2) + (sizes.xs * 2) + sizes.lg }}>
-						Known to most as Kuwaiti curried chicken, the zesty dish is made with a blend of Middle Eastern flavors and spices.
-						{'\n\n'}
-						lime, ginger, turmeric, baharat, cumin, cardamom, black pepper, cinnamon, nutmeg, paprika, that combine to give it a distinctive pop					
+						{menu.description}		
 					</BaseText>
 
 					<View style={{ flexDirection: 'row', justifyContent: 'space-between', position: 'absolute', bottom: sizes.xl, left: sizes.xl, right: sizes.xl }}>

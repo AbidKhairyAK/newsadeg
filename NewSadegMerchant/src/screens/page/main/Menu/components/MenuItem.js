@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 import { StyleSheet, TouchableOpacity, View, Image } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
 
@@ -44,7 +44,7 @@ const MenuItem = ({ isTopItem, menu }) => {
 	)
 }
 
-export default MenuItem
+export default memo(MenuItem)
 
 const styles = StyleSheet.create({
 	itemWrapper: (isTopItem) => ({ 
