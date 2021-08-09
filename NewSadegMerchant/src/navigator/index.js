@@ -18,7 +18,16 @@ const { Navigator, Screen } = createStackNavigator()
 const AppScreens = () => {
 	const { isLogin } = useSelector(state => state.auth)
 
-	return (
+	return __DEV__
+	? (
+		<Navigator headerMode="none" mode="modal" initialRouteName="CategorySetting">
+			<Screen name="Init" component={Init} />
+			{MainScreens.map(screen => screen)}
+			{AuthScreens.map(screen => screen)}
+			{FormModals.map(screen => screen)}
+			{InfoModals.map(screen => screen)}
+		</Navigator>
+	) : (
 		<Navigator headerMode="none" mode="modal">
 			<Screen name="Init" component={Init} />
 			{

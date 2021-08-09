@@ -2,7 +2,7 @@ const shadows = {
 	card: {
 		startColor: "#8D8E8F13",
 		offset: [0, 3],
-		distance: 9,
+		distance: 8,
 	},
 	// card: {
 	// 	startColor: "#8D8E8F0F",

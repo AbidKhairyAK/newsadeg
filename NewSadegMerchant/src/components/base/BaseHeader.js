@@ -12,7 +12,7 @@ const BaseHeader = ({ title, withBack, noMargin }) => {
 		<View style={styles.container}>
 			{withBack &&
 				<TouchableOpacity delayPressIn={100} onPress={navigation.goBack} style={styles.backButton}>
-					<BaseIcon name="chevron-back-outline" />
+					<BaseIcon name="chevron-back-outline" color="gray" />
 				</TouchableOpacity>
 			}
 			<BaseText align="center" type="bold" color="gray" style={styles.title(noMargin)}>
