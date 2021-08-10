@@ -2,15 +2,19 @@ import React, { useEffect, useState, useCallback } from 'react'
 import { View, ActivityIndicator } from 'react-native'
 import LottieView from 'lottie-react-native'
 import { useFocusEffect } from '@react-navigation/native'
+import { useDispatch } from 'react-redux'
 
 import { getScreenSize } from '@/helpers'
 import { colors, sizes } from '@/constants'
 import { axiosInit, authInit } from '@/services'
 import { storage } from '@/utils'
+import { getRestaurantData } from '@/store/restaurant'
 
 const devTargetScreen = false
 
 const Init = ({ navigation }) => {
+	const dispatch = useDispatch()
+
 	const [targetScreen, setTargetScreen] = useState()
 	const [trigger, setTrigger] = useState(0)
 	const [isLoading, setIsLoading] = useState(false)
@@ -19,6 +23,8 @@ const Init = ({ navigation }) => {
 		await axiosInit()
 		const isLogin = await authInit()
 		const isOpened = await storage.getItem('isAppHasBeenOpened')
+
+		if (isLogin) await dispatch(getRestaurantData())
 
 		setTargetScreen(
 			isLogin ? 'AppTabs' : 

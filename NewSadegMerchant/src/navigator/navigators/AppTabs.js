@@ -8,7 +8,7 @@ import {
 } from '@/screens/page/main'
 
 import { tabIcons } from '../config'
-import CustomTabBar from '../CustomTabBar/ver4'
+import CustomTabBar from '../components/CustomTabBar'
 
 const { Navigator, Screen } = createBottomTabNavigator()
 

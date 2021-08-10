@@ -1,18 +1,40 @@
 import React, { useState } from 'react'
-import { View, Text, TouchableOpacity, StyleSheet, Image } from 'react-native'
+import { View, Text, TouchableOpacity, StyleSheet } from 'react-native'
 import { ShadowFlex } from 'react-native-neomorph-shadows'
+import { useSelector, useDispatch } from 'react-redux'
 
-import { BaseText, BaseIcon } from '@/components'
-import { sizes, colors, shadows } from '@/constants'
+import { BaseText, BaseIcon, BaseSwitch, ShadowView } from '@/components'
+import { sizes, colors } from '@/constants'
+import { RestaurantService } from '@/services'
+import { setRestaurantData } from '@/store/restaurant'
 
 const ITEM_TOP_PADDING = sizes.lg
 const ITEM_BOTTOM_PADDING = sizes.lg
 const ICON_SIZE = sizes.xl
 const CONTAINER_RADIUS = sizes.base
-const SWITCH_HEIGHT = sizes.xl
 
 const CustomTabBar = ({ state, descriptors, navigation, icons }) => {
-	const [isOpen, setIsOpen] = useState(true)
+	const dispatch = useDispatch()
+	
+	const { restaurant_status, ...otherRestaurantData } = useSelector(state => state.restaurant)
+	
+	const [isLoading, setIsLoading] = useState(false)
+
+	const isOpen = restaurant_status === 'open'
+
+	const toggleRestaurantStatus = async () => {
+		try {
+			setIsLoading(true)
+			const newStatus = isOpen ? 'close' : 'open'
+			await RestaurantService.updateStatus(newStatus)
+			dispatch(setRestaurantData({ ...otherRestaurantData, restaurant_status: newStatus }))
+		} catch (err) {
+			console.error(err)
+		} finally {
+			setIsLoading(false)
+		}
+	}
+	
 
 	const focusedOptions = descriptors[state.routes[state.index].key].options;
 
@@ -20,12 +42,10 @@ const CustomTabBar = ({ state, descriptors, navigation, icons }) => {
 		return null;
 	}
 
-	const toggleIsOpen = () => setIsOpen(prev => !prev)
-
 	return <>
-		<ShadowFlex style={styles.container}>
-			<View style={styles.containerInner}>
-				<View style={styles.containerLeft}>
+		<ShadowView type="tabBar" radius={{ topLeft: CONTAINER_RADIUS, topRight: CONTAINER_RADIUS }}>
+			<View style={styles.container}>
+				<View style={styles.leftSection}>
 					{state.routes.map((route, index) => {
 						const { options } = descriptors[route.key];
 						const label =
@@ -82,36 +102,26 @@ const CustomTabBar = ({ state, descriptors, navigation, icons }) => {
 					})}
 				</View>
 
-				<View style={styles.containerRight}>
-					<TouchableOpacity delayPressIn={100} onPress={toggleIsOpen}>
-						<Image 
-							source={require('@/assets/images/open.png')} 
-							style={styles.switchImage} 
-							tintColor={colors.gray}
-						/>
-					</TouchableOpacity>
+				<View style={styles.rightSection}>
+					<BaseSwitch 
+						onPress={toggleRestaurantStatus}
+						isLoading={isLoading}
+						status={isOpen}
+						trueTitle="OPEN" 
+						falseTitle="CLOSED" 
+					/>
 				</View>
 			</View>
-		</ShadowFlex>
+		</ShadowView>
 	</>;
 }
 
 export default CustomTabBar
 
 const styles = StyleSheet.create({
-	container: { ...shadows.tabBar, backgroundColor: colors.background, borderRadius: CONTAINER_RADIUS },
-	containerInner: { flexDirection: 'row', backgroundColor: colors.white, borderTopLeftRadius: CONTAINER_RADIUS, borderTopRightRadius: CONTAINER_RADIUS },
-	containerLeft: { flexDirection: 'row', flex: 2 },
-	containerRight: { flex: 1, justifyContent: 'center', alignItems: 'center' },
+	container: { flexDirection: 'row', backgroundColor: colors.white, borderTopLeftRadius: CONTAINER_RADIUS, borderTopRightRadius: CONTAINER_RADIUS },
+	leftSection: { flexDirection: 'row', flex: 2 },
+	rightSection: { flex: 1, justifyContent: 'center', alignItems: 'center' },
 	itemWrapper: { flex: 1, alignItems: 'center', position: 'relative', paddingTop: ITEM_TOP_PADDING, paddingBottom: ITEM_BOTTOM_PADDING },
 	activeIndicator: { width: sizes.xs, height: sizes.xs / 4, backgroundColor: colors.green, borderRadius: sizes.xs, position: 'absolute', bottom: sizes.sm },
-	switchWrapper: { height: SWITCH_HEIGHT / 1.5, borderRadius: SWITCH_HEIGHT / 5, justifyContent: 'center', backgroundColor: colors.gray + '55' },
-	switchWrapperOpen: { paddingLeft: sizes.xxs, alignItems: 'flex-end' },
-	switchWrapperClosed: { paddingRight: sizes.xxs, alignItems: 'flex-start' },
-	switchItem: { ...shadows.item, borderRadius: SWITCH_HEIGHT / 5 },
-	switchItemInner: { height: SWITCH_HEIGHT, justifyContent: 'center', paddingHorizontal: sizes.xxs, borderRadius: SWITCH_HEIGHT / 5 },
-	switchItemOpen: { backgroundColor: colors.green },
-	switchItemClosed: { backgroundColor: colors.red },
-	switchText: { lineHeight: sizes.xs * 1.35 },
-	switchImage: { height: sizes.xxl, width: sizes.xxl, resizeMode: 'contain',  }
 })

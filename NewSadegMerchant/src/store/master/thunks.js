@@ -3,7 +3,7 @@ import { MenuCategoryService } from '@/services'
 
 export const getCategories = createAsyncThunk(
 	'master/getCategories',
-	async (paylaod, { dispatch }) => {
+	async (payload, { dispatch }) => {
 		try {
 			const res = await MenuCategoryService.getList()
 			dispatch({ type: 'master/setCategories', payload: res })
