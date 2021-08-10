@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
+
 import { isActionIncludes } from '@/store/helpers'
 
 import { authenticate, logout } from './thunks'
@@ -10,7 +11,7 @@ const initialState = {
 	user: {}
 }
 
-const authSlice = createSlice({
+const slice = createSlice({
 	name: 'auth',
 	initialState: { ...initialState },
 	reducers: {
@@ -40,6 +41,6 @@ const authSlice = createSlice({
 
 export * from './thunks'
 
-export const { login, reset } = authSlice.actions
+export const { login, reset } = slice.actions
 
-export default authSlice.reducer
+export default slice.reducer

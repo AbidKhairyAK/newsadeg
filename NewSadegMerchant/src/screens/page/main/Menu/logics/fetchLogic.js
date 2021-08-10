@@ -1,12 +1,18 @@
 import React, { useState, useEffect } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
 
-import { MenuService, MenuCategoryService } from '@/services'
+import { getCategories } from '@/store/master'
+import { MenuService } from '@/services'
 
 const CATEGORY_ALL = { id: 'all', name: 'all' }
 
 const fetchLogic = () => {
-	const [selectedCategory, setSelectedCategory] = useState(CATEGORY_ALL)
-	const [categories, setCategories] = useState([CATEGORY_ALL])
+	const dispatch = useDispatch()
+	const { categories: rawCategories } = useSelector(state => state.master)
+
+	const categories = [CATEGORY_ALL, ...rawCategories]
+
+	const [selectedCategory, setSelectedCategory] = useState(categories[0])
 	const [rawMenus, setRawMenus] = useState([])
 	const [menus, setMenus] = useState([])
 	const [isLoading, setIsLoading] = useState({
@@ -34,8 +40,7 @@ const fetchLogic = () => {
 	const getCategoryList = async () => {
 		try {
 			changeLoading('category', true)
-			const res = await MenuCategoryService.getList()
-			setCategories([CATEGORY_ALL, ...res])
+			await dispatch(getCategories())
 		} catch (err) { 
 			console.error(err) 
 		} finally {

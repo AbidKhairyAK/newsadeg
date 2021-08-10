@@ -19,7 +19,7 @@ const Menu = () => {
 					isLoading={isLoading.category}
 					categories={categories}
 					selectedCategory={selectedCategory}
-					changeCategory={changeCategory} 
+					changeCategory={changeCategory}
 				/>
 				<ListSection
 					isLoading={isLoading.menu}
