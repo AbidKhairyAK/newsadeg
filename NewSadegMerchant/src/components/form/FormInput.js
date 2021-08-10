@@ -4,7 +4,7 @@ import { View, TextInput, StyleSheet } from 'react-native'
 import { BaseText } from '@/components'
 import { colors, sizes } from '@/constants'
 
-const FormInput = ({ style = {}, label, noMargin, ...props }) =>
+const FormInput = ({ style = {}, label, noMargin, error, ...props }) =>
 	<View style={{
 		...styles.container(noMargin),
 		...style
@@ -13,6 +13,10 @@ const FormInput = ({ style = {}, label, noMargin, ...props }) =>
 			{label}
 		</BaseText>
 		<TextInput {...props} style={styles.input} />
+
+		{error && <BaseText color="red" size="xs">
+			{error}
+		</BaseText>}
 	</View>
 
 export default FormInput

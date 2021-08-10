@@ -7,7 +7,7 @@ import {
 	AuthScreens,
 	MainScreens,
 	FormModals,
-	InfoModals
+	DialogModals
 } from './navigators'
 import Init from '@/screens/page/Init'
 
@@ -20,12 +20,12 @@ const AppScreens = () => {
 
 	return __DEV__
 	? (
-		<Navigator headerMode="none" mode="modal" initialRouteName="CategorySetting">
+		<Navigator headerMode="none" mode="modal">
 			<Screen name="Init" component={Init} />
 			{MainScreens.map(screen => screen)}
 			{AuthScreens.map(screen => screen)}
 			{FormModals.map(screen => screen)}
-			{InfoModals.map(screen => screen)}
+			{DialogModals.map(screen => screen)}
 		</Navigator>
 	) : (
 		<Navigator headerMode="none" mode="modal">
@@ -36,7 +36,7 @@ const AppScreens = () => {
 				: AuthScreens.map(screen => screen)
 			}
 			{FormModals.map(screen => screen)}
-			{InfoModals.map(screen => screen)}
+			{DialogModals.map(screen => screen)}
 		</Navigator>
 	)
 }

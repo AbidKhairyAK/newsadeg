@@ -7,14 +7,16 @@ import { BaseText, ModalActionSection } from '@/components'
 import { colors, sizes } from '@/constants'
 import { getScreenSize } from '@/helpers'
 
-const ModalInfo = ({ 
+const ModalDialog = ({ 
 	illustration,
 	title, 
 	desc, 
 	onPressPositive, 
 	onPressNegative, 
 	positiveTitle = 'Ok', 
-	negativeTitle = 'Cancel' 
+	negativeTitle = 'Cancel',
+	positiveColor,
+	negativeColor
 }) => {
 	const navigation = useNavigation()
 	const Illustration = illustration // change to TitleCase
@@ -43,11 +45,13 @@ const ModalInfo = ({
 				onPressNegative={onPressNegative}
 				positiveTitle={positiveTitle}
 				negativeTitle={negativeTitle}
+				positiveColor={positiveColor}
+				negativeColor={negativeColor}
 			/>
 		</Modal>
 	)
 }
-export default ModalInfo
+export default ModalDialog
 
 const styles = StyleSheet.create({
 	container: { width: '70%', padding: 0, overflow: 'hidden' },

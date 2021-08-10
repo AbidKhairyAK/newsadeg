@@ -34,7 +34,9 @@ const registerLogic = () => {
 			// munculin success modal atau snackbar
 
 			navigation.navigate('Login')
-		} catch {} finally {
+		} catch (err) { 
+			console.error(err) 
+		} finally {
 			setIsLoading(false)
 		}
 	}

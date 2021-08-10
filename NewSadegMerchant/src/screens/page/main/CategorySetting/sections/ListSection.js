@@ -1,14 +1,12 @@
 import React from 'react'
-import { View, StyleSheet } from 'react-native'
+import { View, StyleSheet, ActivityIndicator } from 'react-native'
 
 import { ShadowView, BaseText, HorizontalRule } from '@/components'
 import { sizes, colors } from '@/constants'
 
 import CategoryItem from '../components/CategoryItem'
 
-const categories = ['Food', 'Beverages', 'Snack', 'Dinner', 'Lunch', 'Breakfast']
-
-const ListSection = () => {
+const ListSection = ({ categories, isLoading, updateCategory, deleteCategory }) => {
 	return (
 		<ShadowView type="card" radius="base" style={styles.shadow}>
 			<View style={styles.inner}>
@@ -19,11 +17,18 @@ const ListSection = () => {
 					Click on category name to edit
 				</BaseText>
 
-				{categories.map((cat, index) =>
-					<View key={cat}>
+				{isLoading.read
+				? <ActivityIndicator color={colors.green} />
+				: categories.map((category, index) =>
+					<View key={category.id}>
 						{index !== 0 && <HorizontalRule margin={sizes.xxxs}/>}
 
-						<CategoryItem cat={cat} />
+						<CategoryItem
+							isLoading={isLoading} 
+							category={category}
+							updateCategory={updateCategory}
+							deleteCategory={deleteCategory}
+						/>
 					</View>
 				)}
 			</View>

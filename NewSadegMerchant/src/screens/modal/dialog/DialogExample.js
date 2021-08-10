@@ -1,13 +1,11 @@
 import React from 'react'
-import { View, ScrollView } from 'react-native'
 
-import { BaseText, ModalInfo } from '@/components'
-import { colors, sizes } from '@/constants'
+import { ModalDialog } from '@/components'
 import CheckAltIllustration from '@/assets/illustrations/check-alt.svg'
 
-const InfoExample = ({ navigation }) => {
+const DialogExample = ({ navigation }) => {
 	return (
-		<ModalInfo
+		<ModalDialog
 			illustration={CheckAltIllustration}
 			title="Data Submitted"
 			desc="Your account data has been submitted"
@@ -16,4 +14,4 @@ const InfoExample = ({ navigation }) => {
 	)
 }
 
-export default InfoExample
+export default DialogExample

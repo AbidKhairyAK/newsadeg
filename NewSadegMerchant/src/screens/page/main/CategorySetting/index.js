@@ -3,17 +3,28 @@ import { ScrollView } from 'react-native'
 
 import { BaseHeader } from '@/components'
 
+import crudLogic from './logics/crudLogic'
 import FormSection from './sections/FormSection'
 import ListSection from './sections/ListSection'
 
 const CategorySetting = ({ navigation }) => {
+	const { isLoading, categories, createCategory, updateCategory, deleteCategory } = crudLogic()
+
 	return (
 		<ScrollView>
 			<BaseHeader title="CATEGORY SETTING" withBack />
 
-			<FormSection />
+			<FormSection
+				createCategory={createCategory}
+				isLoading={isLoading}
+			/>
 
-			<ListSection />
+			<ListSection
+				isLoading={isLoading}
+				categories={categories}
+				updateCategory={updateCategory}
+				deleteCategory={deleteCategory}
+			/>
 		</ScrollView>
 	)
 }

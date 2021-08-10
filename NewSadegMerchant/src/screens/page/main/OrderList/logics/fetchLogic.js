@@ -30,7 +30,9 @@ const fetchLogic = () => {
 					? [ ...prev.data, ...res.data ] 
 					: res.data 
 			}))
-		} catch {} finally {
+		} catch (err) { 
+			console.error(err) 
+		} finally {
 			setIsLoading(false)
 		}
 	}

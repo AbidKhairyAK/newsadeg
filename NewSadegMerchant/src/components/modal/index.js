@@ -1,9 +1,9 @@
-import ModalInfo from './ModalInfo'
+import ModalDialog from './ModalDialog'
 import ModalForm from './ModalForm'
 import ModalActionSection from './ModalActionSection'
 
 export {
-	ModalInfo,
+	ModalDialog,
 	ModalForm,
 	ModalActionSection
 }

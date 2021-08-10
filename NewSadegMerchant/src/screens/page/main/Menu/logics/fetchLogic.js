@@ -24,7 +24,9 @@ const fetchLogic = () => {
 			const res = await MenuService.getList()
 			setRawMenus(res)
 			filterMenu(res)
-		} catch {} finally {
+		} catch (err) { 
+			console.error(err) 
+		} finally {
 			changeLoading('menu', false)
 		}
 	}
@@ -34,7 +36,9 @@ const fetchLogic = () => {
 			changeLoading('category', true)
 			const res = await MenuCategoryService.getList()
 			setCategories([CATEGORY_ALL, ...res])
-		} catch {} finally {
+		} catch (err) { 
+			console.error(err) 
+		} finally {
 			changeLoading('category', false)
 		}
 	}

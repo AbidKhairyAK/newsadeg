@@ -8,6 +8,8 @@ import { colors, sizes } from '@/constants'
 import { axiosInit, authInit } from '@/services'
 import { storage } from '@/utils'
 
+const devTargetScreen = false
+
 const Init = ({ navigation }) => {
 	const [targetScreen, setTargetScreen] = useState()
 	const [trigger, setTrigger] = useState(0)
@@ -42,7 +44,8 @@ const Init = ({ navigation }) => {
 		if (trigger < 2) return
 		setTrigger(0)
 		setIsLoading(false)
-		navigation.navigate(targetScreen)
+		navigation.navigate(__DEV__ && devTargetScreen ? devTargetScreen : targetScreen)
+		// navigation.navigate(targetScreen)
 	}, [trigger])
 
 	return isLoading && (

@@ -4,10 +4,34 @@ import { View, StyleSheet } from 'react-native'
 import { BaseButton } from '@/components'
 import { sizes } from '@/constants'
 
-const ModalActionSection = ({ onPressPositive, onPressNegative, positiveTitle = 'Submit', negativeTitle = 'Cancel', space = sizes.xl }) =>
+const ModalActionSection = ({ 
+	onPressPositive, 
+	onPressNegative, 
+	positiveTitle = 'Submit', 
+	negativeTitle = 'Cancel', 
+	positiveColor = 'green',
+	negativeColor = 'red',
+	space = sizes.xl 
+}) =>
 	<View style={styles.container(space)}>
-		{onPressNegative && <BaseButton onPress={onPressNegative} title={negativeTitle} bg="red" color="white" style={styles.button(space)} />}
-		{onPressPositive && <BaseButton onPress={onPressPositive} title={positiveTitle} bg="green" color="white" style={styles.button(space)} />}
+		{onPressNegative && 
+			<BaseButton
+				onPress={onPressNegative}
+				title={negativeTitle}
+				bg={negativeColor}
+				color="white"
+				style={styles.button(space)}
+			/>
+		}
+		{onPressPositive && 
+			<BaseButton
+				onPress={onPressPositive}
+				title={positiveTitle}
+				bg={positiveColor}
+				color="white"
+				style={styles.button(space)}
+			/>
+		}
 	</View>
 
 export default ModalActionSection

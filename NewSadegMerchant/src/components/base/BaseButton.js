@@ -5,7 +5,7 @@ import { ShadowView, BaseIcon, BaseText } from '@/components'
 import { colors, sizes } from '@/constants'
 
 const BaseButton = ({ 
-	isLoading, // logic props
+	isLoading, disabled, // logic props
 	innerStyle, iconStyle, textStyle, // style props
 	bg, radius, shadowType, // wrapper props
 	title, color, size, type, // text props
@@ -25,9 +25,9 @@ const BaseButton = ({
 	textStyle = textStyle || {}
 
 	return (
-		<TouchableOpacity delayPressIn={100} disabled={isLoading || props.disabled} {...props}>
+		<TouchableOpacity delayPressIn={100} disabled={isLoading || disabled} {...props}>
 			<ShadowView type={shadowType} radius={radius}>
-				<View style={{ ...styles.inner(bg, radius), ...innerStyle }}>
+				<View style={{ ...styles.inner(bg, radius, disabled), ...innerStyle }}>
 					{icon && <BaseIcon 
 						name={icon}
 						size={iconSize}
@@ -56,8 +56,9 @@ const BaseButton = ({
 export default BaseButton
 
 const styles = StyleSheet.create({
-	inner: (bg, radius) => ({ 
-		borderRadius: radius, 
+	inner: (bg, radius, disabled) => ({ 
+		opacity: disabled ? 0.5 : 1,
+		borderRadius: radius,
 		backgroundColor: bg, 
 		paddingVertical: sizes.xs, 
 		flexDirection: 'row', 

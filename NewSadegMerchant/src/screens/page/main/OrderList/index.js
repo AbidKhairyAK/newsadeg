@@ -3,7 +3,7 @@ import { ScrollView, StyleSheet, LogBox, FlatList, ActivityIndicator } from 'rea
 
 import { BaseHeader, OrderItem, NoData } from '@/components'
 import { colors } from '@/constants'
-import CartIllustration from '@/assets/illustrations/cart.svg'
+import DonutIllustration from '@/assets/illustrations/donut.svg'
 
 import fetchLogic from './logics/fetchLogic'
 import TypesSection from './sections/TypesSection'
@@ -37,7 +37,7 @@ const OrderList = () => {
 			}
 			ListEmptyComponent={!isLoading &&
 				<NoData
-					illustration={CartIllustration}
+					illustration={DonutIllustration}
 					title="No order found"
 					description="Wait for a new order or create a menu if you haven't"
 				/>
