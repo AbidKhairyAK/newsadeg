@@ -1,5 +1,6 @@
 import React from 'react'
 import { StyleSheet, View, TouchableOpacity, ActivityIndicator } from 'react-native'
+import { useSelector } from 'react-redux'
 
 import { BaseText, ShadowView, NoData } from '@/components'
 import { sizes, colors } from '@/constants'
@@ -8,9 +9,10 @@ import DonutIllustration from '@/assets/illustrations/donut.svg'
 
 import MenuItem from '../components/MenuItem'
 
-const ListSection = ({ menus, isLoading }) => {
+const ListSection = ({ menus }) => {
+	const { isLoading } = useSelector(state => state.master)
 
-	return isLoading
+	return isLoading.menu
 	? <ActivityIndicator color={colors.green} />
 	: (
 		<View style={styles.container}>

@@ -9,7 +9,7 @@ import ListSection from './sections/ListSection'
 import ActionSection from './sections/ActionSection'
 
 const Menu = () => {
-	const { isLoading, menus, categories, selectedCategory, changeCategory } = fetchLogic()
+	const { menus, categories, selectedCategory, changeCategory } = fetchLogic()
 
 	return (
 		<View style={styles.container}>
@@ -20,10 +20,7 @@ const Menu = () => {
 					selectedCategory={selectedCategory}
 					changeCategory={changeCategory}
 				/>
-				<ListSection
-					isLoading={isLoading.menu}
-					menus={menus}
-				/>
+				<ListSection menus={menus} />
 			</ScrollView>
 
 			<ActionSection />
