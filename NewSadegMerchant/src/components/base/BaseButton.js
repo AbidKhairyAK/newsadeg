@@ -7,13 +7,14 @@ import { colors, sizes } from '@/constants'
 const BaseButton = ({ 
 	isLoading, disabled, // logic props
 	innerStyle, iconStyle, textStyle, // style props
-	bg, radius, shadowType, // wrapper props
+	bg, radius, padding, shadowType, // wrapper props
 	title, color, size, type, // text props
 	icon, iconSize, iconColor, // icon props
 	...props // other props
 }) => {
 	bg = bg ? colors[bg] : colors.white,
 	radius = typeof radius === 'number' ? radius : (sizes[radius] || sizes.xs)
+	padding = typeof padding === 'number' ? padding : sizes[padding]
 	shadowType = shadowType || 'item'
 	color = color || 'black'
 	size = size || 'base'
@@ -27,7 +28,7 @@ const BaseButton = ({
 	return (
 		<TouchableOpacity delayPressIn={100} disabled={isLoading || disabled} {...props}>
 			<ShadowView type={shadowType} radius={radius}>
-				<View style={{ ...styles.inner(bg, radius, disabled), ...innerStyle }}>
+				<View style={{ ...styles.inner(bg, radius, padding, disabled), ...innerStyle }}>
 					{icon && <BaseIcon 
 						name={icon}
 						size={iconSize}
@@ -56,11 +57,12 @@ const BaseButton = ({
 export default BaseButton
 
 const styles = StyleSheet.create({
-	inner: (bg, radius, disabled) => ({ 
+	inner: (bg, radius, padding, disabled) => ({ 
 		opacity: disabled ? 0.5 : 1,
 		borderRadius: radius,
 		backgroundColor: bg, 
-		paddingVertical: sizes.xs, 
+		paddingVertical: padding || sizes.xs, 
+		paddingHorizontal: padding || 0,
 		flexDirection: 'row', 
 		justifyContent: 'center', 
 		alignItems: 'center',

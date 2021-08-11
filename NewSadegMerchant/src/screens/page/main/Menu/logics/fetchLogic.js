@@ -11,7 +11,7 @@ const fetchLogic = () => {
 	const { categories: rawCategories, menus: rawMenus } = useSelector(state => state.master)
 
 	const categories = [CATEGORY_ALL, ...rawCategories]
-	
+
 	const [selectedCategory, setSelectedCategory] = useState(categories[0])
 
 	const changeCategory = val => e => setSelectedCategory(val)

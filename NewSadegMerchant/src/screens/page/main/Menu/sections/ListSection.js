@@ -1,5 +1,6 @@
 import React from 'react'
 import { StyleSheet, View, TouchableOpacity, ActivityIndicator } from 'react-native'
+import { useNavigation } from '@react-navigation/native'
 import { useSelector } from 'react-redux'
 
 import { BaseText, ShadowView, NoData } from '@/components'
@@ -11,6 +12,9 @@ import MenuItem from '../components/MenuItem'
 
 const ListSection = ({ menus }) => {
 	const { isLoading } = useSelector(state => state.master)
+	const { navigate } = useNavigation()
+
+	const toMenuForm = () => navigate('MenuForm')
 
 	return isLoading.menu
 	? <ActivityIndicator color={colors.green} />
@@ -27,7 +31,11 @@ const ListSection = ({ menus }) => {
 				/>
 			)}
 
-			<TouchableOpacity delayPressIn={100} style={styles.addButtonWrapper}>
+			<TouchableOpacity 
+				delayPressIn={100} 
+				style={styles.addButtonWrapper}
+				onPress={toMenuForm}
+			>
 				<ShadowView type="card" radius="base" >
 					<View style={styles.addButton}>
 						<BaseText type="semi-bold" color="green" align="center">

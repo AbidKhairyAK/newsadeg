@@ -12,6 +12,7 @@ LogBox.ignoreLogs(['Warning: componentWillReceiveProps has been renamed']);
 const ActionSection = () => {
 	const { navigate } = useNavigation()
 	const toCategorySetting = () => navigate('CategorySetting')
+	const toMenuForm = () => navigate('MenuForm')
 
 	return <>
 		<View style={styles.backupWrapper}>
@@ -27,7 +28,7 @@ const ActionSection = () => {
 				<BaseIcon name="ice-cream-outline" color="green"/>
 			</ActionButton.Item>
 			<ActionButton.Item 
-				onPress={toCategorySetting}
+				onPress={toMenuForm}
 				buttonColor={colors.white} 
 				title="+ New Menu" 
 			>
