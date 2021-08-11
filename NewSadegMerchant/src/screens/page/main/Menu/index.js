@@ -16,7 +16,6 @@ const Menu = () => {
 			<ScrollView style={styles.container}>
 				<BaseHeader title="MENU" />
 				<CategoriesSection
-					isLoading={isLoading.category}
 					categories={categories}
 					selectedCategory={selectedCategory}
 					changeCategory={changeCategory}

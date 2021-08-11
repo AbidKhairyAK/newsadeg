@@ -50,8 +50,8 @@ const Init = ({ navigation }) => {
 		if (trigger < 2) return
 		setTrigger(0)
 		setIsLoading(false)
-		navigation.navigate(__DEV__ && devTargetScreen ? devTargetScreen : targetScreen)
-		// navigation.navigate(targetScreen)
+		navigation.replace(__DEV__ && devTargetScreen ? devTargetScreen : targetScreen)
+		// navigation.replace(targetScreen)
 	}, [trigger])
 
 	return isLoading && (

@@ -1,17 +1,19 @@
 import React, { useState } from 'react'
 import { View, ScrollView, TouchableOpacity, StyleSheet, ActivityIndicator } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
+import { useSelector } from 'react-redux'
 
 import { BaseText, ShadowView } from '@/components'
 import { sizes, colors } from '@/constants'
 
 import CategoryItem from '../components/CategoryItem'
 
-const CategoriesSection = ({ isLoading, categories, selectedCategory, changeCategory }) => {
+const CategoriesSection = ({ categories, selectedCategory, changeCategory }) => {
 	const { navigate } = useNavigation()
+	const { isLoading } = useSelector(state => state.master)
 	const toCategorySetting = () => navigate('CategorySetting')
 
-	return isLoading
+	return isLoading.category
 	? <ActivityIndicator color={colors.green} />
 	: (
 		<ScrollView horizontal style={styles.container} showsHorizontalScrollIndicator={false}>
