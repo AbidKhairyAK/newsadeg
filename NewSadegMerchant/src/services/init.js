@@ -37,6 +37,7 @@ export const axiosInit = async () => {
 					if ([400, 401].includes(err.response.status)) store.dispatch(logout())
 				}
 			} else {
+				console.error(err.request)
 				console.error(err)
 				alert(err.message)
 			}

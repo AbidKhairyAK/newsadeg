@@ -1,6 +1,17 @@
 import React from 'react'
 import { Dimensions } from 'react-native'
+import ImageResizer from 'react-native-image-resizer'
+
+import { MAX_THUMBNAIL_SIZE } from '@/config'
 import store from '@/store'
+
+export const compressImage = async (
+	{ uri, fileName, type },
+	maxSize = MAX_THUMBNAIL_SIZE
+) => {
+  const res = await ImageResizer.createResizedImage(uri, maxSize, maxSize, 'JPEG', 80, 0)
+  return { ...res, fileName, type}
+}
 
 export const getScreenSize = () => {
 	return Dimensions.get('window')

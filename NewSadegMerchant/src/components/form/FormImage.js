@@ -5,6 +5,7 @@ import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
 import { BaseText, BaseButton, ShadowView } from '@/components'
 import { colors, sizes } from '@/constants'
 import { getScreenSize } from '@/helpers'
+import { MAX_IMAGE_SIZE } from '@/config'
 import AddImageIllustration from '@/assets/illustrations/add-image.svg'
 
 const FormImage = ({ style, label, noMargin, error, optional, onChangeImage, value, ...props }) => {
@@ -12,8 +13,8 @@ const FormImage = ({ style, label, noMargin, error, optional, onChangeImage, val
 
 	const options = { 
 		mediaType: 'photo',
-		maxWidth: 720,
-		maxHeight: 720,
+		maxWidth: MAX_IMAGE_SIZE,
+		maxHeight: MAX_IMAGE_SIZE,
 		quality: 0.8,
 	}
 
@@ -51,7 +52,10 @@ const FormImage = ({ style, label, noMargin, error, optional, onChangeImage, val
 				selectedImage
 				? <ShadowView type="item" radius="xs">
 					<Image
-						source={{ uri: typeof selectedImage === 'string' ? selectedImage : selectedImage.uri  }}
+						source={{ uri: typeof selectedImage === 'string' 
+							? selectedImage 
+							: selectedImage.uri  
+						}}
 						style={{ 
 							width: '100%', 
 							height: getImageHeight(), 
@@ -86,7 +90,7 @@ const FormImage = ({ style, label, noMargin, error, optional, onChangeImage, val
 				/>
 			</View>
 
-			{error && <BaseText color="red" size="xs">
+			{error && <BaseText color="red" size="xs" style={styles.error}>
 				{error}
 			</BaseText>}
 		</View>
@@ -98,5 +102,6 @@ export default FormImage
 const styles = StyleSheet.create({
 	container: (noMargin) => ({ marginBottom: noMargin ? 0 : sizes.sm }),
 	label: { marginBottom: sizes.xxxs, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'flex-end' },
-	input: { width: '100%', backgroundColor: colors.lightGray, borderRadius: sizes.xs, paddingHorizontal: sizes.xs }
+	input: { width: '100%', backgroundColor: colors.lightGray, borderRadius: sizes.xs, paddingHorizontal: sizes.xs },
+	error: { marginTop: sizes.base / 4 }
 })

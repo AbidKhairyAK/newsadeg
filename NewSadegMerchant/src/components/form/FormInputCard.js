@@ -26,7 +26,7 @@ const FormInputCard = ({ style, label, icon, noMargin, error, children, ...props
 					{children}
 				</View>
 
-				{error && <BaseText color="red" size="xs">
+				{error && <BaseText color="red" size="xs" style={styles.error}>
 					{error}
 				</BaseText>}
 			</View>
@@ -39,5 +39,6 @@ const styles = StyleSheet.create({
 	container: (noMargin) => ({ marginBottom: noMargin ? 0 : sizes.base * 1.5 }),
 	inner: { backgroundColor: colors.white, borderRadius: sizes.base * 1.5, paddingHorizontal: sizes.base * 1.5, paddingTop: sizes.base, paddingBottom: sizes.base / 1.5 },
 	inputWrapper: { flexDirection: 'row', alignItems: 'center', marginTop: sizes.base / 4 },
-	input: { flex: 1, padding: 0, paddingHorizontal: sizes.base / 2, paddingBottom: sizes.base / 4, paddingTop: 0, fontSize: sizes.base, fontFamily: fontTypes.regular }
+	input: { flex: 1, padding: 0, paddingHorizontal: sizes.base / 2, paddingBottom: sizes.base / 4, paddingTop: 0, fontSize: sizes.base, fontFamily: fontTypes.regular },
+	error: { marginTop: sizes.base / 4 }
 })

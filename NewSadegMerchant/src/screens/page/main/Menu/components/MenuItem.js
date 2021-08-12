@@ -26,13 +26,15 @@ const MenuItem = ({ isTopItem, menu }) => {
 						</View>
 					</ShadowView>
 					<View style={styles.contentWrapper}>
-						<BaseText size="sm">
-							{toTitleCase(menu.name)}
-						</BaseText>
-						<BaseText size="xs" color="gray" style={styles.menuDesc}>
-							{menu.description?.substring(0, 75)}
-							{menu.description?.length > 75 && '...'}
-						</BaseText>
+						<View>
+							<BaseText size="sm">
+								{toTitleCase(menu.name)}
+							</BaseText>
+							<BaseText size="xs" color="gray" style={styles.menuDesc}>
+								{menu.description?.substring(0, 75)}
+								{menu.description?.length > 75 && '...'}
+							</BaseText>
+						</View>
 						<View style={styles.footerSection}>
 							<MoneyText value={menu.price} />
 							<StatusBadge status={menu.status} />
@@ -56,7 +58,7 @@ const styles = StyleSheet.create({
 	imageShadow: { marginRight: sizes.xs, width: '30%' },
 	imageWrapper: { paddingTop: '100%', position: 'relative', borderRadius: sizes.xss },
 	image: { borderRadius: sizes.xxs, position: 'absolute', top: 0, bottom: 0, left: 0, right: 0 },
-	contentWrapper: { flexShrink: 1 },
+	contentWrapper: { flexShrink: 1, justifyContent: 'space-between' },
 	menuDesc: { marginTop: sizes.base / 4 },
-	footerSection: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginTop: sizes.xxs },
+	footerSection: { width: '100%', position: 'relative', top: sizes.base / -4, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginTop: sizes.xxs },
 })

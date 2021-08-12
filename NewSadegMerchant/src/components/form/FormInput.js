@@ -24,7 +24,7 @@ const FormInput = ({ style, inputStyle, label, noMargin, error, optional, ...pro
 			inputStyle
 		]} />
 
-		{error && <BaseText color="red" size="xs">
+		{error && <BaseText color="red" size="xs" style={styles.error}>
 			{error}
 		</BaseText>}
 	</View>
@@ -34,5 +34,6 @@ export default FormInput
 const styles = StyleSheet.create({
 	container: (noMargin) => ({ marginBottom: noMargin ? 0 : sizes.sm }),
 	label: { marginBottom: sizes.xxxs, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'flex-end' },
-	input: { width: '100%', backgroundColor: colors.lightGray, borderRadius: sizes.xs, paddingHorizontal: sizes.xs }
+	input: { width: '100%', backgroundColor: colors.lightGray, borderRadius: sizes.xs, paddingHorizontal: sizes.xs },
+	error: { marginTop: sizes.base / 4 }
 })
