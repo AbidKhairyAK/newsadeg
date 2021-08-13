@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
-import { View, StyleSheet } from 'react-native'
+import { StyleSheet } from 'react-native'
 import { isEmpty } from 'validate.js'
 
-import { ShadowView, FormInput, BaseButton } from '@/components'
+import { FormInput, BaseButton, BaseCard } from '@/components'
 import { sizes, colors } from '@/constants'
 
 const ERR_MSG = 'This field is required'
@@ -24,8 +24,7 @@ const FormSection = ({ createCategory, isLoading }) => {
 	}
 
 	return (
-		<ShadowView type="card" radius="base" style={styles.shadow}>
-			<View style={styles.inner}>
+			<BaseCard padding="base" style={styles.card} innerStyle={styles.cardInner}>
 				<FormInput
 					error={isError && ERR_MSG}
 					value={inputValue}
@@ -43,16 +42,15 @@ const FormSection = ({ createCategory, isLoading }) => {
 					style={styles.button}
 					innerStyle={styles.buttonInner}
 				/>
-			</View>
-		</ShadowView>
+			</BaseCard>
 	)
 }
 
 export default FormSection
 
 const styles = StyleSheet.create({
-	shadow: { marginBottom: sizes.base, marginHorizontal: sizes.base },
-	inner: { backgroundColor: colors.white, padding: sizes.base, borderRadius: sizes.base, flexDirection: 'row' },
+	card: { marginBottom: sizes.base, marginHorizontal: sizes.base },
+	cardInner: { flexDirection: 'row' },
 	input: { flex: 1 },
 	button: { marginLeft: sizes.xs, marginTop: sizes.base * 1.8 },
 	buttonInner: { paddingHorizontal: sizes.xs }

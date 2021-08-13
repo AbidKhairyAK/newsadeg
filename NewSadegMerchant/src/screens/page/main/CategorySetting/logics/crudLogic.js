@@ -57,10 +57,6 @@ const crudLogic = () => {
 		}
 	}
 
-	useEffect(() => {
-		return () => dispatch(getCategories())
-	}, [])
-
 	return { isLoading, categories, createCategory, updateCategory, deleteCategory }
 }
 

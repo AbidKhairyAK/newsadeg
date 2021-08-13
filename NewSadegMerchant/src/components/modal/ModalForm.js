@@ -7,14 +7,14 @@ import { ModalContainer, BaseText, BaseButton, BaseIcon, ModalActionSection } fr
 import { colors, sizes } from '@/constants'
 import { getScreenSize } from '@/helpers'
 
-const ModalForm = ({ children, title, onPressPositive, onPressNegative }) => {
+const ModalForm = ({ children, title, onPressPositive, onPressNegative, isLoading }) => {
 	const navigation = useNavigation()
 	return (
 		<Modal style={styles.container} cancelable={false}>
 			<ScrollView style={styles.scrollview}>
 				<View style={styles.wrapper}>
 					<View style={styles.header}>
-						<TouchableOpacity delayPressIn={100} style={styles.closeButton} onPress={navigation.goBack}>
+						<TouchableOpacity  style={styles.closeButton} onPress={navigation.goBack}>
 							<BaseIcon name="close" color="gray" size="lg" />
 						</TouchableOpacity>
 						<BaseText type="semi-bold" color="gray" align="center" style={styles.title}>
@@ -24,7 +24,7 @@ const ModalForm = ({ children, title, onPressPositive, onPressNegative }) => {
 					{children}
 				</View>
 
-				<ModalActionSection onPressPositive={onPressPositive} onPressNegative={onPressNegative} />
+				<ModalActionSection isLoading={isLoading} onPressPositive={onPressPositive} onPressNegative={onPressNegative} />
 			</ScrollView>
 		</Modal>
 	)

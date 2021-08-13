@@ -7,7 +7,13 @@ const services = {
 	},
 	create(formData) {
 		return axios.post('/menus', formData)
-	}
+	},
+	update(id, formData) {
+		return axios.post('/menus/' + id, formData)
+	},
+	delete(id) {
+		return axios.delete('/menus/' + id)
+	},
 }
 
 export default services

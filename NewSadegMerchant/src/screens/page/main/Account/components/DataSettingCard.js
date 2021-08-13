@@ -1,14 +1,14 @@
 import React from 'react'
 import { View, StyleSheet } from 'react-native'
 
-import { BaseText, ShadowView, HorizontalRule } from '@/components'
-import { sizes } from '@/constants'
+import { BaseText, BaseCard, HorizontalRule } from '@/components'
+import { sizes, colors } from '@/constants'
 
 import DataSettingItem from './DataSettingItem'
 
 const DataSettingCard = ({ title, items }) => {
 	return (
-		<ShadowView type="card" style={styles.container}>
+		<BaseCard padding="base" style={styles.card}>
 			<BaseText color="gray" size="xs" type="bold" style={styles.title}>
 				{title}
 			</BaseText>
@@ -20,13 +20,13 @@ const DataSettingCard = ({ title, items }) => {
 					<DataSettingItem title={item.title} icon={item.icon} onPress={item.onPress} />
 				</View>
 			)}
-		</ShadowView>
+		</BaseCard>
 	)
 }
 
 export default DataSettingCard
 
 const styles = StyleSheet.create({
-	container: { padding: sizes.base, marginHorizontal: sizes.base, borderRadius: sizes.base, marginBottom: sizes.base * 1.75 },
+	card: { marginHorizontal: sizes.base, marginBottom: sizes.base * 1.75 },
 	title: { marginBottom: sizes.base },
 })

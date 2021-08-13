@@ -13,7 +13,7 @@ const BaseSwitch = ({ style, trueTitle, falseTitle, status, onPress, isLoading }
 			...styles[status ? 'switchWrapperTrue' : 'switchWrapperFalse'],
 			...style
 		}}>
-			<TouchableOpacity delayPressIn={100} onPress={onPress} disabled={isLoading}>
+			<TouchableOpacity  onPress={onPress} disabled={isLoading}>
 				<ShadowView type="item" radius={SWITCH_HEIGHT / 5}>
 					<View style={{
 						...styles.switchItemInner,

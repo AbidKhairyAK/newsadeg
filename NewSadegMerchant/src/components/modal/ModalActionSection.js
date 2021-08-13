@@ -5,6 +5,7 @@ import { BaseButton } from '@/components'
 import { sizes } from '@/constants'
 
 const ModalActionSection = ({ 
+	isLoading,
 	onPressPositive, 
 	onPressNegative, 
 	positiveTitle = 'Submit', 
@@ -16,6 +17,7 @@ const ModalActionSection = ({
 	<View style={styles.container(space)}>
 		{onPressNegative && 
 			<BaseButton
+				isLoading={isLoading}
 				onPress={onPressNegative}
 				title={negativeTitle}
 				bg={negativeColor}
@@ -25,6 +27,7 @@ const ModalActionSection = ({
 		}
 		{onPressPositive && 
 			<BaseButton
+				isLoading={isLoading}
 				onPress={onPressPositive}
 				title={positiveTitle}
 				bg={positiveColor}

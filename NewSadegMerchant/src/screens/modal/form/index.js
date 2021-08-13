@@ -1,5 +1,7 @@
 import FormExample from './FormExample'
+import NewCategoryForm from './NewCategoryForm'
 
 export {
-	FormExample
+	NewCategoryForm,
+	FormExample,
 }

@@ -10,7 +10,7 @@ import { axiosInit, authInit } from '@/services'
 import { storage } from '@/utils'
 import { getRestaurantData } from '@/store/restaurant'
 
-const devTargetScreen = 'Menu'
+const devTargetScreen = false
 
 const Init = ({ navigation }) => {
 	const dispatch = useDispatch()

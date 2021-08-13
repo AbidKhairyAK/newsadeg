@@ -1,9 +1,9 @@
 import React from 'react'
-import { StyleSheet, View, TouchableOpacity, ActivityIndicator } from 'react-native'
+import { StyleSheet, View, ActivityIndicator } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
 import { useSelector } from 'react-redux'
 
-import { BaseText, ShadowView, NoData } from '@/components'
+import { NoData, BaseButton } from '@/components'
 import { sizes, colors } from '@/constants'
 import { getScreenSize } from '@/helpers'
 import DonutIllustration from '@/assets/illustrations/donut.svg'
@@ -31,19 +31,14 @@ const ListSection = ({ menus }) => {
 				/>
 			)}
 
-			<TouchableOpacity 
-				delayPressIn={100} 
-				style={styles.addButtonWrapper}
+			<BaseButton
+				title="+ New Menu"
+				padding="base"
+				shadowType="card"
+				color="green"
 				onPress={toMenuForm}
-			>
-				<ShadowView type="card" radius="base" >
-					<View style={styles.addButton}>
-						<BaseText type="semi-bold" color="green" align="center">
-							+ New Menu
-						</BaseText>
-					</View>
-				</ShadowView>
-			</TouchableOpacity>
+				style={styles.addButton}
+			/>
 		</View>
 	)
 }
@@ -52,6 +47,5 @@ export default ListSection
 
 const styles = StyleSheet.create({
 	container: { marginTop: sizes.xs * -1 },
-	addButtonWrapper: { margin: sizes.base, marginTop: 0 },
-	addButton: { backgroundColor: colors.white, borderRadius: sizes.base, padding: sizes.base }
+	addButton: { margin: sizes.base, marginTop: 0 },
 })

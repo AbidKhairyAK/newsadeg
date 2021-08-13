@@ -31,7 +31,7 @@ const FormSection = ({ form, setFormInline, formErrors, validateFormInline }) =>
 			placeholder="enter your password ..."
 			secureTextEntry={hidePassword}
 		>
-			<TouchableOpacity delayPressIn={100} onPress={toggleShowPassword} style={styles.hidePassword}>
+			<TouchableOpacity  onPress={toggleShowPassword} style={styles.hidePassword}>
 				<BaseIcon 
 					name={hidePassword ? 'eye-off-outline' : 'eye-outline'} 
 					size="lg" 

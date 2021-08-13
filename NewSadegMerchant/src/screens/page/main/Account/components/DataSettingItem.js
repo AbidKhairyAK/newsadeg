@@ -5,7 +5,7 @@ import { BaseText, BaseIcon } from '@/components'
 import { sizes } from '@/constants'
 
 const DataSettingItem = ({ title, icon, onPress }) => (
-	<TouchableOpacity delayPressIn={100} style={styles.container} onPress={onPress}>
+	<TouchableOpacity  style={styles.container} onPress={onPress}>
 		<View style={styles.inner}>
 			<BaseIcon name={icon} size="lg" color="gray" style={styles.icon} />
 			<BaseText size="sm">

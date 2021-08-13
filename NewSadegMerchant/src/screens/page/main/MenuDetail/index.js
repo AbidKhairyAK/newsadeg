@@ -1,12 +1,71 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { ScrollView, View, Image, TouchableOpacity, StyleSheet } from 'react-native'
+import { useSelector, useDispatch } from 'react-redux'
 
 import { ShadowView, BaseText, BaseIcon, MoneyText, BaseSwitch, BaseButton } from '@/components'
 import { sizes, colors } from '@/constants'
 import { getScreenSize, toTitleCase } from '@/helpers'
+import { MenuService } from '@/services'
+import { setMenus } from '@/store/master'
 
 const MenuDetail = ({ navigation, route }) => {
-	const { menu } = route.params
+	const dispatch = useDispatch()
+	const { id } = route.params
+	const { menus } = useSelector(state => state.master)
+	const menu = menus.find(item => item.id === id) || {}
+	
+	const [isLoading, setIsLoading] = useState({
+		updateStatus: false,
+		delete: false
+	})
+
+	const changeLoading = (type, status) => setIsLoading(prev => ({ ...prev, [type]: status }))
+
+	const toggleMenuStatus = async () => {
+		try {
+			changeLoading('updateStatus', true)
+			const updateTo = menu.status === 'ready' ? 'sold' : 'ready'
+			const res = await MenuService.update(id, { status: updateTo })
+
+			const cloneMenus = [...menus]
+			cloneMenus[cloneMenus.findIndex(item => item.id === id)] = res
+			dispatch(setMenus(cloneMenus))
+		} catch (err) {
+			console.error(err)
+		} finally {
+			changeLoading('updateStatus', false)
+		}
+	}
+
+	const deleteMenu = async () => {
+		try {
+			changeLoading('delete', true)
+			await MenuService.delete(id)
+
+			const cloneMenus = [...menus]
+			cloneMenus.splice(cloneMenus.findIndex(item => item.id === id), 1)
+			dispatch(setMenus(cloneMenus))
+			navigation.goBack()
+		} catch (err) {
+			console.error(err)
+		} finally {
+			changeLoading('delete', false)
+		}
+	}
+
+	const confirmDelete = () => {
+		navigation.navigate('ConfirmDialog', {
+			desc: 'Deleted menu can\'t be recovered',
+			positiveTitle: 'Delete',
+			negativeTitle: 'Cancel',
+			onPressPositive: deleteMenu,
+			onPressNegative: () => {},
+			positiveColor: 'red',
+			negativeColor: 'gray',
+		})
+	}
+
+	const toMenuForm = () => navigation.navigate('MenuForm', { initialForm: menu })
 
 	return (
 		<ScrollView style={styles.container}>
@@ -36,6 +95,8 @@ const MenuDetail = ({ navigation, route }) => {
 							trueTitle="IN" 
 							falseTitle="OUT" 
 							style={styles.status} 
+							onPress={toggleMenuStatus}
+							isLoading={isLoading.updateStatus}
 						/>
 					</View>
 
@@ -44,8 +105,23 @@ const MenuDetail = ({ navigation, route }) => {
 					</BaseText>
 
 					<View style={styles.actionWrapper}>
-						<BaseButton title="Delete Menu" icon="trash-outline" bg="red" color="white" style={styles.actionButton} />
-						<BaseButton title="Edit Menu" icon="create-outline" bg="green" color="white" style={styles.actionButton} />
+						<BaseButton
+							title="Delete Menu"
+							icon="trash-outline"
+							bg="red"
+							color="white"
+							style={styles.actionButton}
+							onPress={confirmDelete}
+							isLoading={isLoading.delete}
+						/>
+						<BaseButton
+							title="Edit Menu"
+							icon="create-outline"
+							bg="green"
+							color="white"
+							style={styles.actionButton}
+							onPress={toMenuForm}
+						/>
 					</View>
 				</View>
 			</ShadowView>

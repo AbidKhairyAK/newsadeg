@@ -3,6 +3,7 @@ import BaseIcon from './BaseIcon'
 import BaseHeader from './BaseHeader'
 import BaseSwitch from './BaseSwitch'
 import BaseButton from './BaseButton'
+import BaseCard from './BaseCard'
 
 export {
 	BaseText,
@@ -10,4 +11,5 @@ export {
 	BaseHeader,
 	BaseSwitch,
 	BaseButton,
+	BaseCard,
 }

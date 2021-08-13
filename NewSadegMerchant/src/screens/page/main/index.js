@@ -7,6 +7,7 @@ import MenuForm from './MenuForm'
 import CategorySetting from './CategorySetting'
 
 import Account from './Account'
+import DriverList from './DriverList'
 
 export {
 	OrderList,
@@ -18,4 +19,5 @@ export {
 	CategorySetting,
 
 	Account,
+	DriverList,
 }

@@ -7,7 +7,7 @@ import { toTitleCase } from '@/helpers'
 
 const CategoryItem = ({ name, selected, firstItem, asAction, onPress }) => (
 	<ShadowView type="card" radius="base" style={styles.itemWrapper(firstItem)}>
-		<TouchableOpacity delayPressIn={100} onPress={onPress}>
+		<TouchableOpacity  onPress={onPress}>
 			<View style={styles.itemInner(selected)}>
 				<BaseText size="sm" type="semi-bold" color={asAction ? 'green' : selected ? 'white' : 'gray'}>
 					{toTitleCase(name)}

@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native'
-import { ShadowFlex } from 'react-native-neomorph-shadows'
 import { useSelector, useDispatch } from 'react-redux'
 
 import { BaseText, BaseIcon, BaseSwitch, ShadowView } from '@/components'
@@ -81,7 +80,7 @@ const CustomTabBar = ({ state, descriptors, navigation, icons }) => {
 
 						return (
 							<TouchableOpacity 
-								delayPressIn={100}
+								
 								key={label}
 								accessibilityRole="button"
 								accessibilityState={isFocused ? { selected: true } : {}}

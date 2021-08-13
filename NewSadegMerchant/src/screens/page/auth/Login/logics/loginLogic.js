@@ -9,8 +9,8 @@ const loginLogic = () => {
 	const { isLoading } = useSelector(state => state.auth)
 
 	const { form, setFormInline, validateForm, validateFormInline, resetForm, formErrors } = useForm({
-		email: '',
-		password: ''
+		email: 'restaurant2@email.com',
+		password: '1234'
 	},{
 		email: { presence: true, length: { maximum: 254 }, email: true },
 		password: { presence: true, length: { minimum: 4, maximum: 20 } }

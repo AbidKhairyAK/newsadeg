@@ -1,14 +1,14 @@
 import React from 'react'
 import { View, StyleSheet } from 'react-native'
 
-import { BaseText, ShadowView, MoneyText } from '@/components'
+import { BaseText, BaseCard, MoneyText } from '@/components'
 import { sizes, colors } from '@/constants'
 
 import BalanceButton from './BalanceButton'
 
 const BalanceInfo = () => {
 	return (
-		<ShadowView type="card" style={styles.container}>
+		<BaseCard padding="base" style={styles.card} innerStyle={styles.cardInner}>
 			<View style={styles.infoWrapper}>
 				<BaseText size="sm" color="gray">
 					Balance
@@ -19,14 +19,15 @@ const BalanceInfo = () => {
 				<BalanceButton title="Withdraw" icon="download-outline" />
 				<BalanceButton title="History" icon="reload-outline" />
 			</View>
-		</ShadowView>
+		</BaseCard>
 	)
 }
 
 export default BalanceInfo
 
 const styles = StyleSheet.create({
-	container: { flexDirection: 'row', borderRadius: sizes.base, marginHorizontal: sizes.base, padding: sizes.base, position: 'absolute', bottom: sizes.base * -2, left: 0, right: 0 },
+	card: { marginHorizontal: sizes.base, position: 'absolute', bottom: sizes.base * -2, left: 0, right: 0 },
+	cardInner: { flexDirection: 'row' },
 	infoWrapper: { flex: 4 },
 	actionWrapper: { flex: 5, flexDirection: 'row', justifyContent: 'space-around', borderLeftWidth: 1, borderColor: colors.border },
 })

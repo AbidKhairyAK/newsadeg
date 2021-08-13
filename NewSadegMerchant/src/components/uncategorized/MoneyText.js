@@ -5,7 +5,7 @@ import { sizes } from '@/constants'
 import { formatNumber } from '@/helpers'
 
 const MoneyText = ({ style, size, value }) => {
-	value = formatNumber(value.toFixed(2))
+	value = formatNumber(value?.toFixed(2))
 	size = size ? sizes[size] : sizes.base
 	return (
 		<BaseText type="bold" size={size} style={style}>

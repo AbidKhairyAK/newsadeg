@@ -8,8 +8,8 @@ import { getScreenSize } from '@/helpers'
 import { MAX_IMAGE_SIZE } from '@/config'
 import AddImageIllustration from '@/assets/illustrations/add-image.svg'
 
-const FormImage = ({ style, label, noMargin, error, optional, onChangeImage, value, ...props }) => {
-	const [selectedImage, setSelectedImage] = useState()
+const FormImage = ({ style, label, noMargin, error, optional, onChangeImage, initialImage, ...props }) => {
+	const [selectedImage, setSelectedImage] = useState(initialImage)
 
 	const options = { 
 		mediaType: 'photo',
