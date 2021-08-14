@@ -1,5 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
-import { MenuCategoryService, MenuService } from '@/services'
+import { MenuCategoryService, MenuService, RestaurantDriverService } from '@/services'
 
 export const getCategories = createAsyncThunk(
 	'master/getCategories',
@@ -19,6 +19,18 @@ export const getMenus = createAsyncThunk(
 		try {
 			const res = await MenuService.getList()
 			dispatch({ type: 'master/setMenus', payload: res })
+		} catch (err) {
+			throw err
+		}
+	}
+)
+
+export const getRestaurantDrivers = createAsyncThunk(
+	'master/getRestaurantDrivers',
+	async (payload, { dispatch }) => {
+		try {
+			const res = await RestaurantDriverService.getList()
+			dispatch({ type: 'master/setRestaurantDrivers', payload: res })
 		} catch (err) {
 			throw err
 		}

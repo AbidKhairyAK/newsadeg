@@ -8,6 +8,7 @@ import CategorySetting from './CategorySetting'
 
 import Account from './Account'
 import DriverList from './DriverList'
+import DriverForm from './DriverForm'
 
 export {
 	OrderList,
@@ -20,4 +21,5 @@ export {
 
 	Account,
 	DriverList,
+	DriverForm,
 }

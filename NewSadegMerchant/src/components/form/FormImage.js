@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { View, TextInput, StyleSheet, Image } from 'react-native'
 import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
 
-import { BaseText, BaseButton, ShadowView } from '@/components'
+import { BaseText, BaseButton, ShadowView, HorizontalRule } from '@/components'
 import { colors, sizes } from '@/constants'
 import { getScreenSize } from '@/helpers'
 import { MAX_IMAGE_SIZE } from '@/config'
@@ -21,8 +21,10 @@ const FormImage = ({ style, label, noMargin, error, optional, onChangeImage, ini
 	const callback = res => {
 		if (res.didCancel) return
 
-		setSelectedImage(res.assets[0])
-		onChangeImage(res.assets[0])
+		const payload = { ...res.assets[0], name: res.assets[0].fileName || res.assets[0].name }
+
+		setSelectedImage(payload)
+		onChangeImage(payload)
 	}
 
 	const fromCamera = () => launchCamera(options, callback)
@@ -32,7 +34,7 @@ const FormImage = ({ style, label, noMargin, error, optional, onChangeImage, ini
 		? getScreenSize().width / 2
 		: (getScreenSize().width - (sizes.base + sizes.xs)) / selectedImage.width * selectedImage.height
 
-	return (
+	return <>
 		<View style={[
 			styles.container(noMargin), 
 			style
@@ -94,7 +96,8 @@ const FormImage = ({ style, label, noMargin, error, optional, onChangeImage, ini
 				{error}
 			</BaseText>}
 		</View>
-	)
+		<HorizontalRule />
+	</>
 }
 
 export default FormImage

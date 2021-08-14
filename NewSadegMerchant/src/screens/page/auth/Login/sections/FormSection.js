@@ -5,9 +5,9 @@ import { FormInputCard, BaseIcon } from '@/components'
 import { sizes } from '@/constants'
 
 const FormSection = ({ form, setFormInline, validateFormInline, formErrors }) => {
-	const [isShowPassword, setShowPassword] = useState(false)
+	const [isShowPassword, setIsShowPassword] = useState(false)
 
-	const toggleShowPassword = () => setShowPassword(prev => !prev)
+	const toggleShowPassword = () => setIsShowPassword(prev => !prev)
 
 	return <>
 		<FormInputCard 

@@ -1,14 +1,15 @@
+
 import React, { useState } from 'react'
 import { ScrollView, StyleSheet, View, TouchableOpacity } from 'react-native'
 import { useSelector, useDispatch } from 'react-redux'
 import { useNavigation } from '@react-navigation/native'
 import { isEmpty } from 'validate.js'
 
-import { BaseCard, BaseText, BaseHeader, BaseButton, ShadowView, FormInput, FormPicker, FormImage, HorizontalRule } from '@/components'
+import { BaseCard, BaseText, BaseHeader, BaseButton, ShadowView, FormInput, FormPicker, FormImage } from '@/components'
 import { sizes, colors } from '@/constants'
 import { useForm } from '@/hooks'
 import { MenuService } from '@/services'
-import { getMenus } from '@/store/master'
+import { getMenus, setMenus } from '@/store/master'
 import { getUser, compressImage } from '@/helpers'
 
 const MenuForm = ({ route }) => {
@@ -16,17 +17,19 @@ const MenuForm = ({ route }) => {
 	const { goBack, navigate } = useNavigation()
 	const initialForm = route.params?.initialForm || {}
 
-	const { categories } = useSelector(state => state.master)
+	const { categories, menus } = useSelector(state => state.master)
 	const categoryOptions = categories.map(category => ({
 		label: category.name,
 		value: category.id,
 		key: category.id,
 	}))
-	const { form, setFormInline, setForm, formErrors, validateForm, validateFormInline } = useForm({
+	const { form, setFormInline, resetForm, formErrors, validateForm, validateFormInline, getFormData } = useForm({
+		restaurant_id: getUser().id,
 		name: initialForm.name || '',
 		menu_category_id: initialForm.menu_category_id || null,
 		description: initialForm.description || '',
 		price: initialForm.price?.toString() || '',
+		status: initialForm.status || 'ready',
 		image_file: null,
 	}, {
 		name: { presence: true, length: { maximum: 254 } },
@@ -41,27 +44,15 @@ const MenuForm = ({ route }) => {
 	const handleSubmit = async () => {
 		try {
 			if (validateForm()) return
-
 			setIsLoading(true)
 
-			const formData = new FormData()
-
-			formData.append('restaurant_id', getUser().id)
-			formData.append('menu_category_id', form.menu_category_id)
-			formData.append('name', form.name)
-			formData.append('description', form.description)
-			formData.append('price', parseInt(form.price))
-			// formData.append('price', parseFloat(form.price.replace(/,/ig, '')))
-			formData.append('status', initialForm.status || 'ready')
+			const formData = getFormData({
+				price: parseInt(form.price)
+			})
 
 			if (form.image_file) {
 				const thumbnail = await compressImage(form.image_file)
 
-				formData.append('image_file', {
-					uri: form.image_file.uri,
-					name: form.image_file.fileName,
-					type: form.image_file.type,
-				})
 				formData.append('image_thumbnail_file', {
 					uri: thumbnail.uri,
 					name: thumbnail.fileName,
@@ -69,12 +60,17 @@ const MenuForm = ({ route }) => {
 				})
 			}
 
-			if (isEmpty(initialForm)) await MenuService.create(formData)
-			else await MenuService.update(initialForm.id, formData)
-			
-			await dispatch(getMenus())
+			if (isEmpty(initialForm)) {
+				const res = await MenuService.create(getFormData())
+				dispatch(setMenus([res, ...menus]))
+			} else {
+				const res = await MenuService.update(initialForm.id, getFormData())
+				const copiedData = [...menus]
+				copiedData[copiedData.findIndex(item => item.id === initialForm.id)] = res
+				dispatch(setMenus(copiedData))
+			}
 
-			setForm('reset')
+			resetForm()
 			goBack()
 		} catch (err) {
 			console.error(err)
@@ -138,8 +134,6 @@ const MenuForm = ({ route }) => {
 						error={formErrors.image_file}
 						onChangeImage={setFormInline('image_file')}
 					/>
-
-					<HorizontalRule />
 
 					<BaseButton
 						title="Submit"

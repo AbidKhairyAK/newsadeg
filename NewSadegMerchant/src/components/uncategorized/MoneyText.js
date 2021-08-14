@@ -4,8 +4,9 @@ import { BaseText } from '@/components'
 import { sizes } from '@/constants'
 import { formatNumber } from '@/helpers'
 
-const MoneyText = ({ style, size, value }) => {
-	value = formatNumber(value?.toFixed(2))
+const MoneyText = ({ style, size, value = 0 }) => {
+	value = typeof value === 'string' ? Number(value) : value
+	value = formatNumber(value.toFixed(2))
 	size = size ? sizes[size] : sizes.base
 	return (
 		<BaseText type="bold" size={size} style={style}>

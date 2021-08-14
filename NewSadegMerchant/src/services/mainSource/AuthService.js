@@ -6,7 +6,6 @@ const services = {
 	},
 	getProfile (accessToken) {
 		const config = !accessToken ? null : { headers: { Authorization: 'Bearer ' + accessToken } }
-		console.log('service config', config)
 		return axios.post('/restaurant/me', null, config)
 	},
 }

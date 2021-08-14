@@ -10,7 +10,7 @@ export const compressImage = async (
 	maxSize = MAX_THUMBNAIL_SIZE
 ) => {
   const res = await ImageResizer.createResizedImage(uri, maxSize, maxSize, 'JPEG', 80, 0)
-  return { ...res, fileName, type}
+  return { ...res, fileName, type, name: fileName}
 }
 
 export const getScreenSize = () => {

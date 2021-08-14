@@ -18,7 +18,6 @@ const slice = createSlice({
 		reset: () => ({ ...initialState }),
 		login: (state, action) => {
 			state.isLogin = true
-			console.log(action.payload)
 			state.token = action.payload.token
 			state.user = action.payload.user
 		},

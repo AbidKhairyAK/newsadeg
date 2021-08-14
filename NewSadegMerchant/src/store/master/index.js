@@ -3,15 +3,17 @@ import { createSlice } from '@reduxjs/toolkit'
 import { isActionIncludes } from '@/store/helpers'
 import { logout } from '@/store/auth'
 
-import { getCategories, getMenus } from './thunks'
+import { getCategories, getMenus, getRestaurantDrivers } from './thunks'
 
 const initialState = {
 	isLoading: {
 		category: false,
-		menu: false
+		menu: false,
+		restaurant_driver: false,
 	},
 	categories: [],
 	menus: [],
+	restaurant_drivers: [],
 }
 
 const slice = createSlice({
@@ -23,6 +25,9 @@ const slice = createSlice({
 		},
 		setMenus: (state, action) => {
 			state.menus = action.payload
+		},
+		setRestaurantDrivers: (state, action) => {
+			state.restaurant_drivers = action.payload
 		},
 	},
 	extraReducers: builder => { builder
@@ -46,11 +51,19 @@ const slice = createSlice({
 			isActionIncludes([getMenus.fulfilled, getMenus.rejected]),
 			state => { state.isLoading.menu = false }
 		)
+		.addMatcher(
+			isActionIncludes([getRestaurantDrivers.pending]),
+			state => { state.isLoading.restaurant_driver = true }
+		)
+		.addMatcher(
+			isActionIncludes([getRestaurantDrivers.fulfilled, getRestaurantDrivers.rejected]),
+			state => { state.isLoading.restaurant_driver = false }
+		)
 	}
 })
 
 export * from './thunks'
 
-export const { setCategories, setMenus } = slice.actions
+export const { setCategories, setMenus, setRestaurantDrivers } = slice.actions
 
 export default slice.reducer
