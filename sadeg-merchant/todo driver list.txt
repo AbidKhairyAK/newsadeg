@@ -1,0 +1,5 @@
+- desain driver list screen
+- buat driver form modal
+- simpan data di master store
+- buat driver detail screen
+- tombol edit dan hapus driver ada didalam detail

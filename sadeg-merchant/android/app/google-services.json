@@ -1,0 +1,142 @@
+{
+  "project_info": {
+    "project_number": "318986734304",
+    "project_id": "sadeg-307706",
+    "storage_bucket": "sadeg-307706.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:318986734304:android:3f1d16a456379748705e85",
+        "android_client_info": {
+          "package_name": "com.sadegapp.sadeg"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "318986734304-tq8imqo8nm3deom6jvj06inc5dnjauru.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.sadegapp.sadeg",
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+          }
+        },
+        {
+          "client_id": "318986734304-792s5udiq162pg9nnh7t7chq1035c6sj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBunostkldVuptyahTVWlSoLaASW_mL6-4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "318986734304-792s5udiq162pg9nnh7t7chq1035c6sj.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "318986734304-33g5fokef8a3jttrqt7n6mvn4il0dn1i.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.sadegapp.sadeg-driver"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:318986734304:android:68f5c5e090c101ea705e85",
+        "android_client_info": {
+          "package_name": "com.sadegapp.sadegdriver"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "318986734304-3cara8afd6p6gfqbol15en3j6jn5bker.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.sadegapp.sadegdriver",
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+          }
+        },
+        {
+          "client_id": "318986734304-792s5udiq162pg9nnh7t7chq1035c6sj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBunostkldVuptyahTVWlSoLaASW_mL6-4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "318986734304-792s5udiq162pg9nnh7t7chq1035c6sj.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "318986734304-33g5fokef8a3jttrqt7n6mvn4il0dn1i.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.sadegapp.sadeg-driver"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:318986734304:android:de76b3f8ba2ab8bd705e85",
+        "android_client_info": {
+          "package_name": "com.sadegapp.sadegmerchant"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "318986734304-f6v6uaaimtcggiuo9h119otr38dssjcu.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.sadegapp.sadegmerchant",
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+          }
+        },
+        {
+          "client_id": "318986734304-792s5udiq162pg9nnh7t7chq1035c6sj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBunostkldVuptyahTVWlSoLaASW_mL6-4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "318986734304-792s5udiq162pg9nnh7t7chq1035c6sj.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "318986734304-33g5fokef8a3jttrqt7n6mvn4il0dn1i.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.sadegapp.sadeg-driver"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
