@@ -23,14 +23,10 @@ const CategoryItem = ({ category, isLoading, updateCategory, deleteCategory }) =
 	}
 
 	const confirmDelete = () => {
-		navigate('ConfirmDialog', {
+		navigate('ConfirmDangerDialog', {
 			desc: 'All menu with this category will be deleted',
 			positiveTitle: 'Delete',
-			negativeTitle: 'Cancel',
 			onPressPositive: () => deleteCategory(category.id),
-			onPressNegative: () => {},
-			positiveColor: 'red',
-			negativeColor: 'gray',
 		})
 	}
 

@@ -50,14 +50,10 @@ const crudLogic = ({ navigation, route }) => {
 	}
 
 	const confirmDelete = () => {
-		navigation.navigate('ConfirmDialog', {
+		navigation.navigate('ConfirmDangerDialog', {
 			desc: 'Deleted menu can\'t be recovered',
 			positiveTitle: 'Delete',
-			negativeTitle: 'Cancel',
 			onPressPositive: deleteMenu,
-			onPressNegative: () => {},
-			positiveColor: 'red',
-			negativeColor: 'gray',
 		})
 	}
 

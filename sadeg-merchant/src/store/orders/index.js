@@ -2,14 +2,14 @@ import { createSlice } from '@reduxjs/toolkit'
 
 import { isActionIncludes } from '@/store/helpers'
 
-import { getCurrentOrders, getHistoryOrders } from './thunks'
+import { getNewOrders, getPastOrders } from './thunks'
 
 const initialState = {
 	isLoading: false,
-	current: {
+	new: {
 		data: []
 	},
-	history: {
+	past: {
 		data: []
 	}
 }
@@ -18,22 +18,25 @@ const slice = createSlice({
 	name: 'orders',
 	initialState,
 	reducers: {
-		setCurrentOrders (state, action) {
-			state.current = action.payload
+		resetOrders () {
+			return { ...initialState }
 		},
-		setHistoryOrders (state, action) {
-			state.history = action.payload
+		setNewOrders (state, action) {
+			state.new = action.payload
+		},
+		setPastOrders (state, action) {
+			state.past = action.payload
 		},
 	},
 	extraReducers: builder => { builder
 		.addMatcher(
-			isActionIncludes([getCurrentOrders.pending, getHistoryOrders.pending]),
+			isActionIncludes([getNewOrders.pending, getPastOrders.pending]),
 			state => {
 				state.isLoading = true
 			}
 		)
 		.addMatcher(
-			isActionIncludes([getCurrentOrders.rejected, getCurrentOrders.fulfilled, getHistoryOrders.rejected, getHistoryOrders.fulfilled]),
+			isActionIncludes([getNewOrders.rejected, getNewOrders.fulfilled, getPastOrders.rejected, getPastOrders.fulfilled]),
 			state => {
 				state.isLoading = false
 			}
@@ -43,6 +46,6 @@ const slice = createSlice({
 
 export * from './thunks'
 
-export const { setCurrentOrders, setHistoryOrders } = slice.actions
+export const { resetOrders, setNewOrders, setPastOrders } = slice.actions
 
 export default slice.reducer

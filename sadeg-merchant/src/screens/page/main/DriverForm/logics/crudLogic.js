@@ -86,14 +86,10 @@ const crudLogic = ({ route, navigation }) => {
 	}
 
 	const confirmDelete = () => {
-		navigation.navigate('ConfirmDialog', {
+		navigation.navigate('ConfirmDangerDialog', {
 			desc: 'Deleted driver can\'t be recovered',
 			positiveTitle: 'Delete',
-			negativeTitle: 'Cancel',
 			onPressPositive: handleDelete,
-			onPressNegative: () => {},
-			positiveColor: 'red',
-			negativeColor: 'gray',
 		})
 	}
 

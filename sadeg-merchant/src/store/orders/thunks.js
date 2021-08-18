@@ -9,28 +9,28 @@ const formatPayload = (res, prev, page) => ({
 		: res.data 
 })
 
-export const getCurrentOrders = createAsyncThunk(
-	'orders/getCurrentOrders',
+export const getNewOrders = createAsyncThunk(
+	'orders/getNewOrders',
 	async (page = 1, { dispatch, getState }) => {
 		try {
 			const res = await OrderService.getList('new', page)
-			const prev = getState().orders.current
+			const prev = getState().orders.new
 
-			dispatch({ type: 'orders/setCurrentOrders', payload: formatPayload(res, prev, page) })
+			dispatch({ type: 'orders/setNewOrders', payload: formatPayload(res, prev, page) })
 		} catch (err) {
 			console.log(err)
 		}
 	}
 )
 
-export const getHistoryOrders = createAsyncThunk(
-	'orders/getHistoryOrders',
+export const getPastOrders = createAsyncThunk(
+	'orders/getPastOrders',
 	async (page = 1, { dispatch, getState }) => {
 		try {
 			const res = await OrderService.getList('past', page)
-			const prev = getState().orders.history
+			const prev = getState().orders.past
 
-			dispatch({ type: 'orders/setHistoryOrders', payload: formatPayload(res, prev, page) })
+			dispatch({ type: 'orders/setPastOrders', payload: formatPayload(res, prev, page) })
 		} catch (err) {
 			console.log(err)
 		}

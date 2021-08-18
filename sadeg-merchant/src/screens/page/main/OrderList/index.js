@@ -13,7 +13,7 @@ import ListSection from './sections/ListSection'
 LogBox.ignoreLogs(['This synthetic event is reused']);
 
 const OrderList = () => {
-	const { isLoading, orderTypes, selectedType, changeType, orders, getNextPage, getOrderList, toOrderDetail } = fetchLogic()
+	const { isLoading, orderTypes, selectedType, changeType, orders, getNextPage, refreshOrders, getOrderList, toOrderDetail } = fetchLogic()
 	
 	subscribeLogic()
 
@@ -22,7 +22,7 @@ const OrderList = () => {
 			style={styles.container}
 			refreshing={isLoading}
 			scrollEnabled={!isLoading}
-			onRefresh={getOrderList}
+			onRefresh={refreshOrders}
 			onEndReached={getNextPage}
 			onEndReachedThreshold={0.2}
 			data={orders}
@@ -36,7 +36,12 @@ const OrderList = () => {
 				/>
 			</>}
 			renderItem={({ item, index }) =>
-				<OrderItem onPress={toOrderDetail({ order: item })} order={item} withTotal withDate={selectedType === 'past'} />
+				<OrderItem 
+					onPress={toOrderDetail(item.id, selectedType)} 
+					order={item} 
+					withDate={selectedType === 'past'}
+					withTotal 
+				/>
 			}
 			ListEmptyComponent={!isLoading &&
 				<NoData

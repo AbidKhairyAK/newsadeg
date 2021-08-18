@@ -7,6 +7,13 @@ const services = {
 			params: { type, page, perPage }
 		})
 	},
+	update (id, payload) {
+		return axios.post(`/orders/${id}`, payload)
+	},
+	cancel (id) {
+		return axios.get(`/orders/${id}/cancel-order`)
+	},
+
 }
 
 export default services

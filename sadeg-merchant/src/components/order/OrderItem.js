@@ -41,7 +41,7 @@ const OrderItem = ({ order, onPress, withTotal, withDate }) => {
 				</View>
 			</View>
 
-			{order.order_detail.map((detail, index, self) =>
+			{order.order_detail?.map((detail, index, self) =>
 				<MenuItem 
 					key={index}
 					orderDetail={detail}

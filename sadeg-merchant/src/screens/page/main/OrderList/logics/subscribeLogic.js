@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
 
 import { RestaurantCollection } from '@/services'
-import { getCurrentOrders } from '@/store/orders'
+import { getNewOrders } from '@/store/orders'
 
 const subscribeLogic = () => {
 	const dispatch = useDispatch()
@@ -10,8 +10,7 @@ const subscribeLogic = () => {
 	const [ordersCount, setOrdersCount] = useState(0)
 
 	const handleNewOrder = res => {
-		console.log('new order arrived!')
-		dispatch(getCurrentOrders())
+		dispatch(getNewOrders())
 	}
 
 	const onSnapshot = res => {
@@ -19,10 +18,6 @@ const subscribeLogic = () => {
 
 		setOrdersCount(prevLength => {
 			const currentLength = res._docs?.length || 0
-			
-			console.log(prevLength, prevLength !== 0)
-			console.log(currentLength, prevLength, currentLength > prevLength)
-
 			if (prevLength !== 0 && currentLength > prevLength) handleNewOrder(res)
 
 			return currentLength

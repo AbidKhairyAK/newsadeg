@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useCallback } from 'react'
 import { throttle } from 'lodash'
-import { useNavigation } from '@react-navigation/native'
+import { useNavigation, useFocusEffect } from '@react-navigation/native'
 import { useSelector, useDispatch } from 'react-redux'
 import { isEmpty } from 'validate.js'
 
 import { OrderService } from '@/services'
-import { getCurrentOrders, getHistoryOrders } from '@/store/orders'
+import { getNewOrders, getPastOrders, resetOrders } from '@/store/orders'
 
 const orderTypes = {
 	new: 'Current',
@@ -18,19 +18,14 @@ const fetchLogic = () => {
 
 	const { 
 		isLoading, 
-		current: currentOrders, 
-		history: historyOrders 
+		...ordersMap
 	} = useSelector(state => state.orders)
 
 	const [selectedType, setSelectedType] = useState('new')
 
-	const ordersMap = {
-		new: currentOrders,
-		past: historyOrders
-	}
 	const getOrdersMap = {
-		new: getCurrentOrders,
-		past: getHistoryOrders,
+		new: getNewOrders,
+		past: getPastOrders,
 	}
 
 	const getOrdersByType = getOrdersMap[selectedType]
@@ -39,11 +34,10 @@ const fetchLogic = () => {
 
 	const changeType = type => e => setSelectedType(type)
 
-	const toOrderDetail = params => e => navigation.navigate('OrderDetail', params)
+	const toOrderDetail = (orderId, orderType) => e => navigation.navigate('OrderDetail', { orderId, orderType })
 
 	const getOrderList = (page = 1) => {
 		if (page === 1 && !isEmpty(orders)) return
-		console.log('fetching data')
 		dispatch(getOrdersByType(page))
 	}
 
@@ -56,11 +50,18 @@ const fetchLogic = () => {
 		}
 	}
 
-	useEffect(() => {
-		getOrderList()
-	}, [selectedType])
+	const refreshOrders = () => {
+		dispatch(resetOrders())
+		dispatch(getOrdersByType(1))
+	}
 
-	return { isLoading, orderTypes, selectedType, changeType, orders, getNextPage, getOrderList, toOrderDetail }
+	useFocusEffect(
+		useCallback(() => {
+			getOrderList()
+		}, [selectedType])
+	)
+
+	return { isLoading, orderTypes, selectedType, changeType, orders, getNextPage, refreshOrders, getOrderList, toOrderDetail }
 }
 
 export default fetchLogic

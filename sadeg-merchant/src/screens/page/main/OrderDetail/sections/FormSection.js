@@ -6,11 +6,7 @@ import { colors, sizes } from '@/constants'
 
 const timeOptions = [2, 5, 10, 15, 20, 30]
 
-const FormSection = () => {
-	const [selectedTime, setSelectedTime] = useState()
-
-	const changeSelectedTIme = val => e => setSelectedTime(val)
-
+const FormSection = ({ changeCookingTime, cookingTime }) => {
 	return (
 		<BaseCard style={styles.card}>
 			<BaseText size="sm">
@@ -42,10 +38,10 @@ const FormSection = () => {
 				<View key={val} style={styles.optionWrapper}>
 					{timeOptions.slice(val * 3, val * 3 + 3).map(time =>					
 						<BaseButton 
-							key={time + (time === selectedTime ? 1 : 0)} 
-							onPress={changeSelectedTIme(time)} 
+							key={time + (time === cookingTime ? 1 : 0)} 
+							onPress={changeCookingTime(time)} 
 							title={time + ' Minutes'} 
-							bg={time === selectedTime ? 'green' : 'darkGray'} 
+							bg={time === cookingTime ? 'green' : 'darkGray'} 
 							color="white" 
 							size="sm" 
 							style={styles.timeOption} 
