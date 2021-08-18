@@ -2,6 +2,7 @@ import React from 'react'
 import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
 import { useSelector } from 'react-redux'
+import FlashMessage from 'react-native-flash-message'
 
 import {
 	AuthScreens,
@@ -32,9 +33,11 @@ const AppScreens = () => {
 	)
 }
 
-const AppNavigator = () =>
+const AppNavigator = () => <>
 	<NavigationContainer theme={AppTheme}>
 		<AppScreens />
 	</NavigationContainer>
+	<FlashMessage />
+</>
 
 export default AppNavigator
