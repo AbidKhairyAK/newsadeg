@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { useNavigation } from '@react-navigation/native'
 
 import { OrderService } from '@/services'
-import { getNewOrders, getPastOrders } from '@/store/orders'
+import { resetOrders } from '@/store/orders'
 
 const dataLogic = ({ orderId, orderType }) => {
 	const dispatch = useDispatch()
@@ -25,9 +25,11 @@ const dataLogic = ({ orderId, orderType }) => {
 			changeLoading('reject', true)
 			await OrderService.cancel(orderId)
 			await OrderService.update(orderId, { status: 'canceled' })
-			dispatch(getNewOrders())
-			dispatch(getPastOrders())
-			goBack()
+			dispatch(resetOrders())
+
+			setTimeout(() => { // next tick
+				goBack()
+			}, 0)
 		} catch (err) {
 			console.error(err)
 			changeLoading('reject', false)

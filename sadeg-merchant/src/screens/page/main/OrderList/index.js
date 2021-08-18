@@ -20,7 +20,6 @@ const OrderList = () => {
 		changeType,
 		orders,
 		getNextPage,
-		refreshOrders,
 		getOrderList,
 		toOrderDetail
 	} = fetchLogic()
@@ -32,7 +31,7 @@ const OrderList = () => {
 			style={styles.container}
 			refreshing={isLoading}
 			scrollEnabled={!isLoading}
-			onRefresh={refreshOrders}
+			onRefresh={getOrderList}
 			onEndReached={getNextPage}
 			onEndReachedThreshold={0.2}
 			data={orders}

@@ -18,11 +18,16 @@ const fetchLogic = () => {
 
 	const { 
 		isLoading, 
-		...ordersMap
+		new: newOrders,
+		past: pastOrders
 	} = useSelector(state => state.orders)
 
 	const [selectedType, setSelectedType] = useState('new')
 
+	const ordersMap = {
+		new: newOrders,
+		past: pastOrders
+	}
 	const getOrdersMap = {
 		new: getNewOrders,
 		past: getPastOrders,
@@ -37,7 +42,6 @@ const fetchLogic = () => {
 	const toOrderDetail = (orderId, orderType) => e => navigation.navigate('OrderDetail', { orderId, orderType })
 
 	const getOrderList = (page = 1) => {
-		if (page === 1 && !isEmpty(orders)) return
 		dispatch(getOrdersByType(page))
 	}
 
@@ -50,31 +54,13 @@ const fetchLogic = () => {
 		}
 	}
 
-	const refreshOrders = () => {
-		dispatch(resetOrders())
-		dispatch(getOrdersByType(1))
-	}
-
 	useFocusEffect(
 		useCallback(() => {
-			getOrderList()
-		}, [selectedType])
+			if (isEmpty(orders)) getOrderList()
+		}, [selectedType, orders.length])
 	)
 
-	return { isLoading, orderTypes, selectedType, changeType, orders, getNextPage, refreshOrders, getOrderList, toOrderDetail }
+	return { isLoading, orderTypes, selectedType, changeType, orders, getNextPage, getOrderList, toOrderDetail }
 }
 
 export default fetchLogic
-
-
-// const handleScroll = throttle(({ nativeEvent }) => {
-// 	const contentHeight = nativeEvent?.contentSize.height || 0
-// 	const layoutHeight = nativeEvent?.layoutMeasurement.height || 0
-// 	const offsetY = nativeEvent?.contentOffset.y || 0
-// 	const triggerFetch = contentHeight - ( layoutHeight + offsetY ) < layoutHeight * 0.5
-
-// 	// console.log({ contentHeight, layoutHeight, offsetY, trigger })
-// 	if (triggerFetch && !isLoading && rawOrders.current_page !== rawOrders.last_page) {
-// 		getOrderList(rawOrders.current_page + 1)
-// 	}
-// }, 100, { leading: true, trailing: true })
