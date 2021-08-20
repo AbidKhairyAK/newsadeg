@@ -4,10 +4,10 @@ import { Image, View, StyleSheet } from 'react-native'
 import { BaseText, BaseCard, ShadowView } from '@/components'
 import { sizes } from '@/constants'
 
-const DriverItem = ({ onPress, driver }) =>
+const DriverItem = ({ onPress, driver, style }) =>
 	<BaseCard
 		padding="xxxs"
-		style={styles.card}
+		style={[styles.card, style]}
 		innerStyle={styles.cardInner}
 		onPress={onPress}
 	>

@@ -4,12 +4,14 @@ import OrderService from './OrderService'
 import MenuService from './MenuService'
 import MenuCategoryService from './MenuCategoryService'
 import RestaurantDriverService from './RestaurantDriverService'
+import DriverService from './DriverService'
 
 export {
 	RestaurantService,
 	AuthService,
 	OrderService,
 	MenuService,
-	RestaurantDriverService,
 	MenuCategoryService,
+	RestaurantDriverService,
+	DriverService,
 }

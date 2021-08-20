@@ -3,8 +3,8 @@ import { useDispatch } from 'react-redux'
 import { showMessage } from 'react-native-flash-message'
 import { useNavigation } from '@react-navigation/native'
 
-import { RestaurantCollection } from '@/services'
 import { getNewOrders } from '@/store/orders'
+import { RestaurantCollection } from '@/services'
 
 const subscribeLogic = () => {
 	const dispatch = useDispatch()

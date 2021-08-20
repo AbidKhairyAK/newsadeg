@@ -4,7 +4,7 @@ import { isEmpty } from 'validate.js'
 
 import { useForm } from '@/hooks'
 import { getRestaurant } from '@/helpers'
-import { RestaurantDriverService } from '@/services'
+import { RestaurantDriverService, RestaurantDriverCollection } from '@/services'
 import { setRestaurantDrivers } from '@/store/master'
 
 const crudLogic = ({ route, navigation }) => {
@@ -49,6 +49,8 @@ const crudLogic = ({ route, navigation }) => {
 
 			if (isEmpty(initialForm)) {
 				const res = await RestaurantDriverService.create(getFormData())
+				await RestaurantDriverCollection.create(res.id)
+
 				dispatch(setRestaurantDrivers([res, ...restaurant_drivers]))
 			} else {
 				const res = await RestaurantDriverService.update(initialForm.id, getFormData())
@@ -71,6 +73,7 @@ const crudLogic = ({ route, navigation }) => {
 			changeLoading('delete', true)
 
 			await RestaurantDriverService.delete(initialForm.id)
+			await RestaurantDriverCollection.delete(initialForm.id)
 
 			const copiedData = [...restaurant_drivers]
 			copiedData.splice(copiedData.findIndex(item => item.id === initialForm.id), 1)

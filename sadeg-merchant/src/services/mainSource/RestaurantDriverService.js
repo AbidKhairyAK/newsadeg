@@ -5,6 +5,9 @@ const services = {
 	getList () {
 		return axios.get(`/restaurants/${getRestaurant().id}/drivers`)
 	},
+	detail (id) {
+		return axios.get('/drivers-restaurant/' + id)
+	},
 	create(formData) {
 		return axios.post('/drivers-restaurant', formData)
 	},

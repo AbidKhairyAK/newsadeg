@@ -1,16 +1,25 @@
 import React from 'react'
 import { StyleSheet, View } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
+import { showMessage } from 'react-native-flash-message'
 
 import { BaseText, ShadowView, BaseButton } from '@/components'
 import { colors, sizes } from '@/constants'
 
-const ActionSection = ({ isLoading, scrollViewRef, cookingTime, rejectOrder, acceptOrder }) => {
+const ActionSection = ({ isLoading, scrollViewRef, cookingTime, driverType, rejectOrder, acceptOrder }) => {
 	const { navigate } = useNavigation()
 
 	const handleAccept = () => {
-		if (cookingTime) acceptOrder() 
-		else scrollViewRef.current.scrollToEnd()
+		if (cookingTime && driverType) acceptOrder() 
+		else {
+			scrollViewRef.current.scrollToEnd()
+			showMessage({
+				message: 'Please select driver type & estimated cooking time first!',
+				type: 'warning',
+				icon: 'warning',
+				duration: 3000
+			})
+		}
 	}
 
 	const confirmRejection = () => {

@@ -1,5 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
 
+import { getRestaurantData } from './thunks'
+
 const slice = createSlice({
 	name: 'restaurant',
 	initialState: {},
@@ -7,6 +9,9 @@ const slice = createSlice({
 		setRestaurantData (state, action) {
 			return action.payload
 		}
+	},
+	extraReducers: builder => { builder
+		.addCase(getRestaurantData.fulfilled, (state, action) => action.payload)
 	}
 })
 

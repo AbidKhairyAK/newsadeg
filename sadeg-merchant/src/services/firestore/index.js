@@ -1,5 +1,7 @@
 import RestaurantCollection from './RestaurantCollection'
+import RestaurantDriverCollection from './RestaurantDriverCollection'
 
 export {
-	RestaurantCollection
+	RestaurantDriverCollection,
+	RestaurantCollection,
 }

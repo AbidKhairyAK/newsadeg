@@ -67,7 +67,7 @@ const FormSection = ({ form, setFormInline, formErrors, validateFormInline }) =>
 			label="Phone Number" 
 			icon="call-outline" 
 			placeholder="enter your phone number (+966) ..." 
-			keyboardType="number-pad"
+			keyboardType="phone-pad"
 		/>
 	</>
 }

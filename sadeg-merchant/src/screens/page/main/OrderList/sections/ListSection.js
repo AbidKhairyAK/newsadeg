@@ -19,7 +19,6 @@ const ListSection = ({ orders, isLoading }) => {
 		)}
 		{isLoading && <ActivityIndicator color={colors.green} />}
 	</>
-
 }
 
 export default ListSection

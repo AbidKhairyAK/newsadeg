@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 import { ScrollView, ActivityIndicator, StyleSheet } from 'react-native'
 import { useSelector, useDispatch } from 'react-redux'
+import { isEmpty } from 'validate.js'
 
 import { DriverItem, BaseHeader, BaseButton } from '@/components'
 import { sizes, colors } from '@/constants'
@@ -15,7 +16,7 @@ const DriverList = ({ navigation }) => {
 	}
 
 	useEffect(() => {
-		dispatch(getRestaurantDrivers())
+		if (isEmpty(restaurant_drivers)) dispatch(getRestaurantDrivers())
 	}, [])
 
 	return (

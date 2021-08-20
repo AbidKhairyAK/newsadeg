@@ -13,6 +13,7 @@ import {
 import Init from '@/screens/page/Init'
 
 import { AppTheme } from './config'
+import { navigationRef } from './RootNavigation'
 
 const { Navigator, Screen } = createStackNavigator()
 
@@ -34,7 +35,7 @@ const AppScreens = () => {
 }
 
 const AppNavigator = () => <>
-	<NavigationContainer theme={AppTheme}>
+	<NavigationContainer ref={navigationRef} theme={AppTheme}>
 		<AppScreens />
 	</NavigationContainer>
 	<FlashMessage />

@@ -3,10 +3,10 @@ import { MenuCategoryService, MenuService, RestaurantDriverService } from '@/ser
 
 export const getCategories = createAsyncThunk(
 	'master/getCategories',
-	async (payload, { dispatch }) => {
+	async () => {
 		try {
 			const res = await MenuCategoryService.getList()
-			dispatch({ type: 'master/setCategories', payload: res })
+			return res
 		} catch (err) {
 			throw err
 		}
@@ -15,10 +15,10 @@ export const getCategories = createAsyncThunk(
 
 export const getMenus = createAsyncThunk(
 	'master/getMenus',
-	async (payload, { dispatch }) => {
+	async () => {
 		try {
 			const res = await MenuService.getList()
-			dispatch({ type: 'master/setMenus', payload: res })
+			return res
 		} catch (err) {
 			throw err
 		}
@@ -27,10 +27,10 @@ export const getMenus = createAsyncThunk(
 
 export const getRestaurantDrivers = createAsyncThunk(
 	'master/getRestaurantDrivers',
-	async (payload, { dispatch }) => {
+	async () => {
 		try {
 			const res = await RestaurantDriverService.getList()
-			dispatch({ type: 'master/setRestaurantDrivers', payload: res })
+			return res
 		} catch (err) {
 			throw err
 		}

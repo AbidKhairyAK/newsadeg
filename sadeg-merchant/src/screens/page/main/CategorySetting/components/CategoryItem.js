@@ -62,7 +62,7 @@ export default CategoryItem
 const styles = StyleSheet.create({
 	container: { flexDirection: 'row', alignItems: 'center' },
 	input: (isFocus, isEditable) => ({ 
-		backgroundColor: colors[isFocus ? 'lightGray' : 'white'],
+		backgroundColor: colors[isFocus ? 'dullWhite' : 'white'],
 		color: colors[isEditable ? 'shallowGray' : 'black'],
 		padding: 0,
 		paddingVertical: sizes.xxxs,

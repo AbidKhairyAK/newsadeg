@@ -33,6 +33,6 @@ export default FormPicker
 const styles = StyleSheet.create({
 	container: noMargin => ({ marginBottom: noMargin ? 0 : sizes.base }),
 	label: { marginBottom: sizes.xxxs },
-	pickerWrapper: { backgroundColor: colors.lightGray, borderRadius: sizes.xs },
+	pickerWrapper: { backgroundColor: colors.dullWhite, borderRadius: sizes.xs },
 	error: { marginTop: sizes.base / 4 }
 })

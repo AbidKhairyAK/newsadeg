@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 
-import { isActionIncludes } from '@/store/helpers'
+import { isActionIncludes, getLoadingStatus } from '@/store/helpers'
 import { logout } from '@/store/auth'
 
 import { getCategories, getMenus, getRestaurantDrivers } from './thunks'
@@ -14,6 +14,24 @@ const initialState = {
 	categories: [],
 	menus: [],
 	restaurant_drivers: [],
+}
+
+const getLoadingType = action => {
+	const loadingMap = {
+		getCategories: 'category',
+		getMenus: 'menu',
+		getRestaurantDrivers: 'restaurant_driver',
+	}
+	return loadingMap[action.type.split('/')[1]]
+}
+
+const getStateName = action => {
+	const stateMap = {
+		getCategories: 'categories',
+		getMenus: 'menus',
+		getRestaurantDrivers: 'restaurant_drivers',
+	}
+	return stateMap[action.type.split('/')[1]]
 }
 
 const slice = createSlice({
@@ -31,33 +49,22 @@ const slice = createSlice({
 		},
 	},
 	extraReducers: builder => { builder
+		.addCase(logout.fulfilled, () => ({ ...initialState }))
 		.addMatcher(
-			isActionIncludes([logout.fulfilled]),
-			state => ({ ...initialState })
+			isActionIncludes([getCategories.fulfilled, getMenus.fulfilled, getRestaurantDrivers.fulfilled]),
+			(state, action) => { 
+				state[getStateName(action)] = action.payload 
+			}
 		)
 		.addMatcher(
-			isActionIncludes([getCategories.pending]),
-			state => { state.isLoading.category = true }
-		)
-		.addMatcher(
-			isActionIncludes([getCategories.fulfilled, getCategories.rejected]),
-			state => { state.isLoading.category = false }
-		)
-		.addMatcher(
-			isActionIncludes([getMenus.pending]),
-			state => { state.isLoading.menu = true }
-		)
-		.addMatcher(
-			isActionIncludes([getMenus.fulfilled, getMenus.rejected]),
-			state => { state.isLoading.menu = false }
-		)
-		.addMatcher(
-			isActionIncludes([getRestaurantDrivers.pending]),
-			state => { state.isLoading.restaurant_driver = true }
-		)
-		.addMatcher(
-			isActionIncludes([getRestaurantDrivers.fulfilled, getRestaurantDrivers.rejected]),
-			state => { state.isLoading.restaurant_driver = false }
+			isActionIncludes([
+				getCategories.pending, getCategories.fulfilled, getCategories.rejected,
+				getMenus.pending, getMenus.fulfilled, getMenus.rejected,
+				getRestaurantDrivers.pending, getRestaurantDrivers.fulfilled, getRestaurantDrivers.rejected
+			]),
+			(state, action) => { 
+				state.isLoading[getLoadingType(action)] = getLoadingStatus(action) 
+			}
 		)
 	}
 })

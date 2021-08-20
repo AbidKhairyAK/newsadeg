@@ -8,19 +8,19 @@ const docPrefix = 'restaurant_'
 const subCollection = 'orders'
 const subDocPrefix = 'order_'
 
+const baseObject = userId => firestore()
+	.collection(collection)
+	.doc(docPrefix + (getRestaurant().id || userId))
+
 const services = {
 	async initData (userId) {
-		const existingData = await firestore()
-			.collection(collection)
-			.doc(docPrefix + (getRestaurant().id || userId))
+		const existingData = await baseObject(userId)
 			.collection(subCollection)
 			.get()
 
 		if (!isEmpty(existingData)) return
 
-		await firestore()
-			.collection(collection)
-			.doc(docPrefix + getRestaurant())
+		await baseObject(userId)
 			.collection(subCollection)
 			.doc(subDocPrefix + 0)
 			.set({
@@ -31,9 +31,7 @@ const services = {
 	},
 
 	subscribeOrders (onResult, onError) {
-		return firestore()
-			.collection(collection)
-			.doc(docPrefix + getRestaurant().id)
+		return baseObject()
 			.collection(subCollection)
 			.onSnapshot(
 				onResult,
@@ -42,6 +40,13 @@ const services = {
 					if (onError) onError(err)
 				}
 			)
+	},
+
+	updateOrder (orderId, payload) {
+		return baseObject()
+			.collection(subCollection)
+			.doc(subDocPrefix + orderId)
+			.set(payload)
 	}
 }
 

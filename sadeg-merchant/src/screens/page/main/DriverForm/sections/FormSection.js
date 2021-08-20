@@ -50,11 +50,12 @@ const FormSection = ({
 
 	<FormInput
 		label="Phone Number"
+		placeholder="+966"
 		value={form.phone_number}
 		error={formErrors.phone_number}
 		onChangeText={setFormInline('phone_number')}
 		onEndEditing={validateFormInline('phone_number')}
-		keyboardType="number-pad"
+		keyboardType="phone-pad"
 	/>
 
 	<BaseText size="sm" color="gray">

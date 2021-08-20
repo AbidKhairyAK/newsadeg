@@ -1,5 +1,6 @@
 import React from 'react'
 import { ScrollView, StyleSheet, LogBox, FlatList, ActivityIndicator } from 'react-native'
+import { useDispatch } from 'react-redux'
 
 import { BaseHeader, BaseButton, OrderItem, NoData } from '@/components'
 import { colors } from '@/constants'
@@ -13,6 +14,8 @@ import ListSection from './sections/ListSection'
 LogBox.ignoreLogs(['This synthetic event is reused']);
 
 const OrderList = () => {
+	const dispatch = useDispatch()
+
 	const {
 		isLoading,
 		orderTypes,
