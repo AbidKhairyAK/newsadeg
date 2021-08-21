@@ -3,18 +3,25 @@ import { StyleSheet, View } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
 import { showMessage } from 'react-native-flash-message'
 
-import { BaseText, ShadowView, BaseButton } from '@/components'
+import { BaseText, ShadowView, BaseButton, BaseIcon } from '@/components'
 import { colors, sizes } from '@/constants'
 
-const ActionSection = ({ isLoading, scrollViewRef, cookingTime, driverType, rejectOrder, acceptOrder }) => {
+const ActionSection = ({ scrollViewRef, isLoading, order, cookingTime, driverType, rejectOrder, acceptOrder, processOrder }) => {
 	const { navigate } = useNavigation()
 
+	const handleMarkAsReady = () => {
+		processOrder(null, 'ready')
+	}
+
 	const handleAccept = () => {
-		if (cookingTime && driverType) acceptOrder() 
-		else {
+		if (order.order_type === 'delivery' ? (cookingTime && driverType) : cookingTime) {
+			acceptOrder() 
+		} else {
 			scrollViewRef.current.scrollToEnd()
 			showMessage({
-				message: 'Please select driver type & estimated cooking time first!',
+				message: 'Please select ' + 
+					(order.order_method === 'delivery' ? 'driver type & ' : '') + 
+					'estimated cooking time first!',
 				type: 'warning',
 				icon: 'warning',
 				duration: 3000
@@ -31,9 +38,11 @@ const ActionSection = ({ isLoading, scrollViewRef, cookingTime, driverType, reje
 
 	const isDisableAction = Object.values(isLoading).includes(true)
 
-	return (
-		<ShadowView type="tabBar" style={styles.container}>
-			<View style={styles.inner}>
+	const isShowAction = ['waiting', 'process', 'on_delivery', 'ready'].includes(order.status)
+
+	const renderActions = () => {
+		if (order.status === 'waiting') {
+			return <>
 				<BaseButton
 					title="Reject"
 					icon="close-circle-outline"
@@ -42,7 +51,7 @@ const ActionSection = ({ isLoading, scrollViewRef, cookingTime, driverType, reje
 					style={styles.newOrderButton}
 					onPress={confirmRejection}
 					disabled={isDisableAction}
-					isLoading={isLoading.reject}
+					isLoading={isLoading.negative}
 				/>
 				<BaseButton
 					title="Accept"
@@ -52,8 +61,44 @@ const ActionSection = ({ isLoading, scrollViewRef, cookingTime, driverType, reje
 					style={styles.newOrderButton}
 					onPress={handleAccept}
 					disabled={isDisableAction}
-					isLoading={isLoading.accept}
+					isLoading={isLoading.positive}
 				/>
+			</>
+		} else if (order.status === 'process') {
+			if (order.order_method === 'delivery') {
+				return <BaseText align="center" color="green" type="semi-bold" style={{ width: '100%', marginVertical: sizes.xxxs }}>
+					Waiting for the driver to pick up the order
+				</BaseText>
+			} else if (order.order_method === 'takeaway') {
+				return  <BaseButton
+					title="Mark as Ready"
+					icon="checkmark-circle-outline"
+					bg="green"
+					color="white"
+					style={{ width: '100%' }}
+					onPress={handleMarkAsReady}
+					isLoading={isLoading.positive}
+				/>
+			}
+		} else if (order.status === 'on_delivery') {
+			return <BaseButton
+				title="Track driver"
+				icon="checkmark-circle-outline"
+				bg="green"
+				color="white"
+				style={{ width: '100%' }}
+			/>
+		} else if (order.status === 'ready') {
+			return <BaseText align="center" color="green" type="semi-bold" style={{ width: '100%', marginVertical: sizes.xxxs }}>
+				Waiting for the customer to pick up the order
+			</BaseText>
+		}
+	}
+
+	return isShowAction && (
+		<ShadowView type="tabBar" style={styles.container}>
+			<View style={styles.inner}>
+				{renderActions()}
 			</View>
 		</ShadowView>
 	)

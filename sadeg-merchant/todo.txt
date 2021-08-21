@@ -1,0 +1,20 @@
+# driver partner
+ngirim request ke driver terdekat -/
+subscribe ke sorter -/
+driver yg approve mengirim id ke sorter
+ambil index 0 -/
+hapus collection ketika order sudah selesai
+driver subscribe ke restaurant order
+alert di approved dan rejected driver
+
+# todo
++ restauratn
+send and get notif
+account
+
++ driver
+driver conflict
+
++ customer
+subscribe to order
+hide sold out menu

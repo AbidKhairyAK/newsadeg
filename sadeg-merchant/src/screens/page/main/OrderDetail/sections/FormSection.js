@@ -8,27 +8,29 @@ import { toTitleCase } from '@/helpers'
 const timeOptions = ['2', '5', '10', '15', '20', '30']
 const driverOptions = ['driver_partner', 'driver_restaurant']
 
-const FormSection = ({ changeCookingTime, cookingTime, driverType, changeDriverType }) => {
+const FormSection = ({ order, changeCookingTime, cookingTime, driverType, changeDriverType }) => {
 	return (
 		<BaseCard style={styles.card}>
-			<BaseText size="sm">
-				Driver Option
-			</BaseText>
-			<View style={styles.optionWrapper}>
-				{driverOptions.map(driver =>
-					<BaseButton
-						key={driver}
-						title={toTitleCase(driver)}
-						bg={driver === driverType ? 'green' : 'shallowGray'}
-						color="white"
-						size="sm"
-						style={styles.driverOption}
-						onPress={changeDriverType(driver)}
-					/>
-				)}
-			</View>
+			{order.order_method === 'delivery' && <>
+				<BaseText size="sm">
+					Driver Option
+				</BaseText>
+				<View style={styles.optionWrapper}>
+					{driverOptions.map(driver =>
+						<BaseButton
+							key={driver}
+							title={toTitleCase(driver)}
+							bg={driver === driverType ? 'green' : 'shallowGray'}
+							color="white"
+							size="sm"
+							style={styles.driverOption}
+							onPress={changeDriverType(driver)}
+						/>
+					)}
+				</View>
 
-			<HorizontalRule />
+				<HorizontalRule />
+			</>}
 
 			<BaseText size="sm">
 				Estimated Cooking Time

@@ -23,9 +23,7 @@ const services = {
 		await baseObject(userId)
 			.collection(subCollection)
 			.doc(subDocPrefix + 0)
-			.set({
-				order_id: 0
-			})
+			.set({ order_id: 0 })
 
 		return
 	},
@@ -42,11 +40,25 @@ const services = {
 			)
 	},
 
-	updateOrder (orderId, payload) {
+	subscribeDriversSorter (orderId, onResult, onError) {
 		return baseObject()
 			.collection(subCollection)
 			.doc(subDocPrefix + orderId)
-			.set(payload)
+			.collection('drivers_sorter')
+			.onSnapshot(
+				onResult,
+				err => {
+					console.error(err)
+					if (onError) onError(err)
+				}
+			)
+	},
+
+	setOrder (orderId, payload, isMerge = true) {
+		return baseObject()
+			.collection(subCollection)
+			.doc(subDocPrefix + orderId)
+			.set(payload, { merge: isMerge })
 	}
 }
 

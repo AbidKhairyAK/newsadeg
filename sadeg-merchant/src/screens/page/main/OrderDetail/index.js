@@ -8,6 +8,7 @@ import DetailSection from './sections/DetailSection'
 import AdditionalDetailSection from './sections/AdditionalDetailSection'
 import FormSection from './sections/FormSection'
 import ActionSection from './sections/ActionSection'
+import LoadingOverlay from './sections/LoadingOverlay'
 
 const OrderDetail = ({ route }) => {
 	const scrollViewRef = useRef()
@@ -21,7 +22,9 @@ const OrderDetail = ({ route }) => {
 		cookingTime, 
 		changeCookingTime,
 		rejectOrder,
-		acceptOrder
+		acceptOrder,
+		processOrder,
+		searchDriverLoading
 	} = dataLogic({
 		orderId,
 		orderType
@@ -29,7 +32,10 @@ const OrderDetail = ({ route }) => {
 
 	return <>
 		<ScrollView ref={scrollViewRef} style={styles.container}>
-			<BaseHeader title={'CODE: ' + order.order_code} withBack/>
+			<BaseHeader 
+				title={'CODE: ' + order.order_code + (__DEV__ ? (' - ' + orderId) : '')} 
+				withBack
+			/>
 			<OrderItem withDate order={order} />
 			<DetailSection order={order} />
 			{ order.status === 'waiting'
@@ -44,13 +50,16 @@ const OrderDetail = ({ route }) => {
 			}
 		</ScrollView>
 		<ActionSection
-			isLoading={isLoading}
 			scrollViewRef={scrollViewRef}
+			isLoading={isLoading}
+			order={order}
 			driverType={driverType}
 			cookingTime={cookingTime}
 			rejectOrder={rejectOrder}
 			acceptOrder={acceptOrder}
+			processOrder={processOrder}
 		/>
+		<LoadingOverlay loading={searchDriverLoading} />
 	</>
 }
 

@@ -1,7 +1,7 @@
 import firestore from '@react-native-firebase/firestore'
 
-const collection = 'driver_restaurant'
-const docPrefix = 'driver_restaurant_'
+const collection = 'driver'
+const docPrefix = 'driver_'
 const subCollection = 'orders'
 const subDocPrefix = 'order_'
 
@@ -30,6 +30,25 @@ const services = {
 			.doc(subDocPrefix + orderId)
 			.set(payload, { merge: isMerge })
 	},
+	getActiveDrivers () {
+		return firestore()
+			.collection(collection)
+			.where('status', '==', true)
+			.get()
+	},
+	async sendDeliveryRequests (drivers, orderId, payload, isMerge = true) {
+		const batch = firestore().batch()
+
+		drivers.forEach(driver => {
+			batch.set(
+				baseObject(driver._data.id).collection(subCollection).doc(subDocPrefix + orderId),
+				payload,
+				{ merge: isMerge }
+			)
+		})
+
+		return batch.commit()
+	}
 }
 
 export default services
