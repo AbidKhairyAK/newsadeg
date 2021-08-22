@@ -19,7 +19,7 @@ const subscribeLogic = () => {
 			description: 'Click here to go to the order list.',
 			icon: 'info',
 			type: 'success',
-			duration: 5000,
+			duration: 10000,
 			onPress: () => navigate('OrderList')
 		})
 	}

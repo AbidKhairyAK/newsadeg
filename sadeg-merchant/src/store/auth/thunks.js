@@ -1,6 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import { AuthService } from '@/services'
 import { storage } from '@/utils'
+import { showMessage } from 'react-native-flash-message'
 
 export const authenticate = createAsyncThunk(
 	'auth/authenticate', 
@@ -10,8 +11,18 @@ export const authenticate = createAsyncThunk(
 			await storage.setItem('token', res)
 			return res
 		} catch (err) {
-			if ([401, 400].includes(err?.response?.status)) alert('Email or password is incorrect')
-			else if (err.response) alert(err.response.data.message || err.response.data.error || err.response.data)
+			if ([401, 400].includes(err?.response?.status)) showMessage({
+				message: 'Email or password is incorrect',
+				type: 'danger',
+				icon: 'danger',
+				duration: 5000
+			})
+			else if (err.response) showMessage({
+				message: err.response.data.message || err.response.data.error || err.response.data,
+				type: 'danger',
+				icon: 'danger',
+duration: 5000
+			})
 			throw err
 		}
 	}

@@ -9,6 +9,8 @@ import {
 	CategorySetting,
 	DriverList,
 	DriverForm,
+	RestaurantDataForm,
+	BankAccountForm,
 } from '@/screens/page/main'
 
 import AppTabs from './AppTabs'
@@ -24,6 +26,8 @@ const MainScreens = [
 	<Screen key="CategorySetting" name="CategorySetting" component={CategorySetting} />,
 	<Screen key="DriverList" name="DriverList" component={DriverList} />,
 	<Screen key="DriverForm" name="DriverForm" component={DriverForm} />,
+	<Screen key="RestaurantDataForm" name="RestaurantDataForm" component={RestaurantDataForm} />,
+	<Screen key="BankAccountForm" name="BankAccountForm" component={BankAccountForm} />,
 ]
 
 export default MainScreens

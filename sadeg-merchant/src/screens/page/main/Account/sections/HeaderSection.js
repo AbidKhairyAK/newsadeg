@@ -8,13 +8,13 @@ import { sizes, colors } from '@/constants'
 import BalanceInfo from '../components/BalanceInfo'
 
 const HeaderSection = () => {
-	const { restaurant_name } = useSelector(state => state.restaurant)
+	const { restaurant_name, banner_restaurant } = useSelector(state => state.restaurant)
 
 	return (
 		<ShadowView type="cardHard" radius="base" style={styles.container}>
 			<View style={styles.inner}>
 				<Image
-					source={{ uri: 'https://source.unsplash.com/640x360/?cafe' }}
+					source={{ uri: banner_restaurant }}
 					style={styles.banner}
 				/>
 				

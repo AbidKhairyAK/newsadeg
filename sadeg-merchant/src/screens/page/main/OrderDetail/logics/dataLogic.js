@@ -74,13 +74,15 @@ const dataLogic = ({ orderId, orderType }) => {
 			showMessage({
 				message: 'a driver has been accepted the request',
 				type: 'success',
-				icon: 'success'
+				icon: 'success',
+				duration: 5000
 			})
 		} else {
 			showMessage({
 				message: 'no nearby driver accepted the request',
 				type: 'danger',
-				icon: 'danger'
+				icon: 'danger',
+				duration: 5000
 			})
 		}
 	}

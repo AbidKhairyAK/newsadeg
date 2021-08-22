@@ -9,6 +9,8 @@ import CategorySetting from './CategorySetting'
 import Account from './Account'
 import DriverList from './DriverList'
 import DriverForm from './DriverForm'
+import RestaurantDataForm from './RestaurantDataForm'
+import BankAccountForm from './BankAccountForm'
 
 export {
 	OrderList,
@@ -22,4 +24,6 @@ export {
 	Account,
 	DriverList,
 	DriverForm,
+	RestaurantDataForm,
+	BankAccountForm,
 }

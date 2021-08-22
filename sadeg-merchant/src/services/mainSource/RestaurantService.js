@@ -10,6 +10,9 @@ const services = {
 	create (payload) {
 		return axios.post('/restaurants', payload)
 	},
+	update (payload) {
+		return axios.post('/restaurants/' + getRestaurant().id, payload)
+	},
 	updateStatus (status) {
 		return axios.post('/restaurants/' + getRestaurant().id, {
 			restaurant_status: status // open | close | suspend

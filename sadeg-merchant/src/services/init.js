@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { showMessage } from 'react-native-flash-message'
 
 import store from '@/store'
 import { login, logout } from '@/store/auth'
@@ -31,7 +32,13 @@ export const axiosInit = async () => {
 			if (err.response) {
 				if (!ignoredUrls.includes(err.response?.config?.url)) {
 					console.error('response err', err.response)
-					alert(err.response.data.error || err.response.data.message || err.response.data)
+					
+					showMessage({
+						message: err.response.data.error || err.response.data.message || err.response.data,
+						type: 'danger',
+						icon: 'danger',
+						duration: 5000
+					})
 						
 					// handle unauthorized error
 					if ([400, 401].includes(err.response.status)) store.dispatch(logout())
@@ -39,7 +46,13 @@ export const axiosInit = async () => {
 			} else {
 				console.error(err.request)
 				console.error(err)
-				alert(err.message)
+
+				showMessage({
+					message: err.message,
+					type: 'danger',
+					icon: 'danger',
+					duration: 5000
+				})
 			}
 
 			throw err

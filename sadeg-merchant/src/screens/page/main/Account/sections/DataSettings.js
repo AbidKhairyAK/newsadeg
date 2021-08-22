@@ -8,18 +8,18 @@ const DataSettings = () => {
 	const navigation = useNavigation()
 
 	const accountSettings = [
-		{ title: 'Owner Data', icon: 'person-outline', onPress: () => navigation.navigate('FormExample') },
-		{ title: 'Email Account', icon: 'mail-outline', onPress: () => navigation.navigate('InfoExample') },
-		{ title: 'Password', icon: 'lock-closed-outline' },
-		{ title: 'Phone Number', icon: 'call-outline' },
+		{ title: 'Owner Data', icon: 'person-outline', onPress: () => navigation.navigate('OwnerDataForm') },
+		{ title: 'Email Account', icon: 'mail-outline', onPress: () => navigation.navigate('EmailAccountForm') },
+		{ title: 'Password', icon: 'lock-closed-outline', onPress: () => navigation.navigate('PasswordForm') },
+		{ title: 'Phone Number', icon: 'call-outline', onPress: () => navigation.navigate('PhoneNumberForm') },
 	]
 
 	const restaurantSettings = [
-		{ title: 'Restaurant Data', icon: 'newspaper-outline' },
-		{ title: 'Bank Account', icon: 'card-outline' },
-		{ title: 'Address', icon: 'map-outline' },
-		{ title: 'Open Hour', icon: 'alarm-outline' },
-		{ title: 'Tab Categories', icon: 'pricetags-outline' },
+		{ title: 'Restaurant Data', icon: 'newspaper-outline', onPress: () => navigation.navigate('RestaurantDataForm') },
+		{ title: 'Bank Account', icon: 'card-outline', onPress: () => navigation.navigate('BankAccountForm') },
+		{ title: 'Address', icon: 'map-outline', onPress: () => navigation.navigate('AddressForm') },
+		// { title: 'Open Hour', icon: 'alarm-outline' },
+		{ title: 'Tag Categories', icon: 'pricetags-outline', onPress: () => navigation.navigate('TagCategoriesForm') },
 	]
 
 	return <>

@@ -24,7 +24,7 @@ const ActionSection = ({ scrollViewRef, isLoading, order, cookingTime, driverTyp
 					'estimated cooking time first!',
 				type: 'warning',
 				icon: 'warning',
-				duration: 3000
+				duration: 5000
 			})
 		}
 	}
