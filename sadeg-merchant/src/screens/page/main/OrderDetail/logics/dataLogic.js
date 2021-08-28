@@ -56,13 +56,6 @@ const dataLogic = ({ orderId }) => {
 				restaurant_id: getRestaurant().id
 			})
 
-			// await Promise.all(drivers.docs.map(driver =>
-			// 	DriverCollection.setOrder(driver._data.id, orderId, {
-			// 		id: orderId,
-			// 		restaurant_id: getRestaurant().id
-			// 	})
-			// ))
-
 			setSearchDriverLoading('Waiting for driver to accept the delivery request \n max time: ' + MAX_CHECK_TIME + ' sec')
 			setIsStartChecking(true)
 		} catch (err) {
@@ -125,7 +118,8 @@ const dataLogic = ({ orderId }) => {
 
 		return Collection.setOrder(driverId, orderId, {
 			id: orderId,
-			order_status: status
+			order_status: status,
+			restaurant_id: getRestaurant().id
 		})
 	}
 
