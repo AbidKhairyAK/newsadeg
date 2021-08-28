@@ -9,6 +9,7 @@ import AdditionalSettingItem from '../components/AdditionalSettingItem'
 const AdditionalSettings = () => {
 	const { navigate } = useNavigation()
 	const toDriverList = () => navigate('DriverList')
+	const toInsight = () => alert('this feature is under development')
 
 	return (
 		<View style={styles.container}>
@@ -20,6 +21,7 @@ const AdditionalSettings = () => {
 			<AdditionalSettingItem
 				title="View Insight"
 				icon="bar-chart-outline"
+				onPress={toInsight}
 			/>
 		</View>
 	)

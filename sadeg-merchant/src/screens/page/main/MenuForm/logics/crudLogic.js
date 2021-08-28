@@ -57,10 +57,10 @@ const crudLogic = ({ route, navigation }) => {
 			}
 
 			if (isEmpty(initialForm)) {
-				const res = await MenuService.create(getFormData())
+				const res = await MenuService.create(formData)
 				dispatch(setMenus([res, ...menus]))
 			} else {
-				const res = await MenuService.update(initialForm.id, getFormData())
+				const res = await MenuService.update(initialForm.id, formData)
 				const copiedData = [...menus]
 				copiedData[copiedData.findIndex(item => item.id === initialForm.id)] = res
 				dispatch(setMenus(copiedData))

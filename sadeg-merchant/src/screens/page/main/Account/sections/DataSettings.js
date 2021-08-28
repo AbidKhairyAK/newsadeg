@@ -19,7 +19,7 @@ const DataSettings = () => {
 		{ title: 'Bank Account', icon: 'card-outline', onPress: () => navigation.navigate('BankAccountForm') },
 		{ title: 'Address', icon: 'map-outline', onPress: () => navigation.navigate('AddressForm') },
 		// { title: 'Open Hour', icon: 'alarm-outline' },
-		{ title: 'Tag Categories', icon: 'pricetags-outline', onPress: () => navigation.navigate('TagCategoriesForm') },
+		// { title: 'Tag Categories', icon: 'pricetags-outline', onPress: () => navigation.navigate('TagCategoriesForm') },
 	]
 
 	return <>

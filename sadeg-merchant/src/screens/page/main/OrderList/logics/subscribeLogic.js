@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux'
 import { showMessage } from 'react-native-flash-message'
 import { useNavigation } from '@react-navigation/native'
 
-import { getNewOrders } from '@/store/orders'
+import { getNewOrders, getPastOrders } from '@/store/orders'
 import { RestaurantCollection } from '@/services'
 
 const subscribeLogic = () => {
@@ -12,8 +12,7 @@ const subscribeLogic = () => {
 
 	const [ordersCount, setOrdersCount] = useState(0)
 
-	const handleNewOrder = res => {
-		dispatch(getNewOrders())
+	const showNewOrderMessage = res => {
 		showMessage({
 			message: 'You have new order!',
 			description: 'Click here to go to the order list.',
@@ -28,8 +27,14 @@ const subscribeLogic = () => {
 		console.log('snapshot orders', res)
 
 		setOrdersCount(prevLength => {
-			const currentLength = res._docs?.length || 0
-			if (prevLength !== 0 && currentLength > prevLength) handleNewOrder(res)
+			const currentLength = res._docs?.length || res.docs?.length || 0
+
+			if (currentLength > 0) { 
+				console.log('re get order')
+				dispatch(getNewOrders())
+				dispatch(getPastOrders())
+			}
+			if (prevLength !== 0 && currentLength > prevLength) showNewOrderMessage(res)
 
 			return currentLength
 		})

@@ -7,7 +7,7 @@ import { colors, sizes } from '@/constants'
 const LoadingOverlay = ({ loading }) => loading &&
 	<View style={styles.container}>
 		<ActivityIndicator size="large" color={colors.green} />
-		<BaseText align="center" style={styles.text} type="medium">
+		<BaseText align="center" style={styles.text} type="semi-bold">
 			{loading}
 		</BaseText>
 	</View>

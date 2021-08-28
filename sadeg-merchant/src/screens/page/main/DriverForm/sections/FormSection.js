@@ -24,8 +24,7 @@ const FormSection = ({
 		label="Email"
 		value={form.email}
 		error={formErrors.email}
-		onChangeText={setFormInline('email')}
-		onEndEditing={validateFormInline('email')}
+		onChangeText={setFormInline('email', false)}
 		keyboardType="email-address"
 		autoCapitalize="none"
 	/>

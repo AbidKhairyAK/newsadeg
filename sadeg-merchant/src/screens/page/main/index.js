@@ -11,6 +11,7 @@ import DriverList from './DriverList'
 import DriverForm from './DriverForm'
 import RestaurantDataForm from './RestaurantDataForm'
 import BankAccountForm from './BankAccountForm'
+import AddressForm from './AddressForm'
 
 export {
 	OrderList,
@@ -26,4 +27,5 @@ export {
 	DriverForm,
 	RestaurantDataForm,
 	BankAccountForm,
+	AddressForm,
 }

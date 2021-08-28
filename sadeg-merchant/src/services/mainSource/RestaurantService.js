@@ -17,6 +17,9 @@ const services = {
 		return axios.post('/restaurants/' + getRestaurant().id, {
 			restaurant_status: status // open | close | suspend
 		})
+	},
+	checkEmail (email) {
+		return axios.post('/restaurants/check-email', { email })
 	}
 }
 

@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, TextInput, StyleSheet } from 'react-native'
+import { View, TextInput, StyleSheet, Platform } from 'react-native'
 
 import { BaseText } from '@/components'
 import { colors, sizes } from '@/constants'
@@ -34,6 +34,6 @@ export default FormInput
 const styles = StyleSheet.create({
 	container: (noMargin) => ({ marginBottom: noMargin ? 0 : sizes.sm }),
 	label: { marginBottom: sizes.xxxs, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'flex-end' },
-	input: { width: '100%', backgroundColor: colors.dullWhite, borderRadius: sizes.xs, paddingHorizontal: sizes.xs },
+	input: { width: '100%', backgroundColor: colors.dullWhite, borderRadius: sizes.xs, paddingHorizontal: sizes.xs, paddingVertical: Platform.OS === 'ios' ? sizes.base : 0 },
 	error: { marginTop: sizes.base / 4 }
 })

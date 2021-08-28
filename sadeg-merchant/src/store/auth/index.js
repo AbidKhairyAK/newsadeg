@@ -1,6 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 import { isActionIncludes, getLoadingStatus } from '@/store/helpers'
+import { reset as resetNavigation } from '@/navigator/RootNavigation'
 
 import { authenticate, logout } from './thunks'
 
@@ -21,10 +22,14 @@ const slice = createSlice({
 		},
 	},
 	extraReducers: builder => { builder
-		.addCase(logout.fulfilled, () => ({ ...initialState }))
+		.addCase(logout.fulfilled, state => {
+			state = { ...initialState }
+			resetNavigation({ index: 0, routes: [{ name: 'Init' }] })
+		})
 		.addCase(authenticate.fulfilled, (state, action) => {
 			state.isLogin = true
 			state.token = action.payload
+			resetNavigation({ index: 0, routes: [{ name: 'Init' }] })
 		})
 		.addMatcher(
 			isActionIncludes([

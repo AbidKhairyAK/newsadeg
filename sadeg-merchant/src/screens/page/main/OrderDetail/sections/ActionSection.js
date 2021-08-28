@@ -38,7 +38,12 @@ const ActionSection = ({ scrollViewRef, isLoading, order, cookingTime, driverTyp
 
 	const isDisableAction = Object.values(isLoading).includes(true)
 
-	const isShowAction = ['waiting', 'process', 'on_delivery', 'ready'].includes(order.status)
+	const isShowAction = [
+		'waiting', 
+		'process', 
+		// 'on_delivery', // hide track driver button for now
+		'ready'
+	].includes(order.status)
 
 	const renderActions = () => {
 		if (order.status === 'waiting') {
@@ -66,7 +71,12 @@ const ActionSection = ({ scrollViewRef, isLoading, order, cookingTime, driverTyp
 			</>
 		} else if (order.status === 'process') {
 			if (order.order_method === 'delivery') {
-				return <BaseText align="center" color="green" type="semi-bold" style={{ width: '100%', marginVertical: sizes.xxxs }}>
+				return <BaseText 
+					align="center" 
+					color="green" 
+					type="semi-bold" 
+					style={styles.actionText}
+				>
 					Waiting for the driver to pick up the order
 				</BaseText>
 			} else if (order.order_method === 'takeaway') {
@@ -89,7 +99,12 @@ const ActionSection = ({ scrollViewRef, isLoading, order, cookingTime, driverTyp
 				style={{ width: '100%' }}
 			/>
 		} else if (order.status === 'ready') {
-			return <BaseText align="center" color="green" type="semi-bold" style={{ width: '100%', marginVertical: sizes.xxxs }}>
+			return <BaseText 
+				align="center" 
+				color="green" 
+				type="semi-bold" 
+				style={styles.actionText}
+			>
 				Waiting for the customer to pick up the order
 			</BaseText>
 		}
@@ -109,5 +124,6 @@ export default ActionSection
 const styles = StyleSheet.create({
 	container: { borderRadius: sizes.base },
 	inner: { flexDirection: 'row', justifyContent: 'space-between', backgroundColor: colors.white, borderTopLeftRadius: sizes.base, borderTopRightRadius: sizes.base, padding: sizes.xs },
-	newOrderButton: { width: '47.5%' }
+	newOrderButton: { width: '47.5%' },
+	actionText: { width: '100%', marginVertical: sizes.xxxs },
 })

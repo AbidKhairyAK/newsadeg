@@ -13,8 +13,7 @@ const FormSection = ({ form, setFormInline, formErrors, validateFormInline }) =>
 		<FormInputCard 
 			value={form.email}
 			error={formErrors.email}
-			onChangeText={setFormInline('email')}
-			onEndEditing={validateFormInline('email')}
+			onChangeText={setFormInline('email', false)}
 			label="Email" 
 			icon="mail-outline" 
 			placeholder="enter your email ..." 

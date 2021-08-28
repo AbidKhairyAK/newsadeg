@@ -5,6 +5,7 @@ import MenuService from './MenuService'
 import MenuCategoryService from './MenuCategoryService'
 import RestaurantDriverService from './RestaurantDriverService'
 import DriverService from './DriverService'
+import MiscService from './MiscService'
 
 export {
 	RestaurantService,
@@ -14,4 +15,5 @@ export {
 	MenuCategoryService,
 	RestaurantDriverService,
 	DriverService,
+	MiscService,
 }

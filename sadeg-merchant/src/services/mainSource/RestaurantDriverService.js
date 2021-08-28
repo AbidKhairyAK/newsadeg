@@ -17,6 +17,9 @@ const services = {
 	delete(id) {
 		return axios.delete('/drivers-restaurant/' + id)
 	},
+	checkEmail (email) {
+		return axios.post('/drivers-restaurant/check-email', { email })
+	}
 }
 
 export default services

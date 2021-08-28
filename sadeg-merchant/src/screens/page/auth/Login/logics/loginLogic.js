@@ -1,16 +1,18 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { useNavigation } from '@react-navigation/native'
 
 import { useForm } from '@/hooks'
 import { authenticate } from '@/store/auth'
 
 const loginLogic = () => {
 	const dispatch = useDispatch()
+	const { reset } = useNavigation()
 	const { isLoading } = useSelector(state => state.auth)
 
 	const { form, setFormInline, validateForm, validateFormInline, resetForm, formErrors } = useForm({
-		email: 'restaurant2@email.com',
-		password: '1234'
+		email: '',
+		password: ''
 	},{
 		email: { presence: true, length: { maximum: 254 }, email: true },
 		password: { presence: true, length: { minimum: 4, maximum: 20 } }

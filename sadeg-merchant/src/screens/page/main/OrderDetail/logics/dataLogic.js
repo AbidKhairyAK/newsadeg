@@ -7,14 +7,17 @@ import { OrderService, RestaurantCollection, RestaurantDriverCollection , Driver
 import { getRestaurant } from '@/helpers'
 import { resetOrders, getNewOrders, updateNewOrder } from '@/store/orders'
 
-// const MAX_CHECK_TIME = 120 // 2 minutes
-const MAX_CHECK_TIME = 10
+const MAX_CHECK_TIME = 120 // 120 sec = 2 minutes
+// const MAX_CHECK_TIME = 10
 
-const dataLogic = ({ orderId, orderType }) => {
+const dataLogic = ({ orderId }) => {
 	const dispatch = useDispatch()
 	const { goBack, navigate } = useNavigation()
 
-	const order = useSelector(state => state.orders[orderType]?.data.find(item => item.id === orderId) || {})
+	const order = useSelector(state => {
+		const orders = [...state.orders.new.data, ...state.orders.past.data]
+		return orders.find(item => item.id === orderId) || {}
+	})
 
 	const [isStartChecking, setIsStartChecking] = useState(false)
 	const [searchDriverLoading, setSearchDriverLoading] = useState(false)
@@ -49,6 +52,7 @@ const dataLogic = ({ orderId, orderType }) => {
 
 			await DriverCollection.sendDeliveryRequests(drivers, orderId, {
 				id: orderId,
+				order_status: 'process',
 				restaurant_id: getRestaurant().id
 			})
 
@@ -59,7 +63,7 @@ const dataLogic = ({ orderId, orderType }) => {
 			// 	})
 			// ))
 
-			setSearchDriverLoading('Waiting for driver to accept the delivery request')
+			setSearchDriverLoading('Waiting for driver to accept the delivery request \n max time: ' + MAX_CHECK_TIME + ' sec')
 			setIsStartChecking(true)
 		} catch (err) {
 			console.error(err)
@@ -117,7 +121,7 @@ const dataLogic = ({ orderId, orderType }) => {
 			driver_restaurant: RestaurantDriverCollection,
 			driver_partner: DriverCollection,
 		}
-		Collection = collectionsMap[driverType]
+		const Collection = collectionsMap[driverType]
 
 		return Collection.setOrder(driverId, orderId, {
 			id: orderId,
@@ -186,15 +190,19 @@ const dataLogic = ({ orderId, orderType }) => {
 		)
 
 		let intervalCount = 0
-		const intervalId = setInterval(() => {
+		const searchDriverInterval = setInterval(() => {
 			intervalCount++
-			stopSearchDriver()
-			if (intervalCount >= MAX_CHECK_TIME) clearInterval(intervalId)
+			if (intervalCount >= MAX_CHECK_TIME) {
+				stopSearchDriver()
+				clearInterval(searchDriverInterval)
+				intervalCount = 0
+			}
 		}, 1000)
 
 		return () => {
 			unsubscribe()
-			clearInterval(intervalId)
+			intervalCount = 0
+			clearInterval(searchDriverInterval)
 		}
 	}, [isStartChecking])
 

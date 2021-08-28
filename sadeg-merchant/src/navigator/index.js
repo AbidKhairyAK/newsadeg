@@ -23,11 +23,8 @@ const AppScreens = () => {
 	return (
 		<Navigator headerMode="none" mode="modal">
 			<Screen name="Init" component={Init} />
-			{
-				isLogin 
-				? MainScreens.map(screen => screen)
-				: AuthScreens.map(screen => screen)
-			}
+			{AuthScreens.map(screen => screen)}
+			{MainScreens.map(screen => screen)}
 			{FormModals.map(screen => screen)}
 			{DialogModals.map(screen => screen)}
 		</Navigator>
@@ -42,3 +39,19 @@ const AppNavigator = () => <>
 </>
 
 export default AppNavigator
+
+
+/*
+return (
+	<Navigator headerMode="none" mode="modal">
+		<Screen name="Init" component={Init} />
+		{
+			isLogin 
+			? MainScreens.map(screen => screen)
+			: AuthScreens.map(screen => screen)
+		}
+		{FormModals.map(screen => screen)}
+		{DialogModals.map(screen => screen)}
+	</Navigator>
+)
+*/

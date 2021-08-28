@@ -12,8 +12,9 @@ const ShadowView = ({ type, radius, style, children, ...props }) => {
 
 	return <Shadow
 		paintInside={true}
-		containerViewStyle={style}
+		containerViewStyle={style || {}}
 		radius={radius}
+		finalColor={shadowConfig.startColor.substring(0, 7) + '00'}
 		{...shadowConfig}
 		{...props} 
 	>

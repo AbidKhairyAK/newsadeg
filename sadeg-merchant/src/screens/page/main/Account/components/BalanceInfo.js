@@ -7,17 +7,26 @@ import { sizes, colors } from '@/constants'
 import BalanceButton from './BalanceButton'
 
 const BalanceInfo = () => {
+	const indev = () => alert('this feature is under development')
 	return (
 		<BaseCard padding="base" style={styles.card} innerStyle={styles.cardInner}>
 			<View style={styles.infoWrapper}>
 				<BaseText size="sm" color="gray">
 					Balance
 				</BaseText>
-				<MoneyText value={1350} size="lg" />
+				<MoneyText value={0} size="lg" />
 			</View>
 			<View style={styles.actionWrapper}>
-				<BalanceButton title="Withdraw" icon="download-outline" />
-				<BalanceButton title="History" icon="reload-outline" />
+				<BalanceButton
+					title="Withdraw"
+					icon="download-outline"
+					onPress={indev}
+				/>
+				<BalanceButton
+					title="History"
+					icon="reload-outline"
+					onPress={indev}
+				/>
 			</View>
 		</BaseCard>
 	)

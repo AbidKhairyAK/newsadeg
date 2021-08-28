@@ -17,7 +17,7 @@ export const axiosInit = async () => {
 	// shorten res.data to res
 	axios.interceptors.response.use(
 		res => {
-			const isRootRes = 'headers' in res && 'config' in res && 'request' in res
+			const isRootRes = typeof res === 'object' && 'headers' in res && 'config' in res && 'request' in res
 			return isRootRes ? res.data : res
 		},
 		err => Promise.reject(err)

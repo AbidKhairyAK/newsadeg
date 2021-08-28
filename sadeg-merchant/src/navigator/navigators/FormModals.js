@@ -11,7 +11,7 @@ import {
 	PhoneNumberForm,
 	// RestaurantDataForm,
 	// BankAccountForm,
-	AddressForm,
+	// AddressForm,
 	TagCategoriesForm,
 } from '@/screens/modal/form'
 
@@ -27,7 +27,7 @@ const FormModals = [
 	<Screen key="PhoneNumberForm" name="PhoneNumberForm" component={PhoneNumberForm} />,
 	// <Screen key="RestaurantDataForm" name="RestaurantDataForm" component={RestaurantDataForm} />,
 	// <Screen key="BankAccountForm" name="BankAccountForm" component={BankAccountForm} />,
-	<Screen key="AddressForm" name="AddressForm" component={AddressForm} />,
+	// <Screen key="AddressForm" name="AddressForm" component={AddressForm} />,
 	<Screen key="TagCategoriesForm" name="TagCategoriesForm" component={TagCategoriesForm} />,
 ]
 

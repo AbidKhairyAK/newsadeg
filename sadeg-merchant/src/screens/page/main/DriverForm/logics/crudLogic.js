@@ -17,7 +17,7 @@ const crudLogic = ({ route, navigation }) => {
 		submit: false,
 		delete: false,
 	})
-	const { form, getFormData, setFormInline, resetForm, validateForm, validateFormInline, formErrors } = useForm({
+	const { form, getFormData, setFormInline, resetForm, validateAsync, validateFormInline, formErrors } = useForm({
 		restaurant_id: getRestaurant().id,
 		fullname: initialForm.fullname || '',
 		email: initialForm.email || '',
@@ -29,7 +29,7 @@ const crudLogic = ({ route, navigation }) => {
 		driver_licence_file: null,		
 	}, {
 		fullname: { presence: true, length: { maximum: 254 } },
-		email: { presence: true, length: { maximum: 254 }, email: true },
+		email: { presence: true, length: { maximum: 254 }, email: true, emailAvailable: RestaurantDriverService },
 		password: { presence: isEmpty(initialForm), length: { minimum: isEmpty(initialForm), maximum: 20 } },
 		phone_number: { presence: true, length: { maximum: 20 } },
 		vehicle_year: { presence: true, length: { is: 4 }, numericality: { greaterThanOrEqualTo: 1900, lessThanOrEqualTo: new Date().getFullYear() } },
@@ -44,8 +44,10 @@ const crudLogic = ({ route, navigation }) => {
 
 	const handleSubmit = async () => {
 		try {
-			if (validateForm()) return
 			changeLoading('submit', true)
+			
+			const isFormErr = await validateAsync()
+			if (isFormErr) return
 
 			if (isEmpty(initialForm)) {
 				const res = await RestaurantDriverService.create(getFormData())

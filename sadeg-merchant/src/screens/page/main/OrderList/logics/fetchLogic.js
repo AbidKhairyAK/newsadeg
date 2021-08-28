@@ -1,11 +1,12 @@
-import React, { useState, useCallback } from 'react'
-import { throttle } from 'lodash'
+import React, { useState, useCallback, useEffect } from 'react'
 import { useNavigation, useFocusEffect } from '@react-navigation/native'
 import { useSelector, useDispatch } from 'react-redux'
 import { isEmpty } from 'validate.js'
+import { showMessage } from 'react-native-flash-message'
 
-import { OrderService } from '@/services'
+import { OrderService, DriverCollection } from '@/services'
 import { getNewOrders, getPastOrders, resetOrders } from '@/store/orders'
+import { getRestaurant } from '@/helpers'
 
 const orderTypes = {
 	new: 'Current',
@@ -54,11 +55,28 @@ const fetchLogic = () => {
 		}
 	}
 
+	const completeDataAlert = () => {
+		if (isEmpty(getRestaurant().restaurant_name)) showMessage({
+			message: 'Please complete your data',
+			description: 'Click here or Go to account tab then select \'Restaurant Data\' below \'Restaurant Settings\' section',
+			icon: 'info',
+			type: 'info',
+			autoHide: false,
+			onPress: () => navigation.navigate('Account')
+		})
+	}
+
 	useFocusEffect(
 		useCallback(() => {
 			if (isEmpty(orders)) getOrderList()
+			completeDataAlert()
 		}, [selectedType, orders.length])
 	)
+
+	useEffect(() => {
+		DriverCollection.getActiveDrivers()
+			.then(res => console.log(res.docs.length))
+	}, [])
 
 	return { isLoading, orderTypes, selectedType, changeType, orders, getNextPage, getOrderList, toOrderDetail }
 }
